@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/people")
@@ -20,6 +21,12 @@ public class PeopleController {
         this.personRepository = personRepository;
     }
 
+    @ResponseBody
+    @GetMapping("/all")
+    public List<Person> getAllPerson() {
+        System.out.println("getAllPerson()= "+ personRepository.findAll());
+        return personRepository.findAll();
+    }
 
     @GetMapping()
     public String index(Model model) {
