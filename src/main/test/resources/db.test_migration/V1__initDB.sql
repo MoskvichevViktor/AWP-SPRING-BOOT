@@ -1,8 +1,3 @@
--- CREATE DATABASE awp;
--- DROP SCHEMA IF EXISTS awp;
--- CREATE SCHEMA awp;
-
-
 create table IF NOT EXISTS person
 (
     id      integer primary key,
@@ -60,6 +55,6 @@ create table IF NOT EXISTS contract
 -- alter table contract
 --     owner to postgres;
 
-INSERT INTO person (id, name, pasport, adress, phone)
-VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв№ 7', '25-25-25'),
-       (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв№ 71', '+79056981258');
+-- INSERT INTO person (id, name, pasport, adress, phone)
+-- VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв№ 7', '25-25-25'),
+--        (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв№ 71', '+79056981258');

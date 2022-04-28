@@ -21,10 +21,12 @@ public class PeopleController {
         this.personRepository = personRepository;
     }
 
+/**
+ * getAllPerson добавлен временно для теста сборки
+ * */
     @ResponseBody
     @GetMapping("/all")
     public List<Person> getAllPerson() {
-        System.out.println("getAllPerson()= "+ personRepository.findAll());
         return personRepository.findAll();
     }
 

@@ -8,7 +8,8 @@ public class AwpApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AwpApplication.class, args);
-        System.out.println("See OpenAPI definition  http://localhost:8080/awp/swagger-ui/index.html#/");
+        System.out.println("See OpenAPI definition  http://localhost:8080/swagger-ui/index.html#/");
+        System.out.println("In test mode, see data console from url: http://localhost:8080/h2-console/");
     }
 
 }
