@@ -1,5 +1,3 @@
-
-
 spring:
   datasource:
     username: postgres
@@ -12,3 +10,7 @@ spring:
       hibernate:
         ddl-auto: validate
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+springdoc:
+  swagger-ui: path=/swagger-ui.html
+

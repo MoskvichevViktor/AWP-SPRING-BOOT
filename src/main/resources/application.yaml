@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: work
+    dev: dev
+    work: work

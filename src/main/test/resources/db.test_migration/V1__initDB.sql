@@ -1,7 +1,3 @@
-А, [22.04.2022 12:06]
-Да, пришлось немного переписать скрипт.
--- CREATE DATABASE awp;
-
 create table IF NOT EXISTS person
 (
     id      integer primary key,
@@ -11,8 +7,11 @@ create table IF NOT EXISTS person
     phone   text
 );
 
-alter table person
-    owner to postgres;
+
+
+
+-- alter table person
+--     owner to postgres;
 
 create table IF NOT EXISTS creditrequest
 (
@@ -26,8 +25,8 @@ create table IF NOT EXISTS creditrequest
     pasport       text
 );
 
-alter table creditrequest
-    owner to postgres;
+-- alter table creditrequest
+--     owner to postgres;
 
 create table IF NOT EXISTS creditresponse
 (
@@ -40,8 +39,8 @@ create table IF NOT EXISTS creditresponse
     pasport   text
 );
 
-alter table creditresponse
-    owner to postgres;
+-- alter table creditresponse
+--     owner to postgres;
 
 create table IF NOT EXISTS contract
 (
@@ -53,6 +52,9 @@ create table IF NOT EXISTS contract
     status  text
 );
 
-alter table contract
-    owner to postgres;
+-- alter table contract
+--     owner to postgres;
 
+-- INSERT INTO person (id, name, pasport, adress, phone)
+-- VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв№ 7', '25-25-25'),
+--        (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв№ 71', '+79056981258');
