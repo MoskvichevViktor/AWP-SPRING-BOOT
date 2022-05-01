@@ -1,6 +1,5 @@
 package application.repositories;
 
-import application.models.Contract;
 import application.models.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -8,7 +8,7 @@
 <h1>Credit Response NEW</h1>
 <br>
 <hr>
-<form th:method="POST" th:action="@{/creditResponse}" th:object="${creditResponse}">
+<form th:method="POST" th:action="@{/templates/creditResponse}" th:object="${creditResponse}">
 
     <label for="idrequest">Enter idrequest: </label>
     <input type="text" th:field="*{idrequest}" id="idrequest"/>

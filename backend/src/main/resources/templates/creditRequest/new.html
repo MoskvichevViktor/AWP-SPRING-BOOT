@@ -9,7 +9,7 @@
 <h1>Credit Request NEW</h1>
 <br/>
 <hr/>
-<form th:method="POST" th:action="@{/creditRequest}" th:object="${creditRequest}">
+<form th:method="POST" th:action="@{/templates/creditRequest}" th:object="${creditRequest}">
 
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
