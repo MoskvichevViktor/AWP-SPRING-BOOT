@@ -1,0 +1,14 @@
+<mat-drawer-container class="main__container">
+    <mat-drawer opened mode="side" class="main__menu">
+        <ul class="main__menu_items">
+            <li class="main__menu_item" *ngFor="let item of menuItems"
+                (click)="onMenuItemClick(item)"
+            >
+                {{ item.title }}
+            </li>
+        </ul>
+    </mat-drawer>
+    <mat-drawer-content class="main__content">
+
+    </mat-drawer-content>
+</mat-drawer-container>
