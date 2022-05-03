@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MenuItem} from "../../models/menu-item";
-import {Router} from "@angular/router";
+import {MenuItem} from "../../../models/menu-item";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-main-page',
@@ -11,43 +11,53 @@ export class MainPageComponent implements OnInit {
   menuItems: MenuItem[] = [
     {
       title: 'Главная',
-      url: 'main',
-      color: '',
-      icon: '',
+      url: '',
+      active: true,
+      icon: 'home',
       visible: true
     },
     {
       title: 'Заявки',
       url: 'requests',
-      color: '',
-      icon: '',
+      active: false,
+      icon: 'feedback',
       visible: true
     },
     {
       title: 'Рассмотренные заявки',
       url: 'responses',
-      color: '',
-      icon: '',
+      active: false,
+      icon: 'thumb_up',
       visible: true
     },
     {
       title: 'Договоры',
       url: 'contracts',
-      color: '',
-      icon: '',
+      active: false,
+      icon: 'assignment',
+      visible: true
+    },
+    {
+      title: 'Клиенты',
+      url: 'persons',
+      active: false,
+      icon: 'person',
       visible: true
     },
   ];
 
   constructor(
-      private router: Router
+      private router: Router,
+      private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
   }
 
   onMenuItemClick(item: MenuItem) {
-    this.router.navigate(['/', item.url]);
+    this.menuItems.forEach(item => item.active = false);
+    item.active = true;
+    this.router.navigate([item.url], {relativeTo: this.route});
   }
 
 }

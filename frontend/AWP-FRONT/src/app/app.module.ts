@@ -8,13 +8,17 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import { LoginComponent } from './components/auth/login/login.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { MainPageComponent } from './components/main-page/main-page.component';
+import { MainPageComponent } from './components/main/main-page/main-page.component';
 import {HttpClientModule} from "@angular/common/http";
+import { RequestsListComponent } from './components/requests/requests-list/requests-list.component';
+import { MainPageStartComponent } from './components/main/main-page-start/main-page-start.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainPageComponent
+    MainPageComponent,
+    RequestsListComponent,
+    MainPageStartComponent
   ],
   imports: [
     AppRoutingModule,
