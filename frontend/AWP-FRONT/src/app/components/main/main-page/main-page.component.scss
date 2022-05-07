@@ -1,6 +1,8 @@
+@import "../../../../styles.scss";
+
 .main__menu {
   margin: 16px;
-  min-width: 20%;
+  min-width: 15%;
   border-right: none;
   text-align: left;
   border-radius: 4px;
@@ -19,14 +21,14 @@
   }
 }
 
-.main__menu_item:hover {
-  background: rgba(103, 58, 183, 0.75);
+.main__menu_item:hover :not(.main__menu_item_active) {
+  background: white;
   font-weight: bold;
-  color: white;
+  color: $primaryDarkColor;
 }
 
 .main__menu_item_active {
-  background: rgba(103, 58, 183, 0.75);
+  background: $primaryLightColor;
   font-weight: bold;
   color: white;
 }

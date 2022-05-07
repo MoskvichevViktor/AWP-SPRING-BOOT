@@ -6,6 +6,9 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatCardModule} from "@angular/material/card";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import {MatCardModule} from "@angular/material/card";
         MatFormFieldModule,
         MatToolbarModule,
         MatIconModule,
-        MatCardModule
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule
     ],
     exports: [
         MatSidenavModule,
@@ -26,7 +32,10 @@ import {MatCardModule} from "@angular/material/card";
         MatFormFieldModule,
         MatToolbarModule,
         MatIconModule,
-        MatCardModule
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule
     ]
 })
 export class MaterialModule {

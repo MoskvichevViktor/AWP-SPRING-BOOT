@@ -2,4 +2,19 @@
 @import "./settings";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: $backgroundColor;
+}
+
+.table-container {
+  padding: 40px;
+  text-align: left;
+}
+
+.mat-row :hover {
+  background: $secColor;
+  cursor: pointer;
+}

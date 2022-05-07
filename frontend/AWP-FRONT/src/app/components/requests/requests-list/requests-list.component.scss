@@ -1,0 +1,29 @@
+@import "../../../../styles.scss";
+
+table {
+  width: 100%;
+  .mat-header-row {
+    background-color: $secLightColor;
+    font-weight: bold;
+    th.mat-header-cell {
+      border-bottom: 0;
+    }
+  }
+  th.mat-header-cell {
+    border-bottom: 0;
+  }
+  th.id-column {
+    width: 10%;
+  }
+  th.date-column {
+    width: 30%;
+  }
+  th.name-column {
+    width: 40%;
+  }
+  th.sum-column {
+    width: 20%;
+  }
+}
+
+.sum-rub:after { content:"\20BD"; }
