@@ -21,7 +21,7 @@
   }
 }
 
-.main__menu_item:hover :not(.main__menu_item_active) {
+.main__menu_item:not(.main__menu_item_active):hover {
   background: white;
   font-weight: bold;
   color: $primaryDarkColor;

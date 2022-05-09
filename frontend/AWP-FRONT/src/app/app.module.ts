@@ -12,13 +12,15 @@ import { MainPageComponent } from './components/main/main-page/main-page.compone
 import {HttpClientModule} from "@angular/common/http";
 import { RequestsListComponent } from './components/requests/requests-list/requests-list.component';
 import { MainPageStartComponent } from './components/main/main-page-start/main-page-start.component';
+import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainPageComponent,
     RequestsListComponent,
-    MainPageStartComponent
+    MainPageStartComponent,
+    ClientsListComponent
   ],
   imports: [
     AppRoutingModule,

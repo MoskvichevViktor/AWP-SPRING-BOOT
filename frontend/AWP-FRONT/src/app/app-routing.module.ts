@@ -4,6 +4,7 @@ import {LoginComponent} from "./components/auth/login/login.component";
 import {MainPageComponent} from "./components/main/main-page/main-page.component";
 import {RequestsListComponent} from "./components/requests/requests-list/requests-list.component";
 import {MainPageStartComponent} from "./components/main/main-page-start/main-page-start.component";
+import { ClientsListComponent } from "./components/clients/clients-list/clients-list.component";
 
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'main', component: MainPageComponent, children: [
             { path: '', component: MainPageStartComponent },
-            { path: 'requests', component: RequestsListComponent }
+            { path: 'requests', component: RequestsListComponent },
+            { path: 'clients', component: ClientsListComponent },
         ] },
 ];
 

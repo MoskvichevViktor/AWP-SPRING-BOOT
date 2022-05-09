@@ -39,7 +39,7 @@ export class MainPageComponent implements OnInit {
     },
     {
       title: 'Клиенты',
-      url: 'persons',
+      url: 'clients',
       active: false,
       icon: 'person',
       visible: true
