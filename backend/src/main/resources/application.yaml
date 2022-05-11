@@ -1,5 +1,12 @@
+jwt:
+  secret: JWT&AWP&SpringBoot&GeekBrains&Tim&Secret&String%#$%
+  expired: 3600000
 spring:
   profiles:
     active: dev
     dev: dev
     work: work
+  jta:
+    atomikos:
+      properties:
+        default-max-wait-time-on-shutdown:
