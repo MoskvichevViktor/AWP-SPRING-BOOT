@@ -1,7 +1,7 @@
 spring:
   datasource:
     username: postgres
-    password: 712459
+    password: postgres
     url: jdbc:postgresql://localhost:5432/awp
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -10,7 +10,15 @@ spring:
       hibernate:
         ddl-auto: validate
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
+  flyway:
+    locations: classpath:/db/migration
+    url: jdbc:postgresql://localhost:5432/awp
+    driver-class-name: org.postgresql.Driver
+    user: postgres
+    password: postgres
+    connect-retries: 60
+    validate-on-migrate: true
+    enabled: true
 springdoc:
   swagger-ui: path=/swagger-ui.html
 

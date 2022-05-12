@@ -3,6 +3,7 @@ package application.controllers;
 
 import application.models.Person;
 import application.repositories.PersonRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,12 +22,13 @@ public class PeopleController {
         this.personRepository = personRepository;
     }
 
-/**
- * getAllPerson добавлен временно для теста сборки
- * */
+    /**
+     * getAllPerson добавлен временно для теста сборки
+     */
     @ResponseBody
     @GetMapping("/all")
     public List<Person> getAllPerson() {
+        System.out.println(personRepository.findAll());
         return personRepository.findAll();
     }
 
@@ -89,12 +91,12 @@ public class PeopleController {
 
     @GetMapping("/serch")
     public String serchByName(@RequestParam("field") String field, @RequestParam("value") String value,
-                              Model model){
-        if(field.equals("name")){
+                              Model model) {
+        if (field.equals("name")) {
             model.addAttribute("people", personRepository.findPeopleByName(value));
-        }else if(field.equals("pasport")){
+        } else if (field.equals("pasport")) {
             model.addAttribute("people", personRepository.findPeopleByPasport(value));
-        }else if(field.equals("phone")){
+        } else if (field.equals("phone")) {
             model.addAttribute("people", personRepository.findPeopleByPhone(value));
         }
 

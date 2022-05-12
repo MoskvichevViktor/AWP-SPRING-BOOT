@@ -1,4 +1,4 @@
-#version: '4.5.0'
+version: '4.8.1'
 
 volumes:
   cloud-postgres:
@@ -7,18 +7,16 @@ volumes:
 services:
   postgres:
     image: postgres:9.6
-    domainname: postgres
+    domainname: awp
     ports:
       - "5432:5433"
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-#      - POSTGRES_PASSWORD=712459
+      - POSTGRES_PASSWORD=712459
+    #      - POSTGRES_PASSWORD=postgres
 #      - POSTGRES_DB=awp
-
-
     healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-U", "awp" ]
+      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
       interval: 5s
       timeout: 1s
       retries: 2
