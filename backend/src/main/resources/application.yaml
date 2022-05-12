@@ -1,7 +1,11 @@
 jwt:
   secret: JWT&AWP&SpringBoot&GeekBrains&Tim&Secret&String%#$%
-  expired: 3600000
+  lifetime: 3600000
+
+
 spring:
+  security:
+
   profiles:
     active: dev
     dev: dev

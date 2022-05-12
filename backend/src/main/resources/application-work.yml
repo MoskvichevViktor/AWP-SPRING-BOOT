@@ -1,7 +1,7 @@
 spring:
   datasource:
     username: postgres
-    password: 712459
+    password: postgres
     url: jdbc:postgresql://localhost:5432/awp
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -15,7 +15,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/awp
     driver-class-name: org.postgresql.Driver
     user: postgres
-    password: 712459
+    password: postgres
     connect-retries: 60
     validate-on-migrate: true
     enabled: true
