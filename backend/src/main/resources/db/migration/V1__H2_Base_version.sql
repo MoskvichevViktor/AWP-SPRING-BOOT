@@ -32,7 +32,8 @@ create table if not exists roles
 insert into roles (name)
 values ('ROLE_ADMIN'),
        ('ROLE_MANAGER'),
-       ('ROLE_MAIN_MANAGER');
+       ('ROLE_MAIN_MANAGER'),
+       ('ROLE_EMPTY');
 
 CREATE TABLE if not exists users_roles
 (

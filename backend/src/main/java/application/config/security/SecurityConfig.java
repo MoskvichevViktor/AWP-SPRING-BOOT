@@ -1,55 +1,73 @@
 package application.config.security;
 
-import application.constants.RolesNameEnum;
-import application.utils.jwtsecuriru.JwtConfigurer;
-import application.utils.jwtsecuriru.JwtTokenProvider;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration
-public class SecurityConfig extends  WebSecurityConfigurerAdapter {
-    private final JwtTokenProvider jwtTokenProvider;
+@EnableWebSecurity
+@RequiredArgsConstructor
+@Slf4j
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 
-    //TODO разрешено всем
-    private static final String ALL_ENDPOINT = "";
-    //TODO разрешено ROLE_ADMIN
-    private static final String ADMIN_ENDPOINT = "";
-    //TODO разрешено ROLE_MANAGER
-    private static final String MANAGER_ENDPOINT = "";
-    //TODO разрешено ROLE_MAIN_MANAGER
-    private static final String MAIN_MANAGER_ENDPOINT = "";
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final JwcRequestFilter jwcRequestFilter;
 
-
-    @Autowired
-    public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
-        this.jwtTokenProvider = jwtTokenProvider;
-    }
-
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+    private static final String[] AUTH_WHITELIST_HTTP = {
+            //доступ к любой точке
+            "/**"
+//            ,"/reg"
+            //для доступа к swagger-ui
+            ,"/v3/api-docs/**"
+            ,"/swagger-ui/**"
+    };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(ALL_ENDPOINT).permitAll()
-                .antMatchers(ADMIN_ENDPOINT).hasAnyRole(RolesNameEnum.ROLE_ADMIN.toString())
-                .antMatchers(MANAGER_ENDPOINT).hasAnyRole(RolesNameEnum.ROLE_MANAGER.toString())
-                .antMatchers(MAIN_MANAGER_ENDPOINT).hasAnyRole(RolesNameEnum.ROLE_MAIN_MANAGER.toString())
-                .anyRequest().authenticated()
+                    .antMatchers(AUTH_WHITELIST_HTTP)
+                    .permitAll()
+                    .anyRequest().authenticated()
                 .and()
-                .apply(new JwtConfigurer(jwtTokenProvider));
+                    .exceptionHandling()
+                    .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+
+        http.addFilterBefore(jwcRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+    }
+
+/**Открывает доступ к консоли H2
+ * */
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/h2-console/**");
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
