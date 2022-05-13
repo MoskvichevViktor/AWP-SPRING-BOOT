@@ -1,10 +1,12 @@
-package application.config.security;
+package application.config.security.v1;
 
+import application.config.security.JwcRequestFilter;
+import application.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,24 +14,23 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity
+
+@EnableWebSecurity()
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 @Slf4j
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwcRequestFilter jwcRequestFilter;
+    private final UserService userService;
 
     private static final String[] AUTH_WHITELIST_HTTP = {
             //доступ к любой точке
             "/**"
-//            ,"/reg"
             //для доступа к swagger-ui
-            ,"/v3/api-docs/**"
-            ,"/swagger-ui/**"
+            , "/v3/api-docs/**"
+            , "/swagger-ui/**"
     };
 
     @Override
@@ -39,19 +40,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                    .antMatchers(AUTH_WHITELIST_HTTP)
-                    .permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers(AUTH_WHITELIST_HTTP)
+                .permitAll()
+                // httpBasic() НЕ ОТКЛЮЧАТЬ, НЕ БУДЕТ РАБОТАТЬ @PreAuthorize("hasAuthority('ROLE')")
+                .and().httpBasic()
+                //TODO Указать URLS login and logout
+//                .and()
+//                .formLogin()
+//                .loginPage("/auth")
                 .and()
-                    .exceptionHandling()
-                    .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
-
+                .logout();
+//                .logoutSuccessUrl("/logout");
+//                .and()
+//                    .exceptionHandling()
+//                    .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
         http.addFilterBefore(jwcRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
     }
 
-/**Открывает доступ к консоли H2
- * */
+    /**
+     * Открывает доступ к консоли H2
+     */
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
@@ -69,5 +77,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(userService);
+        return daoAuthenticationProvider;
     }
 }

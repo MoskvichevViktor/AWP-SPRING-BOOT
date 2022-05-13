@@ -1,6 +1,9 @@
+GET http://localhost:8080/api/v1/user/all
+
 GET http://localhost:8080/people/all/
 
-GET http://localhost:8080/api/v1/user/all
+
+
 
 
 
