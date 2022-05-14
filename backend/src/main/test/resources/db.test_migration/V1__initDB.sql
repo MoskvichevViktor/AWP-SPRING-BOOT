@@ -1,4 +1,4 @@
-create table IF NOT EXISTS person
+create table IF NOT EXISTS clients
 (
     id      integer primary key,
     name    varchar,
@@ -10,7 +10,7 @@ create table IF NOT EXISTS person
 
 
 
--- alter table person
+-- alter table clients
 --     owner to postgres;
 
 create table IF NOT EXISTS creditrequest
@@ -55,6 +55,6 @@ create table IF NOT EXISTS contract
 -- alter table contract
 --     owner to postgres;
 
--- INSERT INTO person (id, name, pasport, adress, phone)
+-- INSERT INTO clients (id, name, passport, address, phone)
 -- VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв№ 7', '25-25-25'),
 --        (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв№ 71', '+79056981258');

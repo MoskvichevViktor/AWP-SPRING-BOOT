@@ -16,11 +16,11 @@ public class BaseSecurityEntity {
 
     @CreatedDate
     @Column(name = "created_at")
-    private Date created_at;
+    private Date createdAt;
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private Date updated_at;
+    private Date updatedAt;
 
     @Override
     public String toString() {

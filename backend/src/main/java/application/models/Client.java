@@ -5,8 +5,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "person")
-public class Person {
+@Table(name = "clients")
+public class Client {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,25 +17,25 @@ public class Person {
     private String name;
 
     @NotEmpty(message = "Should not be empty")
-    @Column(name = "pasport")
-    private String pasport;
+    @Column(name = "passport")
+    private String passport;
 
     @NotEmpty(message = "Should not be empty")
-    @Column(name = "adress")
-    private String adress;
+    @Column(name = "address")
+    private String address;
 
     @NotEmpty(message = "Should not be empty")
     @Column(name = "phone")
     private String phone;
 
-    public Person() {
+    public Client() {
     }
 
-    public Person(Integer id, String name, String pasport, String adress, String phone) {
+    public Client(Integer id, String name, String passport, String address, String phone) {
         this.id = id;
         this.name = name;
-        this.pasport = pasport;
-        this.adress = adress;
+        this.passport = passport;
+        this.address = address;
         this.phone = phone;
     }
 
@@ -55,20 +55,20 @@ public class Person {
         this.name = name;
     }
 
-    public String getPasport() {
-        return pasport;
+    public String getPassport() {
+        return passport;
     }
 
-    public void setPasport(String pasport) {
-        this.pasport = pasport;
+    public void setPassport(String pasport) {
+        this.passport = pasport;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String adress) {
+        this.address = adress;
     }
 
     public String getPhone() {
@@ -81,11 +81,11 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "Client{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", pasport='" + pasport + '\'' +
-                ", adress='" + adress + '\'' +
+                ", passport='" + passport + '\'' +
+                ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
     }
