@@ -31,7 +31,7 @@ public class ClientController {
         return clientRepository.findAll();
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public String index(Model model) {
         model.addAttribute("people", clientRepository.findAll());
         return "people/index";
