@@ -16,13 +16,13 @@
 </form>
 <br/>
 
-<div th:each="person : ${people}">
-    <a th:href="@{/people/{id}(id=${person.getId()})}"
-       th:text="${'ID: ' + person.getId() + ', ' +
-       'Name: ' + person.getName() + ', ' +
-       'Pasport: ' + person.getPasport() + ', ' +
-       'Adress: ' + person.getAdress() + ', ' +
-       'Phone: ' + person.getPhone()}">user</a>
+<div th:each="client : ${people}">
+    <a th:href="@{/people/{id}(id=${client.getId()})}"
+       th:text="${'ID: ' + client.getId() + ', ' +
+       'Name: ' + client.getName() + ', ' +
+       'Pasport: ' + client.getPassport() + ', ' +
+       'Adress: ' + client.getAddress() + ', ' +
+       'Phone: ' + client.getPhone()}">user</a>
 
 </div>
 

@@ -1,5 +1,6 @@
 package application.models.security;
 
+import application.constants.UserRole;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,10 +24,8 @@ public class User extends BaseSecurityEntity {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    @Column(name = "user_role")
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
 }

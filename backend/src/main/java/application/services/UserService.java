@@ -1,5 +1,6 @@
 package application.services;
 
+import application.constants.UserRole;
 import application.models.security.Role;
 import application.models.security.User;
 import application.repositories.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,12 +46,12 @@ public class UserService implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.
                 User(user.getUsername(), user.getPassword(),
-                mapRolesTuAuthorities(user.getRoles()));
+                mapRolesToAuthorities(Collections.singletonList(user.getRole())));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesTuAuthorities(Collection<Role> roles) {
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<UserRole> roles) {
         return roles.stream().map(role ->
-                new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+                new SimpleGrantedAuthority(role.toString())).collect(Collectors.toList());
     }
 
     public boolean isExistsUser(String username) {

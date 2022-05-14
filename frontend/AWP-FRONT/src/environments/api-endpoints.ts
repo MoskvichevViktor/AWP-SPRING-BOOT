@@ -7,7 +7,7 @@ export const ApiEndpoints = {
         delete: (id: number) => `/requests/{id}`,
     },
     clients: {
-        list: '/people/all',
+        list: '/clients',
     },
     users: {
         list: '/users',
