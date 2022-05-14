@@ -1,4 +1,4 @@
-import { CreditRequest } from "../models/credit-request";
+import { CreditRequest } from "../shared/models.interfaces";
 
 export const REQUESTS: CreditRequest[] = [
     {

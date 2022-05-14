@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Client } from "../models/client";
 import { RemoteService } from "./remote.service";
 import { environment } from "../../environments/environment";
+import { Client } from "../shared/models.interfaces";
 
 @Injectable({
   providedIn: 'root'

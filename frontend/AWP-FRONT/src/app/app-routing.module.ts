@@ -5,6 +5,7 @@ import {MainPageComponent} from "./components/main/main-page/main-page.component
 import {RequestsListComponent} from "./components/requests/requests-list/requests-list.component";
 import {MainPageStartComponent} from "./components/main/main-page-start/main-page-start.component";
 import { ClientsListComponent } from "./components/clients/clients-list/clients-list.component";
+import { UsersListComponent } from "./components/users/users-list/users-list.component";
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
             { path: '', component: MainPageStartComponent },
             { path: 'requests', component: RequestsListComponent },
             { path: 'clients', component: ClientsListComponent },
+            { path: 'users', component: UsersListComponent },
         ] },
 ];
 

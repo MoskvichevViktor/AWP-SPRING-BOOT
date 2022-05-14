@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CreditRequest } from "../models/credit-request";
+import { CreditRequest } from "../shared/models.interfaces";
 import { REQUESTS } from "../data/mock-credit-requests";
 import { of } from "rxjs";
 import { RemoteService } from "./remote.service";

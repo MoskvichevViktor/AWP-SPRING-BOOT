@@ -13,31 +13,37 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="id" class="id-column">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> № </th>
-                    <td mat-cell *matCellDef="let client"> {{client.id}} </td>
+                    <td mat-cell *matCellDef="let user"> {{user.id}} </td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name" class="name-column">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Ф.И.О. </th>
-                    <td mat-cell *matCellDef="let client"> {{client.name}} </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Имя </th>
+                    <td mat-cell *matCellDef="let user"> {{user.name}} </td>
                 </ng-container>
 
-                <!-- Passport Column -->
-                <ng-container matColumnDef="passport" class="passport-column">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="passport"> № паспорта </th>
-                    <td mat-cell *matCellDef="let client"> {{client.pasport}} </td>
+                <!-- Email Column -->
+                <ng-container matColumnDef="email" class="email-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="email"> Email </th>
+                    <td mat-cell *matCellDef="let user"> {{user.email}} </td>
                 </ng-container>
 
-                <!-- Address Column -->
-                <ng-container matColumnDef="address" class="address-column">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="address"> Адрес </th>
-                    <td mat-cell *matCellDef="let client"> {{client.adress}} </td>
+                <!-- Role Column -->
+                <ng-container matColumnDef="role" class="role-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="role"> Роль </th>
+                    <td mat-cell *matCellDef="let user"> {{user.role}} </td>
                 </ng-container>
 
-                <!-- Phone Column -->
-                <ng-container matColumnDef="phone" class="phone-column">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="phone"> Телефон </th>
-                    <td mat-cell *matCellDef="let client"> {{client.phone}} </td>
+                <!-- DateCreated Column -->
+                <ng-container matColumnDef="dateCreated" class="created-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="created"> Создан </th>
+                    <td mat-cell *matCellDef="let user"> {{user.created.toLocaleString()}} </td>
+                </ng-container>
+
+                <!-- DateUpdatedColumn -->
+                <ng-container matColumnDef="dateUpdated" class="updated-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="updated"> Обновлен </th>
+                    <td mat-cell *matCellDef="let user"> {{user.updated.toLocaleString()}} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -48,8 +54,6 @@
                     <td class="mat-cell" colspan="4">Не найдено данных по запросу "{{input.value}}"</td>
                 </tr>
             </table>
-
-
         </div>
     </mat-card-content>
     <mat-card-footer>
@@ -58,4 +62,3 @@
                 aria-label="Выберите страницу"></mat-paginator>
     </mat-card-footer>
 </mat-card>
-
