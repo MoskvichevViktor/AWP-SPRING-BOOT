@@ -8,10 +8,10 @@
     <version>2.6.3</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.example</groupId>
-  <artifactId>spring-hibernate-crud-app</artifactId>
+  <groupId>org.example</groupId>
+  <artifactId>AWP-SPRING-BOOT-BACK</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>AWP-Spring Boot</name>
+  <name>AWP-Spring Boot Backend</name>
   <description>AWP-Spring Boot</description>
   <properties>
     <java.version>17</java.version>
