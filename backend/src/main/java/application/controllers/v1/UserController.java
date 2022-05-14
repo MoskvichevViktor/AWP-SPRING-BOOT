@@ -1,6 +1,5 @@
 package application.controllers.v1;
 
-import application.dto.AuthRequest;
 import application.dto.UserDto;
 import application.dto.UserRegistrationDto;
 import application.exception.AwpError;
@@ -10,10 +9,8 @@ import application.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +25,7 @@ public class UserController {
     private final AuthService authService;
 
     @GetMapping("")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<UserDto> getAll() {
         List<User> users = userService.getAll();
         return users.stream().map(UserDto::new).collect(Collectors.toList());
