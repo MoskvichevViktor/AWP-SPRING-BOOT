@@ -9,4 +9,7 @@ export const ApiEndpoints = {
     clients: {
         list: '/people/all',
     },
+    users: {
+        list: '/users',
+    },
 }

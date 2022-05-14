@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { RequestsListComponent } from './components/requests/requests-list/requests-list.component';
 import { MainPageStartComponent } from './components/main/main-page-start/main-page-start.component';
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
+import { UsersListComponent } from './components/users/users-list/users-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { ClientsListComponent } from './components/clients/clients-list/clients-
     MainPageComponent,
     RequestsListComponent,
     MainPageStartComponent,
-    ClientsListComponent
+    ClientsListComponent,
+    UsersListComponent
   ],
   imports: [
     AppRoutingModule,

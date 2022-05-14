@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreditRequestService } from "../../../services/credit-request.service";
-import { CreditRequest } from "../../../models/credit-request";
 import { MatTableDataSource } from "@angular/material/table";
 import { Sort } from "@angular/material/sort";
-import { compare } from "../../../models/sort-compare";
+import { compare } from "../../../shared/sort-compare";
 import { Subscription } from "rxjs";
+import { CreditRequest } from "../../../shared/models.interfaces";
 
 @Component({
   selector: 'app-requests-list',

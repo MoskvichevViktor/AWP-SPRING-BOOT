@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ClientService } from "../../../services/client.service";
 import { MatTableDataSource } from "@angular/material/table";
-import { Client } from "../../../models/client";
 import { Subscription } from "rxjs";
 import { Sort } from "@angular/material/sort";
-import { CreditRequest } from "../../../models/credit-request";
-import { compare } from "../../../models/sort-compare";
+import { compare } from "../../../shared/sort-compare";
+import { Client } from "../../../shared/models.interfaces";
 
 @Component({
   selector: 'app-clients-list',

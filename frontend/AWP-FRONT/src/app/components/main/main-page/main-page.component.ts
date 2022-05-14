@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MenuItem} from "../../../models/menu-item";
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MenuItem } from "../../../shared/models.interfaces";
 
 @Component({
   selector: 'app-main-page',
@@ -40,6 +40,13 @@ export class MainPageComponent implements OnInit {
     {
       title: 'Клиенты',
       url: 'clients',
+      active: false,
+      icon: 'face',
+      visible: true
+    },
+    {
+      title: 'Пользователи',
+      url: 'users',
       active: false,
       icon: 'person',
       visible: true
