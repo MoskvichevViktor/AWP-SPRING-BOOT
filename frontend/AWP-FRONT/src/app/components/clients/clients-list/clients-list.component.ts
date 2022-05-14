@@ -55,9 +55,9 @@ export class ClientsListComponent implements OnInit, OnDestroy {
         case 'name':
           return compare(a.name, b.name, isAsc);
         case 'passport':
-          return compare(a.pasport, b.pasport, isAsc);
+          return compare(a.passport, b.passport, isAsc);
         case 'address':
-          return compare(a.adress, b.adress, isAsc);
+          return compare(a.address, b.address, isAsc);
         case 'phone':
           return compare(a.phone, b.phone, isAsc);
         default:

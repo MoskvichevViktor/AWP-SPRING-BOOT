@@ -1,8 +1,8 @@
 export interface Client {
     id: number,
     name: string,
-    pasport: string,
-    adress: string,
+    passport: string,
+    address: string,
     phone: string
 }
 
@@ -25,11 +25,11 @@ export interface CreditRequest {
 
 export interface User {
     id: number,
-    name: string,
+    userName: string,
     email: string,
     role: UserRole,
-    created: Date,
-    updated: Date
+    createdAt: string,
+    updatedAt: string
 }
 
 export enum UserRole {
