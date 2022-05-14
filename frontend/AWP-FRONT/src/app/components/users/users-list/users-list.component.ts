@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
-import { Client, User } from "../../../shared/models.interfaces";
+import { User } from "../../../shared/models.interfaces";
 import { Subscription } from "rxjs";
 import { UserService } from "../../../services/user.service";
 import { Sort } from "@angular/material/sort";
@@ -15,12 +15,12 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   tableTitle = 'Список пользователей';
   dataSource = new MatTableDataSource<User>([]);
-  displayedColumns = ['id', 'name', 'email', 'role', 'dateCreated', 'dateUpdated'];
+  displayedColumns = ['id', 'name', 'email', 'role', 'created', 'updated'];
 
   $usersSub = new Subscription();
 
   constructor(
-      private userService: UserService
+      public userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -53,13 +53,13 @@ export class UsersListComponent implements OnInit, OnDestroy {
         case 'id':
           return compare(a.id, b.id, isAsc);
         case 'name':
-          return compare(a.name, b.name, isAsc);
+          return compare(a.userName, b.userName, isAsc);
         case 'role':
           return compare(a.role, b.role, isAsc);
         case 'created':
-          return compare(a.created.getTime(), b.created.getTime(), isAsc);
+          return compare(a.createdAt, b.createdAt, isAsc);
         case 'updated':
-          return compare(a.updated.getTime(), b.updated.getTime(), isAsc);
+          return compare(a.updatedAt, b.updatedAt, isAsc);
         default:
           return 0;
       }

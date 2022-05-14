@@ -10,6 +10,6 @@ export const ApiEndpoints = {
         list: '/clients',
     },
     users: {
-        list: '/users',
+        list: '/api/v1/users',
     },
 }
