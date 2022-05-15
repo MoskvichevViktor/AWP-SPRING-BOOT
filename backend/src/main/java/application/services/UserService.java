@@ -2,12 +2,9 @@ package application.services;
 
 import application.constants.UserRole;
 import application.dto.UserRegistrationDto;
-import application.exception.AwpError;
-import application.models.security.Role;
 import application.models.security.User;
 import application.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +23,6 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final AuthService authService;
 
     public List<User> getAll() {
         return userRepository.findAll();
@@ -37,7 +33,11 @@ public class UserService implements UserDetailsService {
     }
 
     public ResponseEntity<?> save(User user) {
+        if (user.getRole() == null) {
+            return new ResponseEntity<>(new IllegalArgumentException("Role can't be empty"), HttpStatus.NOT_IMPLEMENTED);
+        }
         if (isExistsUser(user.getUsername())) {
+            userRepository.save(user);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         userRepository.save(user);
@@ -78,18 +78,19 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id);
     }
 
-    public User createNewUser(UserRegistrationDto userDto) {
+
+    public ResponseEntity<?> createNewUser(UserRegistrationDto userDto) {
         Date now = new Date();
         User user = new User();
         user.setUsername(userDto.getUsername());
-        user.setPassword(authService.encrypt(userDto.getPassword()));
+        user.setPassword(userDto.getPassword());
+        //TODO определиться с ролью по умолчанию
+        user.setRole(UserRole.ROLE_MANAGER);
         user.setEmail(userDto.getEmail());
         user.setCreatedAt(now);
         user.setUpdatedAt(now);
-        user.setRole(userDto.getUserRole());
-        return user;
+        save(user);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-
 }
 
