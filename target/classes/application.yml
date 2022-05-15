@@ -1,0 +1,14 @@
+
+
+spring:
+  datasource:
+    username: postgres
+    password: 712459
+    url: jdbc:postgresql://localhost:5432/awp
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: validate
+        dialect: org.hibernate.dialect.PostgreSQLDialect

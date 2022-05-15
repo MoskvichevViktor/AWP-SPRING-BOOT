@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show CreditRequest</title>
+</head>
+<body>
+<h1>Show CreditRequest.</h1>
+
+<br/>
+<hr/>
+<p th:text="${'Id: ' + creditRequest.getId()}">VALUE</p>
+<p th:text="${'Name: ' + creditRequest.getName()}">VALUE</p>
+<p th:text="${'Pasport: ' + creditRequest.getPasport()}">VALUE</p>
+<p th:text="${'Maritalstatus: ' + creditRequest.getMaritalstatus()}">VALUE</p>
+<p th:text="${'Adress: ' + creditRequest.getAdress()}">VALUE</p>
+<p th:text="${'Phone: ' + creditRequest.getPhone()}">VALUE</p>
+<p th:text="${'Jobdetails: ' + creditRequest.getJobdetails()}">VALUE</p>
+<p th:text="${'Creditsum(rub): ' + creditRequest.getCreditsum()}">VALUE</p>
+
+<br/>
+<hr/>
+<a th:href="@{/creditRequest/{id}/edit(id=${creditRequest.getId()})}">Edit CreditRequest.</a>
+<br/>
+<hr/>
+<br/>
+<form th:method="DELETE" th:action="@{/creditRequest/{id}(id=${creditRequest.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+<br/>
+<form th:method="POST" th:action="@{/creditResponse/{id}(id=${creditRequest.getId()})}">
+    <input type="submit" value="Push"/>
+</form>
+
+
+
+
+</body>
+</html>

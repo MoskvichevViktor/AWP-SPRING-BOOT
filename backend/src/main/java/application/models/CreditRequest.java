@@ -7,10 +7,15 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "creditrequest")
 public class CreditRequest {
     @Id
-    @Column(name = "id")
+    @Column(name = "id_creditrequest")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_creditrequest;
 
+    @ManyToOne
+    @JoinColumn(name ="id_client", referencedColumnName = "id_client")
+    private Client client;
+
+    /*
     @NotEmpty(message = "Should not be empty")
     @Column(name = "name")
     private String name;
@@ -19,9 +24,6 @@ public class CreditRequest {
     @Column(name = "pasport")
     private String pasport;
 
-    @NotEmpty(message = "Should not be empty")
-    @Column(name = "maritalstatus")
-    private String maritalstatus;
 
     @NotEmpty(message = "Should not be empty")
     @Column(name = "adress")
@@ -30,6 +32,13 @@ public class CreditRequest {
     @NotEmpty(message = "Should not be empty")
     @Column(name = "phone")
     private String phone;
+
+    */
+
+    @NotEmpty(message = "Should not be empty")
+    @Column(name = "maritalstatus")
+    private String maritalstatus;
+
 
     @NotEmpty(message = "Should not be empty")
     @Column(name = "jobdetails")
@@ -42,30 +51,28 @@ public class CreditRequest {
     public CreditRequest() {
     }
 
-    public CreditRequest(Integer id, String name, String pasport,
+    public CreditRequest(Integer id_creditrequest, String name, String pasport,
                          String maritalstatus, String adress, String phone,
                          String jobdetails, Integer creditsum) {
-        this.id = id;
-        this.name = name;
-        this.pasport = pasport;
+        this.id_creditrequest = id_creditrequest;
+        //this.name = name;
+        //this.pasport = pasport;
+        //this.adress = adress;
+        //this.phone = phone;
         this.maritalstatus = maritalstatus;
-        this.adress = adress;
-        this.phone = phone;
         this.jobdetails = jobdetails;
         this.creditsum = creditsum;
     }
 
     public Integer getId() {
-        return id;
+        return id_creditrequest;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer id_creditrequest) {
+        this.id_creditrequest = id_creditrequest;
     }
-
-    public String getName() {
-        return name;
-    }
+/*
+    public String getName() {return name;}
 
     public void setName(String name) {
         this.name = name;
@@ -77,14 +84,6 @@ public class CreditRequest {
 
     public void setPasport(String pasport) {
         this.pasport = pasport;
-    }
-
-    public String getMaritalstatus() {
-        return maritalstatus;
-    }
-
-    public void setMaritalstatus(String maritalstatus) {
-        this.maritalstatus = maritalstatus;
     }
 
     public String getAdress() {
@@ -101,6 +100,14 @@ public class CreditRequest {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+*/
+    public String getMaritalstatus() {
+        return maritalstatus;
+    }
+
+    public void setMaritalstatus(String maritalstatus) {
+        this.maritalstatus = maritalstatus;
     }
 
     public String getJobdetails() {
@@ -122,12 +129,12 @@ public class CreditRequest {
     @Override
     public String toString() {
         return "CreditRequest{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", pasport='" + pasport + '\'' +
+                "id_creditrequest=" + id_creditrequest +
+                //", name='" + name + '\'' +
+                //", pasport='" + pasport + '\'' +
+                //", adress='" + adress + '\'' +
+                //", phone='" + phone + '\'' +
                 ", maritalstatus='" + maritalstatus + '\'' +
-                ", adress='" + adress + '\'' +
-                ", phone='" + phone + '\'' +
                 ", jobdetails='" + jobdetails + '\'' +
                 ", creditsum=" + creditsum +
                 '}';

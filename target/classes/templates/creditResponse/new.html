@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Credit Response NEW</title>
+</head>
+<body>
+<h1>Credit Response NEW</h1>
+<br>
+<hr>
+<form th:method="POST" th:action="@{/creditResponse}" th:object="${creditResponse}">
+
+    <label for="idrequest">Enter idrequest: </label>
+    <input type="text" th:field="*{idrequest}" id="idrequest"/>
+    <div style="color:red" th:if="${#fields.hasErrors('idrequest')}" th:errors="*{idrequest}">idrequest error</div>
+    <br>
+
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</div>
+    <br>
+
+    <label for="pasport">Enter pasport: </label>
+    <input type="text" th:field="*{pasport}" id="pasport"/>
+    <div style="color:red" th:if="${#fields.hasErrors('pasport')}" th:errors="*{pasport}">pasport error</div>
+    <br>
+
+    <label for="period">Enter period: </label>
+    <input type="text" th:field="*{period}" id="period"/>
+    <div style="color:red" th:if="${#fields.hasErrors('period')}" th:errors="*{period}">period error</div>
+    <br>
+
+    <label for="sum">Enter sum(rub): </label>
+    <input type="text" th:field="*{sum}" id="sum"/>
+    <div style="color:red" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">sum error</div>
+    <br>
+
+    <label for="status">Enter status: </label>
+    <input type="text" th:field="*{status}" id="status"/>
+    <div style="color:red" th:if="${#fields.hasErrors('status')}" th:errors="*{status}">status error</div>
+    <br>
+
+    <br>
+    <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>

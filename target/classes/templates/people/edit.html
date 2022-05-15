@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Person</title>
+</head>
+<h1>Update Person</h1>
+<body>
+
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    <br/>
+    <label for="pasport">Enter pasport: </label>
+    <input type="text" th:field="*{pasport}" id="pasport"/>
+    <div style="color:red" th:if="${#fields.hasErrors('pasport')}" th:errors="*{pasport}">pasport Error</div>
+    <br/>
+    <label for="adress">Enter adress: </label>
+    <input type="text" th:field="*{adress}" id="adress"/>
+    <div style="color:red" th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}">adress Error</div>
+    <br/>
+    <label for="phone">Enter phone: </label>
+    <input type="text" th:field="*{phone}" id="phone"/>
+    <div style="color:red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phone Error</div>
+    <br/>
+
+
+
+    <input type="submit" value="Update"/>
+</form>
+
+</body>
+</html>

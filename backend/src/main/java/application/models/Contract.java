@@ -9,16 +9,21 @@ import javax.validation.constraints.Size;
 @Table(name = "contract")
 public class Contract {
     @Id
-    @Column(name = "id")
+    @Column(name = "id_contract")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_contract;
 
+    @ManyToOne
+    @JoinColumn(name ="id_client", referencedColumnName = "id_client")
+    private Client client;
+
+/*
     @Column(name = "name")
     private String name;
 
     @Column(name = "pasport")
     private String pasport;
-
+*/
     @Column(name = "period")
     private Integer period;
 
@@ -31,38 +36,30 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(Integer id, String name, String pasport, Integer period, Integer sum, String status) {
-        this.id = id;
-        this.name = name;
-        this.pasport = pasport;
+    public Contract(Integer id_contract, String name, String pasport, Integer period, Integer sum, String status) {
+        this.id_contract = id_contract;
+        //this.name = name;
+        //this.pasport = pasport;
         this.period = period;
         this.sum = sum;
         this.status = status;
     }
 
     public Integer getId() {
-        return id;
+        return id_contract;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_contract = id_contract;
     }
 
-    public String getName() {
-        return name;
-    }
+    //public String getName() {return name;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    //public void setName(String name) this.name = name;}
 
-    public String getPasport() {
-        return pasport;
-    }
+    //public String getPasport() {return pasport;}
 
-    public void setPasport(String pasport) {
-        this.pasport = pasport;
-    }
+    //public void setPasport(String pasport) {this.pasport = pasport;}
 
     public int getPeriod() {
         return period;
@@ -91,9 +88,9 @@ public class Contract {
     @Override
     public String toString() {
         return "Contract{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", pasport='" + pasport + '\'' +
+                "id_contract=" + id_contract +
+                // ", name='" + name + '\'' +
+                // ", pasport='" + pasport + '\'' +
                 ", period=" + period +
                 ", sum=" + sum +
                 ", status='" + status + '\'' +

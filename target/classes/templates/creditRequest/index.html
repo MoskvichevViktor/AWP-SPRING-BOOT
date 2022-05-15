@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<h1>Credit Request.</h1>
+<br/>
+<hr/>
+<div th:each="creditRequest : ${creditRequests}">
+    <a th:href="@{/creditRequest/{id}(id=${creditRequest.getId()})}"
+       th:text="${'ID: ' + creditRequest.getId() + ', ' +
+            'Name: ' + creditRequest.getName() + ', ' +
+            'Pasport: ' + creditRequest.getPasport() + ', '+
+            'Maritalstatus: ' + creditRequest.getMaritalstatus() + ', ' +
+            'Adress: ' + creditRequest.getAdress() + ', ' +
+            'Phone: ' + creditRequest.getPhone() + ', '+
+            'Jobdetails: ' + creditRequest.getJobdetails() + ', '+
+            'Creditsum(rub): ' + creditRequest.getCreditsum()}">creditRequest</a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/creditRequest/new">Create new creditRequest</a>
+
+</body>
+</html>
