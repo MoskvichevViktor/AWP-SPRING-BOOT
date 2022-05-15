@@ -2,8 +2,6 @@ package application.services;
 
 import application.constants.UserRole;
 import application.dto.UserRegistrationDto;
-import application.exception.AwpError;
-import application.models.security.Role;
 import application.models.security.User;
 import application.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

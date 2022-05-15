@@ -1,6 +1,5 @@
 package application.controllers.v1;
 
-import application.constants.UserRole;
 import application.dto.UserDto;
 import application.dto.UserRegistrationDto;
 import application.exception.AwpError;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
