@@ -3,6 +3,7 @@ package application.controllers;
 
 import application.models.Client;
 import application.repositories.ClientRepository;
+import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@Data
 @RequestMapping("/clients")
 public class ClientController {
 

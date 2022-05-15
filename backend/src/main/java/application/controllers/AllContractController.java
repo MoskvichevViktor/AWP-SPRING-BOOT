@@ -4,6 +4,7 @@ import application.models.Contract;
 import application.models.CreditResponse;
 import application.repositories.ContractRepository;
 import application.repositories.ResponseRepository;
+import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
+@Data
 @RequestMapping("/allContract")
 public class AllContractController {
 
