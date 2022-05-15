@@ -15,4 +15,5 @@ public class AwpError {
         this.message = message;
         this.date = new Date();
     }
+
 }
