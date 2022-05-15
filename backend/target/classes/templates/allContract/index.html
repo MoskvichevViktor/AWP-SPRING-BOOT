@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contract</title>
+</head>
+<body>
+<h1>CONTRACT.</h1>
+<br/>
+<hr/>
+
+<a href="/allContract">Show ALL Status. </a>
+<br/>
+<a href="/allContract/signed">Show Only Status SIGNED.</a>
+<br/>
+<hr/>
+<div th:each="contract : ${allContract}">
+    <a th:href="@{/allContract/{id}(id=${contract.getId()})}"
+       th:text="${'ID: ' + contract.getId() + ', ' +
+       'Name: ' + contract.getName() + ', ' +
+       'Pasport: ' + contract.getPasport() + ', ' +
+       'Period: ' + contract.getPeriod() + ', ' +
+       'Sum(rub): ' + contract.getSum() + ', ' +
+       'Status: ' + contract.getStatus()}">contract</a>
+
+</div>
+
+<br/>
+<hr/>
+
+<a href="/allContract/new">Create new Contract.</a>
+
+</body>
+</html>

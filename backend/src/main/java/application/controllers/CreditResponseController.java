@@ -5,6 +5,7 @@ import application.models.CreditResponse;
 
 import application.repositories.RequestRepository;
 import application.repositories.ResponseRepository;
+import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 import java.util.Random;
 
 @Controller
+@Data
 @RequestMapping("/creditResponse")
 public class CreditResponseController {
 
@@ -64,7 +66,9 @@ public class CreditResponseController {
     public String createFromCR(@PathVariable("id") int id) {
         CreditRequest newCreditRequest = requestRepository.findById(id).get();
         CreditResponse creditResponse = new CreditResponse();
-        creditResponse.setIdrequest(newCreditRequest.getId());
+
+        creditResponse.setId_creditresponse(newCreditRequest.getId_creditrequest());
+        //creditResponse.setId(newCreditRequest.getId());
         creditResponse.setName(newCreditRequest.getName());
         creditResponse.setPasport(newCreditRequest.getPasport());
         Random random = new Random();
@@ -93,7 +97,8 @@ public class CreditResponseController {
 
         CreditResponse creditResponseToBeUpdated = responseRepository.findById(id).get();
 
-        creditResponseToBeUpdated.setIdrequest(creditResponse.getIdrequest());
+        creditResponseToBeUpdated.setId_creditresponse(creditResponse.getId_creditresponse());
+        //creditResponseToBeUpdated.setId(creditResponse.getId());
         creditResponseToBeUpdated.setName(creditResponse.getName());
         creditResponseToBeUpdated.setPasport(creditResponse.getPasport());
         creditResponseToBeUpdated.setPeriod(creditResponse.getPeriod());
