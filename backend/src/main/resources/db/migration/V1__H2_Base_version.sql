@@ -10,13 +10,10 @@ create table if not exists users
     username   varchar(30)  not null,
     password   varchar(200) not null,
     email      varchar(50) unique,
-    user_role  varchar(50) not null,
+    user_role  varchar(20) not null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp
 );
--- admin:admin
--- manager:1234
--- main_manager:1234
 insert into users (username, password, email, user_role)
 values ('admin', '$2a$12$SpBu8mutcZOxdRJ1uB7K6.gJvohkIh4eG4KbM4YKI.cHt3/Oje3Sq', 'admin@gmail.com', 'ROLE_ADMIN'),
        ('manager', '$2a$12$5LFojdj.ByfyOyO13ziCP.3S.UIezgdPKdiDQriDub1zChxtnZi9u', 'manager@gmail.com', 'ROLE_MANAGER'),
@@ -35,9 +32,6 @@ INSERT INTO clients (id, name, passport, address, phone)
 VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв№ 7', '25-25-25'),
        (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв№ 71', '+79056981258');
 
-
--- alter table clients
---     owner to postgres;
 
 create table IF NOT EXISTS creditrequest
 (

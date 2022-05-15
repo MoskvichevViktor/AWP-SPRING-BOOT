@@ -1,9 +1,11 @@
 package application.controllers.v1;
 
+import application.constants.UserRole;
 import application.dto.UserDto;
 import application.dto.UserRegistrationDto;
 import application.exception.AwpError;
 import application.models.security.User;
+import application.services.AuthService;
 import application.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +24,7 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
+    private final AuthService authService;
 
     @GetMapping("")
 //    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -47,8 +51,8 @@ public class UserController {
         if (userService.isExistsUser(userDto.getUsername())) {
             return new ResponseEntity<>(new AwpError("This username is occupied"), HttpStatus.CONFLICT);
         }
-        userService.save(userService.createNewUser(userDto));
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        userDto.setPassword(authService.encrypt(userDto.getPassword()));
+        return userService.createNewUser(userDto);
     }
 
 }

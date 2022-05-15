@@ -23,7 +23,7 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("")
-    public ResponseEntity<?> createAuthToken(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> createAuthToken(@RequestBody AuthRequest  authRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         } catch (BadCredentialsException e) {
