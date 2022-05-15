@@ -1,4 +1,4 @@
-package application.controllers;
+package application.controllers.v1;
 
 
 import application.models.Client;
