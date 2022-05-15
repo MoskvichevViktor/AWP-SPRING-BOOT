@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show CreditResponse</title>
+</head>
+<h1>Show CreditResponse.</h1>
+<br>
+<hr>
+<body>
+<p th:text="${'Id: ' + creditResponse.getId()}">VALUE</p>
+<p th:text="${'IdRequest: ' + creditResponse.getIdrequest()}">VALUE</p>
+<p th:text="${'Name: ' + creditResponse.getName()}">VALUE</p>
+<p th:text="${'Pasport: ' + creditResponse.getPasport()}">VALUE</p>
+<p th:text="${'Period: ' + creditResponse.getPeriod()}">VALUE</p>
+<p th:text="${'Sum(rub): ' + creditResponse.getSum()}">VALUE</p>
+<p th:text="${'Status: ' + creditResponse.getStatus()}">VALUE</p>
+
+<br>
+<a th:href="@{/creditResponse/{id}/edit(id=${creditResponse.getId()})}">Edit CreditResponse.</a>
+<br>
+<hr>
+<br>
+<form th:method="DELETE" th:action="@{/creditResponse/{id}(id=${creditResponse.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+<br>
+<form th:method="POST" th:action="@{/allContract/{id}(id=${creditResponse.getId()})}">
+    <input type="submit" value="->Contract"/>
+</form>
+</body>
+</html>
