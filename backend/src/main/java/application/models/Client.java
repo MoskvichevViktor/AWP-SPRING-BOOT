@@ -8,9 +8,9 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "clients")
 public class Client {
     @Id
-    @Column(name = "id")
+    @Column(name = "id_client")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_client;
 
     @NotEmpty(message = "Should not be empty")
     @Column(name = "name")
@@ -31,8 +31,8 @@ public class Client {
     public Client() {
     }
 
-    public Client(Integer id, String name, String passport, String address, String phone) {
-        this.id = id;
+    public Client(Integer id_client, String name, String passport, String address, String phone) {
+        this.id_client = id_client;
         this.name = name;
         this.passport = passport;
         this.address = address;
@@ -40,11 +40,11 @@ public class Client {
     }
 
     public Integer getId() {
-        return id;
+        return id_client;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_client = id_client;
     }
 
     public String getName() {
@@ -82,7 +82,7 @@ public class Client {
     @Override
     public String toString() {
         return "Client{" +
-                "id=" + id +
+                "id_client=" + id_client +
                 ", name='" + name + '\'' +
                 ", passport='" + passport + '\'' +
                 ", address='" + address + '\'' +

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update creditResponse</title>
+</head>
+<body>
+<h1>Update CreditResponse</h1>
+<br>
+<form th:method="PATCH" th:action="@{/creditResponse/{id}(id=${creditResponse.getId()})}" th:object="${creditResponse}">
+
+    <label for="idrequest">Enter idrequest: </label>
+    <input type="text" th:field="*{idrequest}" id="idrequest"/>
+    <br>
+
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br>
+
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{pasport}" id="pasport"/>
+    <br>
+
+    <label for="period">Enter period: </label>
+    <input type="text" th:field="*{period}" id="period"/>
+    <br>
+
+    <label for="sum">Enter sum(rub): </label>
+    <input type="text" th:field="*{sum}" id="sum"/>
+    <br>
+
+    <label for="status">Enter status: </label>
+    <input type="text" th:field="*{status}" id="status"/>
+    <br>
+
+    <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

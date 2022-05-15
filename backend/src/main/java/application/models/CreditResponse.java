@@ -6,18 +6,9 @@ import javax.persistence.*;
 @Table(name = "creditresponse")
 public class CreditResponse {
     @Id
-    @Column(name = "id")
+    @Column(name = "id_creditresponse")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "idrequest")
-    private Integer idrequest;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "pasport")
-    private String pasport;
+    private Integer id_creditresponse;
 
     @Column(name = "period")
     private Integer period;
@@ -28,42 +19,54 @@ public class CreditResponse {
     @Column(name = "status")
     private String status;
 
+    @OneToOne
+    @JoinColumn(name ="id_creditrequest", referencedColumnName = "id_creditrequest")
+    private CreditRequest creditRequest;
+
+    @ManyToOne
+    @JoinColumn(name ="id_client", referencedColumnName = "id_client")
+    private Client client;
+
+
+    /*
+    @Column(name = "idrequest")
+    private Integer idrequest;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "pasport")
+    private String pasport;
+     */
+
     public CreditResponse() {
     }
 
-    public CreditResponse(Integer id, Integer idrequest, String name, String pasport, Integer period, Integer sum, String status) {
-        this.id = id;
-        this.idrequest = idrequest;
-        this.name = name;
-        this.pasport = pasport;
+    public CreditResponse(Integer id_creditresponse, Integer idrequest, String name, String pasport, Integer period, Integer sum, String status) {
+        this.id_creditresponse = id_creditresponse;
+        //this.idrequest = idrequest;
+        //this.name = name;
+        //this.pasport = pasport;
         this.period = period;
         this.sum = sum;
         this.status = status;
     }
 
     public Integer getId() {
-        return id;
+        return id_creditresponse;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_creditresponse = id_creditresponse;
     }
 
-    public Integer getIdrequest() {
-        return idrequest;
-    }
+    //public Integer getIdrequest() {return idrequest;}
 
-    public void setIdrequest(Integer idrequest) {
-        this.idrequest = idrequest;
-    }
+    //public void setIdrequest(Integer idrequest) {this.idrequest = idrequest;}
 
-    public String getName() {
-        return name;
-    }
+    //public String getName() {return name;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    //public void setName(String name) {this.name = name;}
 
     public Integer getPeriod() {
         return period;
@@ -89,20 +92,16 @@ public class CreditResponse {
         this.status = status;
     }
 
-    public String getPasport() {
-        return pasport;
-    }
+    //public String getPasport() {return pasport;}
 
-    public void setPasport(String pasport) {
-        this.pasport = pasport;
-    }
+    //public void setPasport(String pasport) {this.pasport = pasport;}
 
     @Override
     public String toString() {
         return "CreditResponse{" +
-                "id=" + id +
-                ", idrequest=" + idrequest +
-                ", name='" + name + '\'' +
+                "id_creditresponse =" + id_creditresponse +
+               // ", idrequest=" + idrequest +
+               // ", name='" + name + '\'' +
                 ", period=" + period +
                 ", sum=" + sum +
                 ", status='" + status + '\'' +

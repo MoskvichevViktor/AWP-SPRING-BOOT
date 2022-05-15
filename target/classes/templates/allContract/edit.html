@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Contract</title>
+</head>
+<body>
+<h1>Update Contract.</h1>
+<br/>
+
+<form th:method="PATCH" th:action="@{/allContract/{id}(id=${contract.getId()})}" th:object="${contract}">
+
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</div>
+    <br/>
+
+    <label for="pasport">Enter pasport: </label>
+    <input type="text" th:field="*{pasport}" id="pasport"/>
+    <div style="color:red" th:if="${#fields.hasErrors('pasport')}" th:errors="*{pasport}">pasport error</div>
+    <br/>
+
+    <label for="period">Enter period: </label>
+    <input type="text" th:field="*{period}" id="period"/>
+    <div style="color:red" th:if="${#fields.hasErrors('period')}" th:errors="*{period}">period error</div>
+    <br/>
+
+    <label for="sum">Enter sum(rub): </label>
+    <input type="text" th:field="*{sum}" id="sum"/>
+    <div style="color:red" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">sum error</div>
+    <br/>
+
+    <label for="status">Enter status: </label>
+    <input type="text" th:field="*{status}" id="status"/>
+    <div style="color:red" th:if="${#fields.hasErrors('status')}" th:errors="*{status}">status error</div>
+    <br/>
+
+    <input type="submit" value="Update"/>
+</form>
+
+</body>
+</html>
