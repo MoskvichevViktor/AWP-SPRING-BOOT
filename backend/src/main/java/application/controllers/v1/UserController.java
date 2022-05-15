@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RequestMapping("/api/v1/users")
-@RestController
+@RestController//для json
 
 @RequiredArgsConstructor
 public class UserController {

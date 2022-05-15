@@ -4,6 +4,7 @@ package application.controllers;
 import application.models.CreditRequest;
 
 import application.repositories.RequestRepository;
+import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
+@Data
 @RequestMapping("/creditRequest")
 public class CreditRequestController {
 
@@ -62,6 +64,7 @@ public class CreditRequestController {
             return "creditRequest/edit";
 
         CreditRequest creditRequestToBeUpdated = requestRepository.findById(id).get();
+
 
         creditRequestToBeUpdated.setName(creditRequest.getName());
         creditRequestToBeUpdated.setPasport(creditRequest.getPasport());
