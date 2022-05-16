@@ -16,26 +16,26 @@ public class CreditRequest {
 
 
     @ManyToOne
-    @JoinColumn(name ="id_client", referencedColumnName = "id_client")
+    @JoinColumn(name = "id_client", referencedColumnName = "id_client")
     private Client client;
 
 
-    @NotEmpty(message = "Should not be empty")
-    @Column(name = "name")
-    private String name;
+//    @NotEmpty(message = "Should not be empty")
+//    @Column(name = "name")
+//    private String name;
 
-    @NotEmpty(message = "Should not be empty")
-    @Column(name = "pasport")
-    private String pasport;
+//    @NotEmpty(message = "Should not be empty")
+//    @Column(name = "pasport")
+//    private String pasport;
 
 
-    @NotEmpty(message = "Should not be empty")
-    @Column(name = "adress")
-    private String adress;
+//    @NotEmpty(message = "Should not be empty")
+//    @Column(name = "adress")
+//    private String adress;
 
-    @NotEmpty(message = "Should not be empty")
-    @Column(name = "phone")
-    private String phone;
+//    @NotEmpty(message = "Should not be empty")
+//    @Column(name = "phone")
+//    private String phone;
 
 
     @NotEmpty(message = "Should not be empty")
