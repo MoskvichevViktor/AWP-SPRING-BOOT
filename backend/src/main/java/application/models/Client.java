@@ -1,6 +1,7 @@
 package application.models;
 
 
+import application.models.baseentity.AbstractEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,11 +10,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Data
 @Table(name = "clients")
-public class Client {
-    @Id
-    @Column(name = "id_client")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_client;
+public class Client extends AbstractEntity {
 
     @NotEmpty(message = "Should not be empty")
     @Column(name = "name")
@@ -30,9 +27,5 @@ public class Client {
     @NotEmpty(message = "Should not be empty")
     @Column(name = "phone")
     private String phone;
-
-    public Client() {
-    }
-
 
 }

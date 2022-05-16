@@ -21,50 +21,61 @@ values ('admin', '$2a$12$SpBu8mutcZOxdRJ1uB7K6.gJvohkIh4eG4KbM4YKI.cHt3/Oje3Sq',
 
 create table IF NOT EXISTS clients
 (
-    id_client   integer primary key,
-    name    varchar,
-    passport text,
-    address  text,
-    phone   text
+    id         integer primary key,
+    name       varchar,
+    passport   text,
+    address    text,
+    phone      text,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 );
 
-INSERT INTO clients (id_client, name, passport, address, phone)
+create table IF NOT EXISTS credit_request
+(
+    id         integer primary key,
+    period     integer,
+    sum        money,
+    status     text,
+    clients    bigint,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
+
+);
+
+
+INSERT INTO clients (id, name, passport, address, phone)
 VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв№ 7', '25-25-25'),
        (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв№ 71', '+79056981258');
 
 
-create table IF NOT EXISTS creditrequest
+INSERT INTO credit_request(id, period, sum, status, clients)
+VALUES (1, 12, 100000, 'created', 1),
+       (2, 24, 50000, 'waiting', 2),
+       (3, 24, 600000, 'waiting', 2),
+       (4, 6, 25000, 'rejection', 3),
+       (5, 18, 900000, 'confirmed', 4),
+       (6, 18, 999999, 'rejection', 4);
+
+
+create table IF NOT EXISTS contracts
 (
-    id            integer primary key,
-    name          text,
-    maritalstatus text,
-    adress        text,
-    phone         text,
-    jobdetails    text,
-    creditsum     integer,
-    pasport       text
+    id         integer primary key,
+    period     integer,
+    sum        money,
+    status     text,
+    clients    bigint,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 );
 
-create table IF NOT EXISTS creditresponse
-(
-    id        integer primary key,
-    idrequest integer,
-    name      text,
-    period    integer,
-    sum       integer,
-    status    text,
-    pasport   text
-);
+INSERT INTO contracts (id, period, sum, status, clients)
+VALUES (1, 24, 66000, 'active', 1),
+       (2, 24, 100250, 'completed', 1),
+       (3, 24, 100250, 'active', 2),
+       (4, 24, 40000, 'active', 3),
+       (5, 24, 60000, 'completed', 2);
 
 
 
-create table IF NOT EXISTS contract
-(
-    id      integer primary key,
-    name    text,
-    pasport text,
-    period  integer,
-    sum     integer,
-    status  text
-);
+
 

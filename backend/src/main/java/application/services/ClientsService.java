@@ -1,7 +1,6 @@
 package application.services;
 
 import application.models.Client;
-import application.models.security.User;
 import application.repositories.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

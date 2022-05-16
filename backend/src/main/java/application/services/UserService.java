@@ -2,7 +2,7 @@ package application.services;
 
 import application.constants.UserRole;
 import application.dto.UserRegistrationDto;
-import application.models.security.User;
+import application.models.User;
 import application.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

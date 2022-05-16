@@ -3,7 +3,7 @@ package application.controllers.v1;
 import application.dto.UserDto;
 import application.dto.UserRegistrationDto;
 import application.exception.AwpError;
-import application.models.security.User;
+import application.models.User;
 import application.services.AuthService;
 import application.services.UserService;
 import lombok.RequiredArgsConstructor;

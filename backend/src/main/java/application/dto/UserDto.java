@@ -1,7 +1,7 @@
 package application.dto;
 
 import application.constants.UserRole;
-import application.models.security.User;
+import application.models.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

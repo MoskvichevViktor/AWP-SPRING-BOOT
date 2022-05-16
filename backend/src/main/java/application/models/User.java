@@ -1,19 +1,15 @@
-package application.models.security;
+package application.models;
 
 import application.constants.UserRole;
+import application.models.baseentity.AbstractEntity;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
 
 @Data
 @Entity
 @Table(name = "users")
-public class User extends BaseSecurityEntity {
+public class User extends AbstractEntity {
 
     @Column(name = "username")
     private String username;

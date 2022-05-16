@@ -1,40 +1,16 @@
 package application.models;
 
+import application.constants.ContractStatus;
+import application.models.baseentity.AbstractContractTemplate;
 
-import lombok.Data;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
 
-import javax.persistence.*;
-
-@Entity
-@Data
-@Table(name = "contract")
-public class Contract {
-    @Id
-    @Column(name = "id_contract")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_contract;
-
-    @ManyToOne
-    @JoinColumn(name ="id_client", referencedColumnName = "id_client")
-    private Client client;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "pasport")
-    private String pasport;
-
-    @Column(name = "period")
-    private Integer period;
-
-    @Column(name = "sum")
-    private Integer sum;
-
+@Table(name = "contracts")
+public class Contract extends AbstractContractTemplate {
     @Column(name = "status")
-    private String status;
-
-    public Contract() {
-    }
-
-
+    @Enumerated(EnumType.STRING)
+    private ContractStatus status;
 }

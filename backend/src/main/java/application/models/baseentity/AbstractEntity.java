@@ -1,4 +1,4 @@
-package application.models.security;
+package application.models.baseentity;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -9,7 +9,7 @@ import java.util.Date;
 
 @MappedSuperclass
 @Data
-public class BaseSecurityEntity {
+public abstract class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
