@@ -2,13 +2,18 @@ package application.models;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
 @Table(name = "contract")
 public class Contract {
     @Id
@@ -16,16 +21,16 @@ public class Contract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_contract;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="id_client", referencedColumnName = "id_client")
     private Client client;
-
+/*
     @Column(name = "name")
     private String name;
 
     @Column(name = "pasport")
     private String pasport;
-
+*/
     @Column(name = "period")
     private Integer period;
 
@@ -34,9 +39,5 @@ public class Contract {
 
     @Column(name = "status")
     private String status;
-
-    public Contract() {
-    }
-
 
 }

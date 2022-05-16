@@ -2,20 +2,15 @@ package application.controllers;
 
 import application.models.CreditRequest;
 import application.models.CreditResponse;
-
 import application.repositories.RequestRepository;
 import application.repositories.ResponseRepository;
-import lombok.Data;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+//import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Random;
 
-@Controller
-@Data
+@RestController
 @RequestMapping("/creditResponse")
 public class CreditResponseController {
 
@@ -27,92 +22,70 @@ public class CreditResponseController {
         this.requestRepository = requestRepository;
     }
 
-
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("creditResponses", responseRepository.findAll());
-        return "creditResponse/index";
+    public List<CreditResponse> index() {
+        return responseRepository.findAll();
     }
+
     //for sort by status
     @GetMapping("/approved")
-    public String indexOnlyApproved(Model model) {
-        model.addAttribute("creditResponses", responseRepository.findCreditResponsesByStatus("approved"));
-        return "creditResponse/index";
+    public List<CreditResponse> indexOnlyApproved() {
+        return responseRepository.findCreditResponsesByStatus("approved");
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("creditResponse", responseRepository.findById(id).get());
-        return "creditResponse/show";
-    }
-
-    @GetMapping("/new")
-    public String newcreditResponse(@ModelAttribute("creditResponse") CreditResponse creditResponse) {
-        return "creditResponse/new";
+    public CreditResponse show(@PathVariable("id") int id) {
+        return responseRepository.findById(id).get();
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("creditResponse") @Valid CreditResponse creditResponse,
-                         BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "creditResponse/new";
-
-        responseRepository.save(creditResponse);
-        return "redirect:/creditResponse";
+    public CreditResponse create(@RequestBody CreditResponse creditResponse) {
+        return responseRepository.save(creditResponse);
     }
 
     //ответ на заявку
     @PostMapping("/{id}")
-    public String createFromCR(@PathVariable("id") int id) {
+    public CreditResponse createFromCR(@PathVariable("id") int id) {
         CreditRequest newCreditRequest = requestRepository.findById(id).get();
         CreditResponse creditResponse = new CreditResponse();
 
         creditResponse.setId_creditresponse(newCreditRequest.getId_creditrequest());
         //creditResponse.setId(newCreditRequest.getId());
-        creditResponse.setName(newCreditRequest.getName());
-        creditResponse.setPasport(newCreditRequest.getPasport());
+        creditResponse.setClient(newCreditRequest.getClient());
+        //creditResponse.setPasport(newCreditRequest.getPasport());
         Random random = new Random();
         creditResponse.setSum(random.nextInt(newCreditRequest.getCreditsum()));
         creditResponse.setPeriod(random.nextInt(12)*30);
+
         if(random.nextBoolean()){
             creditResponse.setStatus("approved");
         }else{
             creditResponse.setStatus("not approved");
         }
-        responseRepository.save(creditResponse);
-        return "redirect:/creditResponse";
-    }
 
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("creditResponse", responseRepository.findById(id).get());
-        return "creditResponse/edit";
+        return responseRepository.save(creditResponse);
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("creditResponse") @Valid CreditResponse creditResponse, BindingResult bindingResult,
-                         @PathVariable("id") int id) {
-        if (bindingResult.hasErrors())
-            return "creditResponse/edit";
+    public CreditResponse update(@RequestBody CreditResponse creditResponse,
+                                 @PathVariable("id") int id) {
 
         CreditResponse creditResponseToBeUpdated = responseRepository.findById(id).get();
 
         creditResponseToBeUpdated.setId_creditresponse(creditResponse.getId_creditresponse());
         //creditResponseToBeUpdated.setId(creditResponse.getId());
-        creditResponseToBeUpdated.setName(creditResponse.getName());
-        creditResponseToBeUpdated.setPasport(creditResponse.getPasport());
+        creditResponseToBeUpdated.setClient(creditResponse.getClient());
+        //creditResponseToBeUpdated.setPasport(creditResponse.getPasport());
         creditResponseToBeUpdated.setPeriod(creditResponse.getPeriod());
         creditResponseToBeUpdated.setSum(creditResponse.getSum());
         creditResponseToBeUpdated.setStatus(creditResponse.getStatus());
 
-
         responseRepository.save(creditResponseToBeUpdated);
-        return "redirect:/creditResponse";
+        return responseRepository.save(creditResponseToBeUpdated);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public void delete(@PathVariable("id") int id) {
         responseRepository.deleteById(id);
-        return "redirect:/creditResponse";
     }
 }

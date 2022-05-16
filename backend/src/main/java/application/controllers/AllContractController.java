@@ -4,16 +4,12 @@ import application.models.Contract;
 import application.models.CreditResponse;
 import application.repositories.ContractRepository;
 import application.repositories.ResponseRepository;
-import lombok.Data;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+//import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.List;
 
-@Controller
-@Data
+@RestController
 @RequestMapping("/allContract")
 public class AllContractController {
 
@@ -25,83 +21,61 @@ public class AllContractController {
         this.responseRepository = responseRepository;
     }
 
-
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("allContract", contractRepository.findAll());
-        return "allContract/index";
+    public List<Contract> index() {
+       //возращаем лист контрактов
+        return contractRepository.findAll();
     }
 
     //for sort by status
     @GetMapping("/signed")
-    public String indexOnlySigned(Model model) {
-        model.addAttribute("allContract", contractRepository.findContractsByStatus("signed"));
-        return "allContract/index";
+    public List<Contract> indexOnlySigned() {
+
+        return contractRepository.findContractsByStatus("signed");
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("contract", contractRepository.findById(id).get());
-        return "allContract/show";
-    }
+    public Contract show(@PathVariable("id") int id) {
 
-    @GetMapping("/new")
-    public String newContract(@ModelAttribute("contract") Contract contract) {
-        return "allContract/new";
+        return contractRepository.findById(id).get();
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("contract") @Valid Contract contract,
-                         BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "allContract/new";
-
-        contractRepository.save(contract);
-        return "redirect:/allContract";
+    public Contract create(@RequestBody  Contract contract) {
+        return contractRepository.save(contract);
     }
 
     //go to the Contract
-    @PostMapping("/{id}")
-    public String createContract(@PathVariable("id") int id) {
+   @PostMapping("/{id}")
+    public Contract createContract(@PathVariable("id") int id) {
         //переносим в контракт значения из ответа на заявку
         CreditResponse newCreditResponse = responseRepository.findById(id).get();
         Contract contract = new Contract();
-        contract.setName(newCreditResponse.getName());
-        contract.setPasport(newCreditResponse.getPasport());
+        contract.setClient(newCreditResponse.getClient());
         contract.setPeriod(newCreditResponse.getPeriod());
         contract.setSum(newCreditResponse.getSum());
         contract.setStatus("not signed");//defolt
-        contractRepository.save(contract);
-        return "redirect:/allContract";
+
+        return contractRepository.save(contract);
     }
 
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("contract", contractRepository.findById(id).get());
-        return "allContract/edit";
-    }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("contract") @Valid Contract contract, BindingResult bindingResult,
-                         @PathVariable("id") int id) {
-        if (bindingResult.hasErrors())
-            return "allContract/edit";
+    public Contract update(@RequestBody Contract contract,
+                           @PathVariable("id") int id) {
 
         Contract contractToBeUpdated = contractRepository.findById(id).get();
 
-        contractToBeUpdated.setName(contract.getName());
-        contractToBeUpdated.setPasport(contract.getPasport());
+        contractToBeUpdated.setClient(contract.getClient());
         contractToBeUpdated.setPeriod(contract.getPeriod());
         contractToBeUpdated.setSum(contract.getSum());
         contractToBeUpdated.setStatus(contract.getStatus());
 
-        contractRepository.save(contractToBeUpdated);
-        return "redirect:/allContract";
+        return contractRepository.save(contractToBeUpdated);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public void delete(@PathVariable("id") int id) {
         contractRepository.deleteById(id);
-        return "redirect:/allContract";
     }
 }

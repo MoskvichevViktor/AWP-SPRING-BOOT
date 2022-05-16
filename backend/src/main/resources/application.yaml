@@ -7,7 +7,7 @@ spring:
   security:
 
   profiles:
-    active: dev
+    active: work
     dev: dev
     work: work
   jta:

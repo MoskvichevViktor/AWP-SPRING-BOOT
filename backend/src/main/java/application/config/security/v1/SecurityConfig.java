@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             //для доступа к swagger-ui
             , "/v3/api-docs/**"
             , "/swagger-ui/**"
+            , "/allContract**"
     };
 
     @Override
