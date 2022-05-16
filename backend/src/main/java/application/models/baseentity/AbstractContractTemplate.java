@@ -4,6 +4,7 @@ import application.models.Client;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 
 @MappedSuperclass
@@ -18,6 +19,6 @@ public abstract class AbstractContractTemplate extends AbstractEntity {
     private Integer period;
 
     @Column(name = "sum")
-    private Integer sum;
+    private BigDecimal sum;
 
 }
