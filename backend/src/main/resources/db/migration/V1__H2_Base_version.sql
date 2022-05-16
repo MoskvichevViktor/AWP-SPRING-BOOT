@@ -21,14 +21,14 @@ values ('admin', '$2a$12$SpBu8mutcZOxdRJ1uB7K6.gJvohkIh4eG4KbM4YKI.cHt3/Oje3Sq',
 
 create table IF NOT EXISTS clients
 (
-    id      integer primary key,
+    id_client   integer primary key,
     name    varchar,
     passport text,
     address  text,
     phone   text
 );
 
-INSERT INTO clients (id, name, passport, address, phone)
+INSERT INTO clients (id_client, name, passport, address, phone)
 VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв№ 7', '25-25-25'),
        (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв№ 71', '+79056981258');
 
