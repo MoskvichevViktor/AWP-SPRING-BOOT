@@ -7,7 +7,7 @@ public enum RequestStatus {
     REJECTION("rejection");
 
 
-    public final String statusName;
+    private final String statusName;
 
     RequestStatus(String statusName) {
         this.statusName = statusName;

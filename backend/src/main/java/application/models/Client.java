@@ -28,4 +28,8 @@ public class Client extends AbstractEntity {
     @Column(name = "phone")
     private String phone;
 
+    @Override
+    public String toString() {
+        return "Empty toString method";
+    }
 }

@@ -15,4 +15,8 @@ public class CreditRequest extends AbstractContractTemplate {
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
+    @Override
+    public String toString() {
+        return "CreditRequest{}";
+    }
 }

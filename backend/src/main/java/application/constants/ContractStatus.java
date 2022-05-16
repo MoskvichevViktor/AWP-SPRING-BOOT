@@ -4,7 +4,7 @@ public enum ContractStatus {
     ACTIVE("active"),
     COMPLETED("completed");
 
-    public final String contractStatusName;
+    private final String contractStatusName;
 
     ContractStatus(String contractStatusName) {
         this.contractStatusName = contractStatusName;

@@ -13,4 +13,9 @@ public class Contract extends AbstractContractTemplate {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ContractStatus status;
+
+    @Override
+    public String toString() {
+        return "Empty toString method";
+    }
 }

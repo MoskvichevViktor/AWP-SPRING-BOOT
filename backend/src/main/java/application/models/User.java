@@ -24,4 +24,8 @@ public class User extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Override
+    public String toString() {
+        return "User{}";
+    }
 }
