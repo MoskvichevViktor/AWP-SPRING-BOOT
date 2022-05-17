@@ -1,6 +1,7 @@
 package application.constants;
 
 public enum ContractStatus {
+    WAITING_SIGNING("waiting_signing"),
     ACTIVE("active"),
     COMPLETED("completed");
 

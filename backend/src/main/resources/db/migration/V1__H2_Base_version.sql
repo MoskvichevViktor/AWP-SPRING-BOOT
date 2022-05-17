@@ -42,6 +42,19 @@ create table IF NOT EXISTS credit_request
 
 );
 
+create table IF NOT EXISTS credit_response
+(
+    id             integer primary key,
+    period         integer,
+    sum            money,
+    percent        real,
+    status         text,
+    clients        bigint,
+    credit_request bigint,
+    created_at     timestamp default current_timestamp,
+    updated_at     timestamp default current_timestamp
+
+);
 
 INSERT INTO clients (id, name, passport, address, phone)
 VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв№ 7', '25-25-25'),
@@ -57,23 +70,27 @@ VALUES (1, 12, 100000, 'created', 1),
        (6, 18, 999999, 'rejection', 4);
 
 
+INSERT INTO credit_response(id, period, sum, percent, status, clients, credit_request)
+VALUES (1, 12, 20000, 17, 'confirmed', 1, 1),
+       (2, 12, 30000, 19, 'confirmed', 2, 2);
+
+
 create table IF NOT EXISTS contracts
 (
-    id         integer primary key,
-    period     integer,
-    sum        money,
-    status     text,
-    clients    bigint,
-    created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp
+    id              integer primary key,
+    period          integer,
+    sum             money,
+    status          text,
+    clients         bigint,
+    credit_response bigint,
+    created_at      timestamp default current_timestamp,
+    updated_at      timestamp default current_timestamp
 );
 
-INSERT INTO contracts (id, period, sum, status, clients)
-VALUES (1, 24, 66000, 'active', 1),
-       (2, 24, 100250, 'completed', 1),
-       (3, 24, 100250, 'active', 2),
-       (4, 24, 40000, 'active', 3),
-       (5, 24, 60000, 'completed', 2);
+INSERT INTO contracts (id, period, sum, status, clients, credit_response)
+VALUES (1, 24, 66000, 'active', 1, 1),
+       (2, 24, 100250, 'completed', 1, 2);
+
 
 
 

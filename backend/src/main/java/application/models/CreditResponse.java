@@ -10,17 +10,20 @@ import javax.persistence.*;
 @Entity
 @Setter
 @Getter
-@Table(name = "credit_request")
-public class CreditRequest extends AbstractContractTemplate {
+@Table(name = "credit_response")
+public class CreditResponse extends AbstractContractTemplate {
+
+    @Column(name = "percent")
+    private Float percent;
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
-    public CreditRequest() {
-    }
+    @OneToOne()
+    @JoinColumn(name = "id")
+    private CreditRequest creditRequest;
 
-    @Override
-    public String toString() {
-        return "CreditRequest{}";
+    public CreditResponse() {
     }
 }

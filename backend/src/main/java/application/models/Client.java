@@ -1,14 +1,16 @@
 package application.models;
 
 
-import application.models.baseentity.AbstractEntity;
-import lombok.Data;
+import application.models.abstractentity.AbstractEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Data
+@Setter
+@Getter
 @Table(name = "clients")
 public class Client extends AbstractEntity {
 
