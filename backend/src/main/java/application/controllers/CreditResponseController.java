@@ -6,7 +6,7 @@ import application.repositories.RequestRepository;
 import application.repositories.ResponseRepository;
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
+
 import java.util.List;
 import java.util.Random;
 
