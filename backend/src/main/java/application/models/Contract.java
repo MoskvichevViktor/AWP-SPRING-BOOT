@@ -10,8 +10,9 @@ import javax.persistence.*;
 @Entity
 @Setter
 @Getter
-@Table(name = "contracts")
+@Table(name = "contract")
 public class Contract extends AbstractContractTemplate {
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ContractStatus status;

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 @Setter
@@ -29,6 +30,15 @@ public class Client extends AbstractEntity {
     @NotEmpty(message = "Should not be empty")
     @Column(name = "phone")
     private String phone;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<CreditRequest> creditRequests;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<CreditResponse> creditResponses;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Contract> contracts;
 
     @Override
     public String toString() {

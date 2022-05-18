@@ -20,6 +20,7 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
     generate-ddl: false
     hibernate:
+#      ddl-auto: create-drop
       ddl-auto: none
   h2:
     console:

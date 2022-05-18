@@ -1,7 +1,7 @@
 package application.constants;
 
 public enum RequestStatus {
-    CREATED("created"),
+//    CREATED("created"),
     WAITING("waiting"),
     CONFIRMED("confirmed"),
     REJECTION("rejection");

@@ -17,7 +17,7 @@ import java.util.List;
 public class ClientController {
     private final ClientsService clientsService;
 
-    @GetMapping("")
+    @GetMapping("/all")
     public List<Client> getAllClients() {
         return clientsService.findAll();
     }
@@ -37,5 +37,6 @@ public class ClientController {
     public Client getById(@RequestBody Long id) {
         return clientsService.getById(id).orElseThrow(() -> new ResourceNotFoundException("No client with Id: " + id));
     }
+
 
 }
