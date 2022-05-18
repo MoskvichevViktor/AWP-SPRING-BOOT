@@ -44,7 +44,11 @@ public class JwcRequestFilter extends OncePerRequestFilter {
             );
             SecurityContextHolder.getContext().setAuthentication(token);
         }
-        filterChain.doFilter(request, response);
+        try {
+            filterChain.doFilter(request, response);
+        } catch (ServletException e) {
+            System.out.println("JWTRequestFilter class исключение: " + e);
+        }
     }
 
 }
