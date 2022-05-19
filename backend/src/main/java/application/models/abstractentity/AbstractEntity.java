@@ -1,5 +1,6 @@
 package application.models.abstractentity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,8 +12,7 @@ import java.util.Date;
 
 @MappedSuperclass
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
 public abstract class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +26,5 @@ public abstract class AbstractEntity {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @Override
-    public String toString() {
-        return "Empty toString method";
-    }
+
 }

@@ -1,9 +1,12 @@
 package application.config.security;
 
 import application.utils.jwtsecuriru.JwtTokenUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,7 +50,7 @@ public class JwcRequestFilter extends OncePerRequestFilter {
         try {
             filterChain.doFilter(request, response);
         } catch (ServletException e) {
-            System.out.println("JWTRequestFilter class исключение: " + e);
+            System.out.println("application/config/security/JwcRequestFilter.filterChain.doFilter(request, response) class исключение: " + e);
         }
     }
 

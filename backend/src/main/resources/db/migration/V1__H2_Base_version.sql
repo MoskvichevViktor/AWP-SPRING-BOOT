@@ -33,8 +33,10 @@ create table contract
     updated_at timestamp default current_timestamp,
     period     integer,
     sum        decimal(19, 2),
+    percent    decimal(4, 2),
     status     varchar(30),
     client_id  bigint,
+--     FOREIGN KEY (client_id) references clients(id)
     primary key (id)
 );
 
@@ -74,13 +76,13 @@ VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12,
        (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв№ 71', '+79056981258');
 
 
--- INSERT INTO credit_request(id, period, sum, status, client_id)
--- VALUES (1, 12, 100000, 'WAITING', 1),
---        (2, 24, 50000, 'WAITING', 2),
---        (3, 24, 600000, 'WAITING', 2),
---        (4, 6, 25000, 'REJECTION', 3),
---        (5, 18, 900000, 'CONFIRMED', 4),
---        (6, 18, 999999, 'REJECTION', 4);
+INSERT INTO credit_request(id, period, sum, status, client_id)
+VALUES (1, 12, 100000, 'WAITING', 1),
+       (2, 24, 50000, 'WAITING', 2),
+       (3, 24, 600000, 'WAITING', 2),
+       (4, 6, 25000, 'REJECTION', 3),
+       (5, 18, 900000, 'CONFIRMED', 4),
+       (6, 18, 999999, 'REJECTION', 4);
 
 
 INSERT INTO credit_response(id, period, sum, percent, status, client_id)
@@ -88,9 +90,9 @@ VALUES (1, 12, 20000, 17, 'REJECTION', 1),
        (2, 12, 30000, 19, 'CONFIRMED', 2);
 
 
-INSERT INTO contract (id, period, sum, status, client_id)
-VALUES (1, 24, 66000, 'ACTIVE', 1),
-       (3, 24, 100250, 'COMPLETED', 2);
+INSERT INTO contract (id, period, sum, percent, status, client_id)
+VALUES (1, 24, 66000, 15, 'ACTIVE', 1),
+       (3, 24, 100250, 17, 'COMPLETED', 2);
 
 
 

@@ -2,17 +2,18 @@ package application.models;
 
 
 import application.models.abstractentity.AbstractEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
+
+@Data
 @Entity
-@Getter
-@Setter
 @Table(name = "clients")
 public class Client extends AbstractEntity {
 
@@ -32,25 +33,19 @@ public class Client extends AbstractEntity {
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL
-//
-    )
-    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     private List<CreditRequest> creditRequests;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     private List<CreditResponse> creditResponses;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     private List<Contract> contracts;
 
     public Client() {
     }
 
-    @Override
-    public String toString() {
-        return "Empty toString method";
-    }
 }

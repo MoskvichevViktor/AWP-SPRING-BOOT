@@ -3,15 +3,14 @@ package application.models;
 import application.constants.ContractStatus;
 import application.models.abstractentity.AbstractContractTemplate;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@NoArgsConstructor
+
 @Setter
 @Getter
+@Entity
 @Table(name = "contract")
 public class Contract extends AbstractContractTemplate {
 
@@ -23,9 +22,10 @@ public class Contract extends AbstractContractTemplate {
     @JoinColumn(name = "id")
     private CreditResponse creditResponse;
 
-    @Override
-    public String toString() {
-        return "Empty toString method";
+    @Column(name = "percent")
+    private Float percent;
+
+    public Contract() {
     }
 
 }

@@ -2,11 +2,10 @@ package application.controllers.v1;
 
 import application.models.Client;
 import application.models.Contract;
+import application.models.CreditResponse;
 import application.services.ContractService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,4 +20,14 @@ public class ContractController {
     public List<Contract> getAllClients() {
         return contractService.findAll();
     }
+
+//    @GetMapping("/client/{id}")
+//    public Client findByClientId(@PathVariable Long id) {
+//        return contractService.findClientByClientId(id);
+//    }
+
+//    @GetMapping("/request")
+//    public CreditResponse findByCreditResponseId(Long creditResponseId) {
+//        return contractService.findCreditResponseByCreditResponseId(creditResponseId);
+//    }
 }

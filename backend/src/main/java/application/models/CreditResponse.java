@@ -7,9 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
 @Setter
 @Getter
+@Entity
 @Table(name = "credit_response")
 public class CreditResponse extends AbstractContractTemplate {
 
