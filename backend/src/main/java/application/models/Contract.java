@@ -2,14 +2,15 @@ package application.models;
 
 import application.constants.ContractStatus;
 import application.models.abstractentity.AbstractContractTemplate;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-
-@Setter
-@Getter
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "contract")
 public class Contract extends AbstractContractTemplate {
@@ -18,14 +19,10 @@ public class Contract extends AbstractContractTemplate {
     @Enumerated(EnumType.STRING)
     private ContractStatus status;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private CreditResponse creditResponse;
-
     @Column(name = "percent")
     private Float percent;
 
-    public Contract() {
-    }
-
+    @Column(name = "client_id")
+    Long clientId;
 }
+

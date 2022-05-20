@@ -1,8 +1,7 @@
 package application.controllers.v1;
 
-import application.models.Client;
+import application.exception.ResourceNotFoundException;
 import application.models.Contract;
-import application.models.CreditResponse;
 import application.services.ContractService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,18 +15,16 @@ import java.util.List;
 public class ContractController {
     private final ContractService contractService;
 
+
     @GetMapping("/all")
     public List<Contract> getAllClients() {
         return contractService.findAll();
     }
 
-//    @GetMapping("/client/{id}")
-//    public Client findByClientId(@PathVariable Long id) {
-//        return contractService.findClientByClientId(id);
-//    }
-
-//    @GetMapping("/request")
-//    public CreditResponse findByCreditResponseId(Long creditResponseId) {
-//        return contractService.findCreditResponseByCreditResponseId(creditResponseId);
-//    }
+    @GetMapping("/{id}")
+    public Contract getById(@PathVariable Long id) {
+        return contractService.
+                findById(id).
+                orElseThrow(() -> new ResourceNotFoundException("No contract with Id: " + id));
+    }
 }

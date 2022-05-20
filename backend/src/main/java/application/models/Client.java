@@ -12,7 +12,8 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 
-@Data
+//@NoArgsConstructor
+//@Data
 @Entity
 @Table(name = "clients")
 public class Client extends AbstractEntity {
@@ -33,19 +34,51 @@ public class Client extends AbstractEntity {
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id")
-    private List<CreditRequest> creditRequests;
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "client_id")
+//    private List<CreditRequest> creditRequests;
+//
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "client_id")
+//    private List<CreditResponse> creditResponses;
+//
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "client_id")
+//    private List<Contract> contracts;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id")
-    private List<CreditResponse> creditResponses;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id")
-    private List<Contract> contracts;
 
     public Client() {
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassport() {
+        return passport;
+    }
+
+    public void setPassport(String passport) {
+        this.passport = passport;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

@@ -7,8 +7,8 @@ import application.repositories.ContractRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.net.CacheResponse;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,17 +19,8 @@ public class ContractService {
         return contractRepository.findAll();
     }
 
-    public List<Contract> findContractsByStatus(String signed) {
-        return contractRepository.findContractsByStatus(signed);
+    public Optional<Contract> findById(Long id) {
+        return contractRepository.findById(id);
     }
 
-//    public Client findClientByClientId(Long clientId) {
-//        Client client = contractRepository.findClientByClientId(clientId);
-//        System.out.format("ID = ?. Имя клиента:  ?",client.getName()  , clientId);
-//        return contractRepository.findClientByClientId(clientId);
-//    }
-
-//    public CreditResponse findCreditResponseByCreditResponseId(Long creditResponseId) {
-//        return contractRepository.finCreditResponseByResponseId(creditResponseId);
-//    }
 }

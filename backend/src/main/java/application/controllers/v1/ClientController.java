@@ -35,7 +35,9 @@ public class ClientController {
 
     @GetMapping("/id")
     public Client getById(@RequestBody Long id) {
-        return clientsService.getById(id).orElseThrow(() -> new ResourceNotFoundException("No client with Id: " + id));
+        return clientsService.
+                getById(id).
+                orElseThrow(() -> new ResourceNotFoundException("No client with Id: " + id));
     }
 
 

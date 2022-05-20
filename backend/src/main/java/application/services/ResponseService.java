@@ -6,17 +6,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ResponseService {
-    private final CreditResponseRepository creditResponseRepository;
-
-    List<CreditResponse> findCreditResponsesByStatus(String status) {
-        return creditResponseRepository.findCreditResponsesByStatus(status);
-    }
+    private final CreditResponseRepository responseRepository;
 
     public List<CreditResponse> findAll() {
-        return creditResponseRepository.findAll();
+        return responseRepository.findAll();
+    }
+
+    public Optional<CreditResponse> findById(Long id) {
+        return responseRepository.findById(id);
     }
 }

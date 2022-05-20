@@ -1,15 +1,14 @@
 package application.models;
 
-import application.constants.RequestStatus;
 import application.constants.ResponseStatus;
 import application.models.abstractentity.AbstractContractTemplate;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Setter
-@Getter
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "credit_response")
 public class CreditResponse extends AbstractContractTemplate {
@@ -21,10 +20,11 @@ public class CreditResponse extends AbstractContractTemplate {
     @Enumerated(EnumType.STRING)
     private ResponseStatus status;
 
-    @OneToOne()
-    @JoinColumn(name = "id")
-    private CreditRequest creditRequest;
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "contract_id")
+    Contract contract;
 
-    public CreditResponse() {
-    }
+    @Column(name = "client_id")
+    Long clientId;
+
 }
