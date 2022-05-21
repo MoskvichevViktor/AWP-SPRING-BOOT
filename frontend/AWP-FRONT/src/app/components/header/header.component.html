@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>AWP Project</span>
+    <span class="example-spacer"></span>
+    <span>{{username}}</span>
+    <button mat-icon-button class="example-icon" *ngIf="isLoggedIn"
+    (click)="onLogout()">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+</mat-toolbar>

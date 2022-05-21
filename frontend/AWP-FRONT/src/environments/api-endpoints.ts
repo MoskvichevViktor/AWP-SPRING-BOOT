@@ -1,15 +1,18 @@
 export const ApiEndpoints = {
+    auth: {
+        login: '/auth',
+    },
     creditRequests: {
-        list: '/requests',
-        get: (id: number) => `/requests/{id}`,
+        list: '/credit_requests',
+        get: (id: number) => `/credit_requests/{id}`,
         create: 'requests/create',
-        update: (id: number) => `/requests/{id}`,
-        delete: (id: number) => `/requests/{id}`,
+        update: (id: number) => `/credit_requests/{id}`,
+        delete: (id: number) => `/credit_requests/{id}`,
     },
     clients: {
-        list: '/clients',
+        list: '/clients/all',
     },
     users: {
-        list: '/api/v1/users',
+        list: '/users/all',
     },
 }

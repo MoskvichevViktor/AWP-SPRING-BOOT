@@ -14,6 +14,7 @@ import { RequestsListComponent } from './components/requests/requests-list/reque
 import { MainPageStartComponent } from './components/main/main-page-start/main-page-start.component';
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
 import { UsersListComponent } from './components/users/users-list/users-list.component';
+import { HeaderComponent } from './components/header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { UsersListComponent } from './components/users/users-list/users-list.com
     RequestsListComponent,
     MainPageStartComponent,
     ClientsListComponent,
-    UsersListComponent
+    UsersListComponent,
+    HeaderComponent
   ],
   imports: [
     AppRoutingModule,
