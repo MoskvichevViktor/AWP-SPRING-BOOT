@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/credit_response")
+@RequestMapping("/api/v1/credit_responses")
 @AllArgsConstructor
 public class ResponseController {
     private final ResponseService responseService;

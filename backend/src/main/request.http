@@ -1,52 +1,45 @@
-GET http://localhost:8080/api/v1/credit_request/all
+#The correct autorisation "token":**********
+POST http://localhost:8080/api/v1/auth
+Content-Type: application/json
 
-GET http://localhost:8080/api/v1/credit_response/all
+{
+  "username": "admin",
+  "password": "admin"
+}
 
-GET http://localhost:8080/api/v1/credit_response/1
+###
+#"message": "Incorrect username or password"
+POST http://localhost:8080/api/v1/auth
+Content-Type: application/json
 
-GET http://localhost:8080/api/v1/contract/1
+{
+  "username": "admin1",
+  "password": "admin"
+}
 
-GET http://localhost:8080/api/v1/contract/all
-
-
-
-
-
-
-
-GET http://localhost:8080/api/v1/credit_request/1
-
-GET http://localhost:8080/api/v1/contract/all
-
-GET http://localhost:8080/api/v1/clients/all
-
-
-GET http://localhost:8080/api/v1/contract/client/1
-
-
-
-
-
-
-
-
-
-
+###
+//
 GET http://localhost:8080/api/v1/users/all
 
+###
+GET http://localhost:8080/api/v1/clients/all
 
+###
+GET http://localhost:8080/api/v1/credit_requests/all
 
+###
+GET http://localhost:8080/api/v1/credit_responses/all
 
+###
+GET http://localhost:8080/api/v1/credit_responses/1
 
-#
+###
+GET http://localhost:8080/api/v1/contracts/1
 
+###
+GET http://localhost:8080/api/v1/contracts/all
 
-
-
-
-
-
-
-
+###
+GET http://localhost:8080/api/v1/clients/1
 
 

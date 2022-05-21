@@ -33,8 +33,8 @@ public class ClientController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/id")
-    public Client getById(@RequestBody Long id) {
+    @GetMapping("/{id}")
+    public Client getById(@PathVariable Long id) {
         return clientsService.
                 getById(id).
                 orElseThrow(() -> new ResourceNotFoundException("No client with Id: " + id));
