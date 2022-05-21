@@ -1,11 +1,10 @@
-package java.controllers;
+package controllers;
 
 import application.AwpApplication;
 import application.models.Client;
 import application.repositories.ClientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -29,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestPropertySource(locations = "classpath:app_test.properties")
 @AutoConfigureMockMvc
 @SpringBootTest(classes = AwpApplication.class)
-public class PeopleResponseBodyMethodControllerMockTest {
+public class TestClientsResponseBodyMethodControllerMockTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,22 +39,8 @@ public class PeopleResponseBodyMethodControllerMockTest {
     @Autowired
     protected UserDetailsService userDetailsService;
 
-
-    protected UsernamePasswordAuthenticationToken getPrincipal(String username) {
-
-        UserDetails user = this.userDetailsService.loadUserByUsername(username);
-
-        UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(
-                        user,
-                        user.getPassword(),
-                        user.getAuthorities());
-
-        return authentication;
-    }
-
     @Test
-    public void testFindAllPeople() throws Exception {
+    public void testFindAllClients() throws Exception {
         Client client = new Client();
         client.setId(1l);
         client.setName("name");
@@ -64,7 +49,7 @@ public class PeopleResponseBodyMethodControllerMockTest {
         client.setPhone("phone");
 
         client = clientRepository.save(client);
-        System.out.println(clientRepository.findAll().toString());
+        System.out.println(clientRepository.findAll());
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/api/v1/clients/all")

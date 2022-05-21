@@ -46,7 +46,6 @@ public class Client extends AbstractEntity {
 //    @JoinColumn(name = "client_id")
 //    private List<Contract> contracts;
 
-
     public Client() {
     }
 
