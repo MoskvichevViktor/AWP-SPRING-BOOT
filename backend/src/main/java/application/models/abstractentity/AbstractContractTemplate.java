@@ -19,3 +19,4 @@ public abstract class AbstractContractTemplate extends AbstractEntity {
     private BigDecimal sum;
 
 }
+

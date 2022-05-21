@@ -11,8 +11,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 public abstract class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
