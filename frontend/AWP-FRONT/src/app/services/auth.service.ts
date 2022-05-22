@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { AuthRequest, AuthResponse } from "../shared/models.interfaces";
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
-import { BehaviorSubject, catchError, of, take, tap } from "rxjs";
+import { BehaviorSubject, catchError, Observable, of, take, tap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -11,9 +11,10 @@ import { BehaviorSubject, catchError, of, take, tap } from "rxjs";
 export class AuthService {
     private readonly JWT_TOKEN = 'JWT_TOKEN';
     private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-    public loggedUser = new BehaviorSubject<string>('');
-    public authErrors = new BehaviorSubject<string | null>(null);
-    public isLoggedIn = new BehaviorSubject<boolean>(false);
+    private readonly USERNAME = 'USERNAME';
+    authErrors = new BehaviorSubject<string | null>(null);
+    isLoggedIn = new BehaviorSubject<boolean>(!!this.getJwtToken());
+    loggedUser = new BehaviorSubject<string | null>(this.getUsername());
 
     private loginUrl = environment.api.url + environment.api.endpoints.auth.login;
 
@@ -47,25 +48,31 @@ export class AuthService {
         return localStorage.getItem(this.JWT_TOKEN);
     }
 
+    public getUsername() {
+        return localStorage.getItem(this.USERNAME) ? localStorage.getItem(this.USERNAME) : '';
+    }
+
     private doLoginUser(username: string, token: string) {
+        this.storeCredentials(username, token);
         this.isLoggedIn.next(true);
         this.loggedUser.next(username);
-        this.storeToken(token);
         this.router.navigate(['/main']);
     }
 
     private doLogoutUser() {
-        this.isLoggedIn.next(false);
-        this.clearToken();
-        this.loggedUser.next('');
+        this.clearCredentials();
         this.router.navigate(['/login']);
+        this.isLoggedIn.next(false);
+        this.loggedUser.next('');
     }
 
-    private storeToken(token: string) {
+    private storeCredentials(username: string, token: string) {
+        localStorage.setItem(this.USERNAME, username);
         localStorage.setItem(this.JWT_TOKEN, token);
     }
 
-    private clearToken() {
+    private clearCredentials() {
+        localStorage.removeItem(this.USERNAME);
         localStorage.removeItem(this.JWT_TOKEN);
     }
 
