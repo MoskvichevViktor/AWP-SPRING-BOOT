@@ -73,7 +73,7 @@ export class AuthService {
         if (error.message) {
             this.authErrors.next(error.message);
         } else {
-            this.authErrors.next('ERROR!');
+            this.authErrors.next('Ошибка авторизации!');
         }
     }
 
