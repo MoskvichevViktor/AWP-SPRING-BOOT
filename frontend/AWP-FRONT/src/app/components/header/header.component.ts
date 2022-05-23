@@ -8,7 +8,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
-  username = '';
+  username: string | null = '';
   isLoggedIn = false;
 
   constructor(

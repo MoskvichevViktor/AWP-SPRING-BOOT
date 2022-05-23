@@ -6,12 +6,15 @@ import {RequestsListComponent} from "./components/requests/requests-list/request
 import {MainPageStartComponent} from "./components/main/main-page-start/main-page-start.component";
 import { ClientsListComponent } from "./components/clients/clients-list/clients-list.component";
 import { UsersListComponent } from "./components/users/users-list/users-list.component";
+import { AuthGuard } from "./guards/auth.guard";
 
 
 const routes: Routes = [
     { path: '', redirectTo: '/main', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: 'main', component: MainPageComponent, children: [
+    { path: 'main', component: MainPageComponent,
+        canActivate: [AuthGuard],
+        children: [
             { path: '', component: MainPageStartComponent },
             { path: 'requests', component: RequestsListComponent },
             { path: 'clients', component: ClientsListComponent },
