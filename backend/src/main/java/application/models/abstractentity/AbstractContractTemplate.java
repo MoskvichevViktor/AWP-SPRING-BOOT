@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 
-@NoArgsConstructor
-@Data
 @MappedSuperclass
+@Data
+@NoArgsConstructor
 public abstract class AbstractContractTemplate extends AbstractEntity {
 
     @Column(name = "period")

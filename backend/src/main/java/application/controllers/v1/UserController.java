@@ -25,7 +25,7 @@ public class UserController {
     private final AuthService authService;
 
     @GetMapping("/all")
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<UserDto> getAll() {
         List<User> users = userService.getAll();
         return users.stream().map(UserDto::new).collect(Collectors.toList());

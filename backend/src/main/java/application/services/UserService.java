@@ -4,6 +4,7 @@ import application.constants.UserRole;
 import application.dto.UserRegistrationDto;
 import application.models.User;
 import application.repositories.UserRepository;
+import application.utils.jwtsecuriru.UserDataFromHttpRequestUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final UserDataFromHttpRequestUtil userDataFromHttpRequestUtil;
 
     public List<User> getAll() {
         return userRepository.findAll();
@@ -91,6 +93,11 @@ public class UserService implements UserDetailsService {
         user.setUpdatedAt(now);
         save(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    public String getCurrentUserName() {
+
+        return userDataFromHttpRequestUtil.getUserName();
     }
 }
 
