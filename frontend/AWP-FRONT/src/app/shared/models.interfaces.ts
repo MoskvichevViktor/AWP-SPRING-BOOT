@@ -4,7 +4,8 @@ export interface AuthRequest {
 }
 
 export interface AuthResponse {
-    token: string
+    token: string,
+    profile: User
 }
 
 export interface Client {

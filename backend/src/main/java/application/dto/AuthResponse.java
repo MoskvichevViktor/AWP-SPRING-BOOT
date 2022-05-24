@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 public class AuthResponse {
     private String token;
+    private UserDto profile;
 
     public AuthResponse(String token) {
         this.token = token;

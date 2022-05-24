@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { AuthRequest, AuthResponse } from "../shared/models.interfaces";
+import {AuthRequest, AuthResponse, User} from "../shared/models.interfaces";
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
-import { BehaviorSubject, catchError, Observable, of, take, tap } from "rxjs";
+import { BehaviorSubject, catchError, of, take, tap } from "rxjs";
+import {StorageService} from "./storage.service";
 
 @Injectable({
     providedIn: 'root'
@@ -11,16 +12,17 @@ import { BehaviorSubject, catchError, Observable, of, take, tap } from "rxjs";
 export class AuthService {
     private readonly JWT_TOKEN = 'JWT_TOKEN';
     private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-    private readonly USERNAME = 'USERNAME';
+    private readonly USER_PROFILE = 'PROFILE';
     authErrors = new BehaviorSubject<string | null>(null);
     isLoggedIn = new BehaviorSubject<boolean>(!!this.getJwtToken());
-    loggedUser = new BehaviorSubject<string | null>(this.getUsername());
+    userProfile = new BehaviorSubject<User | null>(this.getUserProfile());
 
     private loginUrl = environment.api.url + environment.api.endpoints.auth.login;
 
     constructor(
         private http: HttpClient,
-        private router: Router
+        private router: Router,
+        private storageService: StorageService
     ) {
     }
 
@@ -28,9 +30,7 @@ export class AuthService {
         this.http.post<AuthResponse>(this.loginUrl, request)
             .pipe(
                 take(1),
-                tap(res => {
-                    this.doLoginUser(request.username, res.token);
-                }),
+                tap(authResponse => this.doLoginUser(authResponse)),
                 catchError(response => {
                     if (response.error) {
                         this.handleError(response.error);
@@ -45,17 +45,17 @@ export class AuthService {
     }
 
     public getJwtToken() {
-        return localStorage.getItem(this.JWT_TOKEN);
+        return this.storageService.getItem(this.JWT_TOKEN);
     }
 
-    public getUsername() {
-        return localStorage.getItem(this.USERNAME) ? localStorage.getItem(this.USERNAME) : '';
+    private getUserProfile() {
+        return this.storageService.getItem(this.USER_PROFILE);
     }
 
-    private doLoginUser(username: string, token: string) {
-        this.storeCredentials(username, token);
+    private doLoginUser(authResponse: AuthResponse) {
+        this.saveCredentials(authResponse.token, authResponse.profile);
         this.isLoggedIn.next(true);
-        this.loggedUser.next(username);
+        this.userProfile.next(authResponse.profile);
         this.router.navigate(['/main']);
     }
 
@@ -63,17 +63,17 @@ export class AuthService {
         this.clearCredentials();
         this.router.navigate(['/login']);
         this.isLoggedIn.next(false);
-        this.loggedUser.next('');
+        this.userProfile.next(null);
     }
 
-    private storeCredentials(username: string, token: string) {
-        localStorage.setItem(this.USERNAME, username);
-        localStorage.setItem(this.JWT_TOKEN, token);
+    private saveCredentials(token: string, profile: User) {
+        this.storageService.setItem(this.JWT_TOKEN, token);
+        this.storageService.setItem(this.USER_PROFILE, profile);
     }
 
     private clearCredentials() {
-        localStorage.removeItem(this.USERNAME);
-        localStorage.removeItem(this.JWT_TOKEN);
+        this.storageService.removeItem(this.JWT_TOKEN);
+        this.storageService.removeItem(this.USER_PROFILE);
     }
 
     private handleError(error: any) {
