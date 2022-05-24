@@ -81,8 +81,8 @@ create table credit_request
 
 
 INSERT INTO clients (id, name, passport, address, phone)
-VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв№ 7', '25-25-25'),
-       (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв№ 71', '+79056981258'),
+VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12, кв № 7', '25-25-25'),
+       (2, 'Петров', '11-13 666777', 'Астрахань, ул.Боевая, 125, кв № 71', '+79056981258'),
        (3, 'Сидоров', '2222 666777', 'Москва, пр.Мира, 30, кв № 1', '+792780113888');
 
 
@@ -90,12 +90,13 @@ INSERT INTO contract (id, period, sum, percent, status, client_id)
 VALUES (1, 24, 30000, 15, 'WAITING_SIGNING', 1);
 
 INSERT INTO credit_request(id, period, sum, status, client_id, response_id)
-VALUES (1, 12, 100000, 'WAITING', 1, 1),
-       (2, 24, 50000, 'CONFIRMED', 1, 2);
+VALUES (1, 12, 100000, 'WAITING', 1, 3),
+       (2, 24, 50000, 'CONFIRMED', 1, 2),
+       (3, 6, 25000, 'REJECTION', 1, 1);
 --        (3, 24, 600000, 'WAITING', 1,3);
 
 INSERT INTO credit_response(id, period, sum, percent, status, client_id, contract_id)
-VALUES (1, 6, 25000, 17, 'REJECTION', 1, 1),
-       (2, 24, 30000, 19, 'CONFIRMED', 1, null),
-       (3, 24, 100000, 15, 'CONFIRMED', 1, null);
+VALUES (1, 6, 25000, 17, 'REJECTION', 1, null ),
+       (2, 24, 30000, 15, 'CONFIRMED', 1, 1),
+       (3, 24, 100000, 19, 'CONFIRMED', 1, null);
 

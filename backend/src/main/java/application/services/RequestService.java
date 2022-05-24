@@ -1,12 +1,16 @@
 package application.services;
 
+import application.dto.CreditRequestDto;
+import application.exception.ResourceNotFoundException;
 import application.models.CreditRequest;
 import application.repositories.CreditRequestRepositoriy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,5 +23,32 @@ public class RequestService {
 
     public Optional<CreditRequest> findById(Long id) {
         return requestRepositoriy.findById(id);
+    }
+
+    public List<CreditRequestDto> findAllRequestDto(){
+        return requestRepositoriy.findAll().stream()
+                .map(CreditRequestDto::valueOf)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    public Optional<CreditRequestDto> findRequestDtoById(Long id){
+        return  requestRepositoriy.findById(id).map(CreditRequestDto::valueOf);
+    }
+
+    public void save(CreditRequestDto requestDto){
+        requestRepositoriy.save(requestDto.mapToCreditRequest());
+    }
+
+    public void update(CreditRequestDto requestDto){
+      if (requestRepositoriy.existsById(requestDto.getId())){
+          CreditRequest request = requestRepositoriy.getById(requestDto.getId());
+           requestRepositoriy.save(requestDto.updateCreditRequest(request));
+      }else {
+            throw new NoSuchElementException();
+      }
+    }
+
+    public void deleteById(Long id){
+        requestRepositoriy.deleteById(id);
     }
 }

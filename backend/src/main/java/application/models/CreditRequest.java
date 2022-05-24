@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @NoArgsConstructor
@@ -25,5 +26,4 @@ public class CreditRequest extends AbstractContractTemplate {
     @OneToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "response_id")
     private CreditResponse creditResponse;
-
 }
