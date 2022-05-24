@@ -8,6 +8,9 @@ import { AuthService } from "./auth.service";
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
+    private AUTH_PARAM = 'Authorization';
+    private TOKEN_PREFIX = 'Bearer ';
+
     constructor(
         private authService: AuthService
     ) {
@@ -24,7 +27,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
                 const modifiedReq = req.clone({
                     setHeaders: {
-                        Auth: token,
+                        [this.AUTH_PARAM]: this.TOKEN_PREFIX + token,
                         'Content-Type': 'application/json; charset=utf-8'
                     }
                 });
