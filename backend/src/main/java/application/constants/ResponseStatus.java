@@ -1,6 +1,7 @@
 package application.constants;
 
 public enum ResponseStatus {
+    WAITING("waiting"),
     CONFIRMED("confirmed"),
     REJECTION("rejection");
 

@@ -24,6 +24,7 @@ public class UserController {
     private final UserService userService;
     private final AuthService authService;
 
+
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<UserDto> getAll() {
