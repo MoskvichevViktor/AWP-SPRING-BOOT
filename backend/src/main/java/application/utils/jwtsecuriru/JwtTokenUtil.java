@@ -42,7 +42,8 @@ public class JwtTokenUtil {
     }
 
     public String getUserNameFromToken(String token) {
-        return null;
+        Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
+        return claims.getSubject();
     }
 
     public List<String> getRoles(String token) {
