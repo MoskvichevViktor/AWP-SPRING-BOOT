@@ -2,16 +2,14 @@ package application.services;
 
 import application.constants.UserRole;
 import application.dto.UserRegistrationDto;
+import application.exception.ResourceNotFoundException;
 import application.models.User;
 import application.repositories.UserRepository;
-import application.utils.jwtsecuriru.UserDataFromHttpRequestUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -47,8 +45,11 @@ public class UserService implements UserDetailsService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<?> delete(User user) {
-        if (!isExistsUser(user.getUsername())) {
+    @Transactional
+    public ResponseEntity<?> delete(Long id) {
+        User user = getUserById(id).orElseThrow(() ->
+                new ResourceNotFoundException("user with id:" + id + " tot found"));
+        if (user == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         userRepository.delete(user);
@@ -76,11 +77,9 @@ public class UserService implements UserDetailsService {
         return userRepository.existsAllByUsernameEquals(username);
     }
 
-
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
-
 
     public ResponseEntity<?> createNewUser(UserRegistrationDto userDto) {
         Date now = new Date();

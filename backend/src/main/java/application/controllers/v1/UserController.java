@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RequestMapping("/api/v1/users")
-@RestController//для json
+@RestController
 
 @RequiredArgsConstructor
 public class UserController {
@@ -24,24 +24,23 @@ public class UserController {
     private final UserService userService;
     private final AuthService authService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<UserDto> getAll() {
         List<User> users = userService.getAll();
         return users.stream().map(UserDto::new).collect(Collectors.toList());
     }
 
-
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @PostMapping("/update")
-    public ResponseEntity<?> saveOrUpdate(@RequestBody User user) {
+    @PatchMapping("")
+    public ResponseEntity<?> update(@RequestBody User user) {
         return userService.save(user);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @PostMapping("/del")
-    public ResponseEntity<?> delete(@RequestBody User user) {
-        return userService.delete(user);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        return userService.delete(id);
     }
 
     @PostMapping("")
