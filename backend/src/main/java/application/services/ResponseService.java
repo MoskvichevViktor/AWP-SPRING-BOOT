@@ -38,14 +38,14 @@ public class ResponseService {
         responseRepository.save(responseDto.mapToCreditResponse());
     }
 
-    public void update(CreditResponseDto responseDto){
-        if (responseRepository.existsById(responseDto.getId())){
+    public void update(CreditResponseDto responseDto) {
+        if (responseRepository.existsById(responseDto.getId())) {
             CreditResponse response = responseRepository.getById(responseDto.getId());
             responseRepository.save(responseDto.updateCreditResponse(response));
         }
     }
 
-    public void deleteById(Long id){
-        responseRepository.deleteById(id);
-    }
+//    public void deleteById(Long id){
+//        responseRepository.deleteById(id);
+//    }
 }

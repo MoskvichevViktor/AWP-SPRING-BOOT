@@ -42,6 +42,8 @@ create table contract
     client_id  bigint,
     primary key (id),
     foreign key (client_id) references clients (id)
+--         on DELETE RESTRICT
+--         on UPDATE CASCADE
 );
 
 drop table if exists credit_response cascade;
@@ -74,8 +76,8 @@ create table credit_request
     client_id   bigint,
     response_id bigint,
     primary key (id),
-    foreign key (client_id) references clients (id)
---     foreign key (response_id) references credit_response (id)
+    foreign key (client_id) references clients (id),
+    foreign key (response_id) references credit_response (id)
 );
 
 
@@ -89,14 +91,14 @@ VALUES (1, 'Иванов', '12-16 454871', 'Москва, ул.Ленина, 12,
 INSERT INTO contract (id, period, sum, percent, status, client_id)
 VALUES (1, 24, 30000, 15, 'WAITING_SIGNING', 1);
 
-INSERT INTO credit_request(id, period, sum, status, client_id, response_id)
-VALUES (1, 12, 100000, 'WAITING', 1, 3),
-       (2, 24, 50000, 'CONFIRMED', 1, 2),
-       (3, 6, 25000, 'REJECTION', 1, 1);
---        (3, 24, 600000, 'WAITING', 1,3);
+
 
 INSERT INTO credit_response(id, period, sum, percent, status, client_id, contract_id)
-VALUES (1, 6, 25000, 17, 'REJECTION', 1, null ),
+VALUES (1, 6, 25000, 17, 'REJECTION', 1, null),
        (2, 24, 30000, 15, 'CONFIRMED', 1, 1),
        (3, 24, 100000, 19, 'CONFIRMED', 1, null);
 
+INSERT INTO credit_request(id, period, sum, status, client_id, response_id)
+VALUES (1, 12, 100000, 'WAITING', 1, 1),
+       (2, 24, 50000, 'CONFIRMED', 1, 2),
+       (3, 24, 600000, 'WAITING', 1, 3);

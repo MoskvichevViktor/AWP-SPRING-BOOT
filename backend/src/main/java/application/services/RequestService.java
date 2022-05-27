@@ -1,7 +1,6 @@
 package application.services;
 
 import application.dto.CreditRequestDto;
-import application.exception.ResourceNotFoundException;
 import application.models.CreditRequest;
 import application.repositories.CreditRequestRepositoriy;
 import lombok.RequiredArgsConstructor;
@@ -39,16 +38,16 @@ public class RequestService {
         requestRepositoriy.save(requestDto.mapToCreditRequest());
     }
 
-    public void update(CreditRequestDto requestDto){
-      if (requestRepositoriy.existsById(requestDto.getId())){
-          CreditRequest request = requestRepositoriy.getById(requestDto.getId());
-           requestRepositoriy.save(requestDto.updateCreditRequest(request));
-      }else {
+    public void update(CreditRequestDto requestDto) {
+        if (requestRepositoriy.existsById(requestDto.getId())) {
+            CreditRequest request = requestRepositoriy.getById(requestDto.getId());
+            requestRepositoriy.save(requestDto.updateCreditRequest(request));
+        } else {
             throw new NoSuchElementException();
-      }
+        }
     }
 
-    public void deleteById(Long id){
-        requestRepositoriy.deleteById(id);
-    }
+//    public void deleteById(Long id){
+//        requestRepositoriy.deleteById(id);
+//    }
 }

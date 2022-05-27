@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 
 @NoArgsConstructor
@@ -15,7 +14,8 @@ import java.time.LocalDateTime;
 @Table(name = "credit_request")
 public class CreditRequest extends AbstractContractTemplate {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST },fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
 
@@ -23,7 +23,7 @@ public class CreditRequest extends AbstractContractTemplate {
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
-    @OneToOne(optional = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "response_id")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(updatable = false, name = "response_id")
     private CreditResponse creditResponse;
 }

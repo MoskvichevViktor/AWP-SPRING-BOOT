@@ -16,7 +16,7 @@ import java.util.List;
 public class RequestController {
     private final RequestService requestService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<CreditRequest> getAll() {
         return requestService.findAll();
     }
@@ -29,31 +29,31 @@ public class RequestController {
     }
 
     @GetMapping("/dto")
-    public List<CreditRequestDto> findAllRequestDto(){
+    public List<CreditRequestDto> findAllRequestDto() {
         return requestService.findAllRequestDto();
     }
 
     @GetMapping("/dto/{id}")
-    public CreditRequestDto findRequestDtoById(@PathVariable Long id){
+    public CreditRequestDto findRequestDtoById(@PathVariable Long id) {
         return requestService.findRequestDtoById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Request with Id: " + id + " not found"));
     }
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void create(@RequestBody CreditRequestDto requestDto){
+    public void create(@RequestBody CreditRequestDto requestDto) {
         requestService.save(requestDto);
     }
 
     @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void update(@RequestBody CreditRequestDto requestDto){
+    public void update(@RequestBody CreditRequestDto requestDto) {
         requestService.update(requestDto);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id){
-        requestService.deleteById(id);
-    }
+//    @DeleteMapping("/{id}")
+//    public void deleteById(@PathVariable Long id) {
+//        requestService.deleteById(id);
+//    }
 
 }

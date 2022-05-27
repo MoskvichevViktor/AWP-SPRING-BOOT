@@ -27,10 +27,10 @@ public class ClientController {
         return clientsService.save(client);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        return clientsService.delete(id);
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?> delete(@PathVariable Long id) {
+//        return clientsService.delete(id);
+//    }
 
     @GetMapping("/{id}")
     public Client getById(@PathVariable Long id) {

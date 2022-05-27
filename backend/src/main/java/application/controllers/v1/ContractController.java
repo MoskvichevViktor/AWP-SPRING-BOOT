@@ -17,6 +17,7 @@ import java.util.List;
 public class ContractController {
     private final ContractService contractService;
 
+
     @GetMapping("")
     public List<Contract> getAllClients() {
         return contractService.findAll();
