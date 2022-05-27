@@ -42,10 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(AUTH_WHITELIST_HTTP)
-                .permitAll()
-                .and()
-                .logout();
-//                    .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+                .permitAll();
         http.addFilterBefore(jwcRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
@@ -66,11 +63,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-//    @Bean
-//    public DaoAuthenticationProvider daoAuthenticationProvider() {
-//        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-//        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-//        daoAuthenticationProvider.setUserDetailsService(userService);
-//        return daoAuthenticationProvider;
-//    }
 }
