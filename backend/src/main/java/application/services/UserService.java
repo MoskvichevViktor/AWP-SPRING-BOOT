@@ -49,7 +49,7 @@ public class UserService implements UserDetailsService {
     public ResponseEntity<?> delete(Long id) {
         User user = getUserById(id).orElseThrow(() ->
                 new ResourceNotFoundException("user with id:" + id + " tot found"));
-        if (user == null) {
+        if (user == null || user.getUsername().equals("admin")) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         userRepository.delete(user);
