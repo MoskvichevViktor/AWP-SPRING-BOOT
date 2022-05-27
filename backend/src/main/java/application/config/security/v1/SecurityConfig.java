@@ -1,7 +1,6 @@
 package application.config.security.v1;
 
 import application.config.security.JwcRequestFilter;
-import application.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
@@ -23,8 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwcRequestFilter jwcRequestFilter;
-    private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
     private static final String[] AUTH_WHITELIST_HTTP = {
             //доступ к любой точке

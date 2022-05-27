@@ -1,5 +1,5 @@
 GET http://localhost:8080/api/v1/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjUzNTgyNTMwLCJpYXQiOjE2NTM1Nzg5MzB9._d2Buucqqf-qsCtYKDe-S09Tu_9m9zLJ2hsETpc35qI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjUzNjUyNzkwLCJpYXQiOjE2NTM2NDkxOTB9.JowjKX6bZl3ntZriDnylRjkq6XOJG44vDsMIVO4dPXA
 
 ###
 GET http://localhost:8080/api/v1/credit_requests/all
