@@ -1,15 +1,12 @@
 package application.dto;
 
 import application.constants.RequestStatus;
-import application.models.Client;
 import application.models.CreditRequest;
-import application.models.CreditResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.net.CacheResponse;
 import java.util.Date;
 
 @Data
@@ -20,9 +17,11 @@ public class CreditRequestDto {
     private BigDecimal sum;
     private Integer period;
     private RequestStatus status;
-    private Client client;
-    private CreditResponse response;
+    private Long clientId;
+    private String clientName;
+    private Long responseId;
     private Date createdAt;
+    private Date updatedAt;
 
     public static CreditRequestDto valueOf(CreditRequest request){
         CreditRequestDto requestDto = new CreditRequestDto();
@@ -30,28 +29,31 @@ public class CreditRequestDto {
         requestDto.setSum(request.getSum());
         requestDto.setPeriod(request.getPeriod());
         requestDto.setStatus(request.getStatus());
-        requestDto.setClient(request.getClient());
-        requestDto.setResponse(request.getCreditResponse());
+        requestDto.setClientId(request.getClient().getId());
+        requestDto.setClientName(request.getClient().getName());
+        requestDto.setResponseId(request.getCreditResponse().getId());
         requestDto.setCreatedAt(request.getCreatedAt());
+        requestDto.setUpdatedAt(request.getUpdatedAt());
         return requestDto;
     }
 
-    public CreditRequest mapToCreditRequest(){
-        CreditRequest newRequest = new CreditRequest();
-        newRequest.setId(id);
-        newRequest.setSum(sum);
-        newRequest.setPeriod(period);
-        newRequest.setStatus(status);
-        newRequest.setClient(client);
-        newRequest.setCreditResponse(response);
-        return newRequest;
-    }
-
-    public CreditRequest updateCreditRequest(CreditRequest request){
-        request.setStatus(status);
-        request.setSum(sum);
-        request.setPeriod(period);
-        request.setCreditResponse(response);
-        return request;
-    }
+// TODO: 28.05.2022 перенести в сервис - создание нового Request на основе ДТО
+    //    public CreditRequest mapToCreditRequest(){
+//        CreditRequest newRequest = new CreditRequest();
+//        newRequest.setId(id);
+//        newRequest.setSum(sum);
+//        newRequest.setPeriod(period);
+//        newRequest.setStatus(status);
+//        newRequest.setClient(client);
+//        newRequest.setCreditResponse(response);
+//        return newRequest;
+//    }
+    //todo 28.05.2022 перенести в сервис - обновление Request на основе ДТО
+//    public CreditRequest updateCreditRequest(CreditRequest request){
+//        request.setStatus(status);
+//        request.setSum(sum);
+//        request.setPeriod(period);
+//        request.setCreditResponse(response);
+//        return request;
+//    }
 }

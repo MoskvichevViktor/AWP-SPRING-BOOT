@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CreditRequest } from "../shared/models.interfaces";
-import { REQUESTS } from "../data/mock-credit-requests";
-import { of } from "rxjs";
+import { CreditRequest, RequestStatus, UserRole } from "../shared/models.interfaces";
+import { map } from "rxjs";
 import { RemoteService } from "./remote.service";
 import { environment } from "../../environments/environment";
+import * as moment from "moment";
 
 
 @Injectable({
@@ -11,20 +11,32 @@ import { environment } from "../../environments/environment";
 })
 export class CreditRequestService {
 
-  private creditRequests: CreditRequest[] = REQUESTS;
   private loadRequestsUrl = environment.api.url + environment.api.endpoints.creditRequests.list;
 
   constructor(
       private remoteService: RemoteService
   ) { }
 
-  get requests() {
-    return of(this.creditRequests.slice());
+  public loadAll() {
+    return this.remoteService.fetchAll<CreditRequest>(this.loadRequestsUrl)
+        .pipe(
+            map(requests => {
+              return requests.map(request => {
+                request.createdAt = moment(request.createdAt).format('DD.MM.YYYY, HH:mm:ss');
+                request.updatedAt = request.updatedAt ? moment(request.updatedAt).format('DD.MM.YYYY, HH:mm:ss') : '';
+                return request;
+              })
+            })
+        );
   }
 
-  public loadAll() {
-    this.remoteService.fetchAll<CreditRequest>(this.loadRequestsUrl)
-        .subscribe(responseData => this.creditRequests = responseData);
-  }
+    public renderRequestStatus(status: RequestStatus) {
+        switch (status) {
+            case 'WAITING': return 'Ожидает решения';
+            case 'CONFIRMED': return 'Одобрена';
+            case 'REJECTION': return 'Отклонена';
+        }
+        return '';
+    }
 
 }

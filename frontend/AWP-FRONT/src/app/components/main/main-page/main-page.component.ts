@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { MenuItem } from "../../../shared/models.interfaces";
+import { MenuItem, UserRole } from "../../../shared/models.interfaces";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: 'app-main-page',
@@ -55,7 +56,8 @@ export class MainPageComponent implements OnInit {
 
   constructor(
       private router: Router,
-      private route: ActivatedRoute
+      private route: ActivatedRoute,
+      private authService: AuthService
   ) { }
 
   ngOnInit(): void {

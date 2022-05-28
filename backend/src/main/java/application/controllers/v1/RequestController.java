@@ -17,24 +17,12 @@ public class RequestController {
     private final RequestService requestService;
 
     @GetMapping("")
-    public List<CreditRequest> getAll() {
-        return requestService.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public CreditRequest getById(@PathVariable Long id) {
-        return requestService.
-                findById(id).
-                orElseThrow(() -> new ResourceNotFoundException("No request with Id: " + id));
-    }
-
-    @GetMapping("/dto")
-    public List<CreditRequestDto> findAllRequestDto() {
+    public List<CreditRequestDto> findAll() {
         return requestService.findAllRequestDto();
     }
 
-    @GetMapping("/dto/{id}")
-    public CreditRequestDto findRequestDtoById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public CreditRequestDto findById(@PathVariable Long id) {
         return requestService.findRequestDtoById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Request with Id: " + id + " not found"));
     }

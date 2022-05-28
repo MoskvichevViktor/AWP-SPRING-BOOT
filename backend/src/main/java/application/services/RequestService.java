@@ -35,13 +35,13 @@ public class RequestService {
     }
 
     public void save(CreditRequestDto requestDto){
-        requestRepositoriy.save(requestDto.mapToCreditRequest());
+//        requestRepositoriy.save(requestDto.mapToCreditRequest());
     }
 
     public void update(CreditRequestDto requestDto) {
         if (requestRepositoriy.existsById(requestDto.getId())) {
             CreditRequest request = requestRepositoriy.getById(requestDto.getId());
-            requestRepositoriy.save(requestDto.updateCreditRequest(request));
+//            requestRepositoriy.save(requestDto.updateCreditRequest(request));
         } else {
             throw new NoSuchElementException();
         }

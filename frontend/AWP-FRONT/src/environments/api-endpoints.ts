@@ -9,10 +9,16 @@ export const ApiEndpoints = {
         update: (id: number) => `/credit_requests/{id}`,
         delete: (id: number) => `/credit_requests/{id}`,
     },
+    creditResponses: {
+        list: '/credit_responses',
+    },
+    contracts: {
+        list: '/contracts',
+    },
     clients: {
-        list: '/clients/all',
+        list: '/clients',
     },
     users: {
-        list: '/users/all',
+        list: '/users',
     },
 }

@@ -4,7 +4,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Sort } from "@angular/material/sort";
 import { compare } from "../../../shared/sort-compare";
 import { Subscription } from "rxjs";
-import { CreditRequest } from "../../../shared/models.interfaces";
+import { CreditRequest, RequestStatus } from "../../../shared/models.interfaces";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-requests-list',
@@ -15,16 +16,19 @@ export class RequestsListComponent implements OnInit, OnDestroy {
 
   tableTitle = 'Список заявок на предоставление кредита';
   dataSource = new MatTableDataSource<CreditRequest>([]);
-  displayedColumns = ['id', 'date', 'name', 'creditSum'];
+  displayedColumns = ['id', 'date', 'name', 'sum', 'period', 'status'];
+  RequestStatus = RequestStatus;
+
+  requestStatusFilter = new FormControl('');
   
   $requestSub = new Subscription();
 
   constructor(
-      private creditRequestService: CreditRequestService,
+      public creditRequestService: CreditRequestService,
   ) { }
 
   ngOnInit(): void {
-    this.$requestSub = this.creditRequestService.requests.subscribe(
+    this.$requestSub = this.creditRequestService.loadAll().subscribe(
         requests => this.dataSource.data = requests
     );
   }
@@ -53,15 +57,19 @@ export class RequestsListComponent implements OnInit, OnDestroy {
         case 'id':
           return compare(a.id, b.id, isAsc);
         case 'name':
-          return compare(a.requesterFullName, b.requesterFullName, isAsc);
+          return compare(a.clientName, b.clientName, isAsc);
         case 'date':
-          return compare(a.created.getTime(), b.created.getTime(), isAsc);
-        case 'creditSum':
-          return compare(a.creditSum, b.creditSum, isAsc);
+          return compare(a.createdAt, b.createdAt, isAsc);
+        case 'sum':
+          return compare(a.sum, b.sum, isAsc);
         default:
           return 0;
       }
     });
+  }
+
+  onFilterChange() {
+    console.log(this.requestStatusFilter.value);
   }
 
 }

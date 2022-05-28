@@ -16,7 +16,7 @@ import java.util.List;
 public class ResponseController {
     private final ResponseService responseService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<CreditResponse> getAll() {
         return responseService.findAll();
     }
@@ -28,7 +28,7 @@ public class ResponseController {
                 orElseThrow(() -> new ResourceNotFoundException("No credit response with Id: " + id));
     }
 
-    @GetMapping
+    @GetMapping("/dto")
     public List<CreditResponseDto> findAllDto() {
         return responseService.findAllResponseDto();
     }

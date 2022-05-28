@@ -4,3 +4,14 @@
 /backend/src/main/resources/application.yaml
 /backend/src/main/resources/application-work.yml
 /backend/src/main/resources/application-dev.yml
+/backend/target/
+/backend/target/classes/
+/backend/target/classes/application/
+/backend/target/classes/db/
+/backend/target/classes/application.yaml
+/backend/target/classes/application-dev.yml
+/backend/target/classes/application-work.yml
+/backend/target/classes/docker-compose.yml
+/backend/target/generated-sources/
+/backend/target/generated-sources/annotations/
+/backend/target/test-classes/

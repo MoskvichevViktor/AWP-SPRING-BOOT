@@ -7,6 +7,12 @@
                 <input matInput (keyup)="applyFilter($event)" placeholder="Напр. Иванов" #input>
             </mat-form-field>
 
+            <mat-button-toggle-group class="status-filter" [formControl]="requestStatusFilter" (change)="onFilterChange()">
+                <mat-button-toggle value="">Все заявки</mat-button-toggle>
+                <mat-button-toggle *ngFor="let status of RequestStatus | keyvalue"
+                        [value]=status.key>{{creditRequestService.renderRequestStatus(status.value)}}</mat-button-toggle>
+            </mat-button-toggle-group>
+
             <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
                 <!-- ID Column -->
                 <ng-container matColumnDef="id" class="id-column">
@@ -16,20 +22,32 @@
 
                 <!-- Date Column -->
                 <ng-container matColumnDef="date" class="date-column">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="created"> Дата и время создания </th>
-                    <td mat-cell *matCellDef="let request"> {{request.created.toLocaleString()}} </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="date"> Создана </th>
+                    <td mat-cell *matCellDef="let request"> {{request.createdAt}} </td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name" class="name-column">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Ф.И.О. заявителя </th>
-                    <td mat-cell *matCellDef="let request"> {{request.requesterFullName}} </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Заявитель </th>
+                    <td mat-cell *matCellDef="let request"> {{request.clientName}} </td>
                 </ng-container>
 
                 <!-- Sum Column -->
-                <ng-container matColumnDef="creditSum" class="sum-column">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="creditSum"> Запрашиваемая сумма, руб. </th>
-                    <td mat-cell *matCellDef="let request" class="sum-rub"> {{request.creditSum}} </td>
+                <ng-container matColumnDef="sum" class="sum-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="sum"> Сумма, руб. </th>
+                    <td mat-cell *matCellDef="let request" class="sum-rub"> {{request.sum}} </td>
+                </ng-container>
+
+                <!-- Period Column -->
+                <ng-container matColumnDef="period" class="period-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="period"> Срок </th>
+                    <td mat-cell *matCellDef="let request"> {{request.period}} </td>
+                </ng-container>
+
+                <!-- Status Column -->
+                <ng-container matColumnDef="status" class="status-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="status"> Статус </th>
+                    <td mat-cell *matCellDef="let request"> {{creditRequestService.renderRequestStatus(request.status)}} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -40,7 +58,6 @@
                     <td class="mat-cell" colspan="4">Не найдено данных по запросу "{{input.value}}"</td>
                 </tr>
             </table>
-
 
         </div>
     </mat-card-content>

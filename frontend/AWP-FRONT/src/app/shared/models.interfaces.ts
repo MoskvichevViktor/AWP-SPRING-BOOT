@@ -26,11 +26,13 @@ export interface MenuItem {
 
 export interface CreditRequest {
     id: number,
-    requesterId: number,
-    requesterFullName: string,
-    creditSum: number,
-    actual: boolean,
-    created: Date
+    clientId: number,
+    clientName: string,
+    period: number
+    sum: number,
+    status: RequestStatus
+    createdAt: string,
+    updatedAt: string
 }
 
 export interface User {
@@ -46,4 +48,10 @@ export enum UserRole {
     ROLE_ADMIN = "ROLE_ADMIN",
     ROLE_MANAGER = "ROLE_MANAGER",
     ROLE_MAIN_MANAGER = "ROLE_MAIN_MANAGER",
+}
+
+export enum RequestStatus {
+    WAITING = "WAITING",
+    CONFIRMED = "CONFIRMED",
+    REJECTION = "REJECTION",
 }

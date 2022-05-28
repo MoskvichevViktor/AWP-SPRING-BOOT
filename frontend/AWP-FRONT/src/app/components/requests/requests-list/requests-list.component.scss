@@ -13,17 +13,27 @@ table {
     border-bottom: 0;
   }
   th.id-column {
-    width: 10%;
+    width: 5%;
   }
   th.date-column {
-    width: 30%;
+    width: 20%;
   }
   th.name-column {
-    width: 40%;
+    width: 30%;
   }
   th.sum-column {
+    width: 20%;
+  }
+  th.period-column {
+    width: 5%;
+  }
+  th.status-column {
     width: 20%;
   }
 }
 
 .sum-rub:after { content:"\20BD"; }
+
+.status-filter {
+  margin-left: 64px;
+}
