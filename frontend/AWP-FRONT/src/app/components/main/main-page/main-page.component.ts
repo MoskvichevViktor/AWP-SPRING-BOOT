@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { MenuItem, UserRole } from "../../../shared/models.interfaces";
 import { AuthService } from "../../../services/auth.service";
+import { BehaviorSubject, map } from "rxjs";
 
 @Component({
   selector: 'app-main-page',
@@ -9,6 +10,9 @@ import { AuthService } from "../../../services/auth.service";
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
+
+  private currentRoleSubj = new BehaviorSubject<UserRole>(UserRole.ROLE_MANAGER);
+
   menuItems: MenuItem[] = [
     {
       title: 'Главная',
@@ -61,6 +65,9 @@ export class MainPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.authService.userProfile.subscribe(
+        profile => this.currentRoleSubj.next(profile ? profile.role : UserRole.ROLE_MANAGER)
+    );
   }
 
   onMenuItemClick(item: MenuItem) {
