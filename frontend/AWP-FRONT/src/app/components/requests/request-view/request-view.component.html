@@ -1,0 +1,47 @@
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar>
+            <a routerLink="/main/requests">
+                <mat-icon
+                        matTooltip="Вернуться к списку заявок"
+                        matTooltipPosition="right">
+                    feedback
+                </mat-icon>
+            </a>
+        </div>
+    </mat-card-header>
+    <mat-card-title>{{getRequestInfo(request)}}</mat-card-title>
+    <mat-card-subtitle>
+        <h2>{{title | uppercase }}</h2>
+    </mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item>
+                <h4 matLine>Заявитель: </h4>
+                <p matLine>{{request?.clientName}}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 matLine>Сумма кредита: </h4>
+                <p matLine class="sum-rub">{{request?.sum}}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 matLine>Срок кредита: </h4>
+                <p matLine class="period-month">{{request?.period}}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 matLine>Заявка создана: </h4>
+                <p matLine>{{request?.createdAt}}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 matLine>Последнее обновление: </h4>
+                <p matLine>{{request?.updatedAt}}</p>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+        <button mat-stroked-button color="warn" (click)="onEditClick()">Редактировать</button>
+    </mat-card-actions>
+    <mat-card-footer></mat-card-footer>
+</mat-card>

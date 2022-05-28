@@ -18,3 +18,30 @@ body {
   background: $secColor;
   cursor: pointer;
 }
+
+mat-card-header a:visited {
+  color: $primaryDarkColor;
+}
+
+mat-card-header a:hover {
+  color: $primaryColor;
+}
+
+mat-card-title {
+  color: $primaryDarkColor;
+}
+
+mat-list-item h4 {
+  color: $primaryDarkColor;
+}
+
+mat-list-item p {
+  font-size: 1.2em !important;
+}
+
+
+.sum-rub:after { content:"\20BD"; }
+
+.period-month:after { content: ' мес.'; }
+
+

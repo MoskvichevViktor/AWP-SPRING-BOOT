@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CreditRequest, RequestStatus, UserRole } from "../shared/models.interfaces";
+import { CreditRequest, RequestStatus } from "../shared/models.interfaces";
 import { map } from "rxjs";
 import { RemoteService } from "./remote.service";
 import { environment } from "../../environments/environment";
+import { formatDateTime } from "../shared/format-date-time";
 import * as moment from "moment";
 
 
@@ -27,10 +28,22 @@ export class CreditRequestService {
             .pipe(
                 map(requests => {
                     return requests.map(request => {
-                        request.createdAt = moment(request.createdAt).format('DD.MM.YYYY, HH:mm:ss');
-                        request.updatedAt = request.updatedAt ? moment(request.updatedAt).format('DD.MM.YYYY, HH:mm:ss') : '';
+                        request.createdAt = formatDateTime(request.createdAt);
+                        request.updatedAt = request.updatedAt ? formatDateTime(request.updatedAt) : '';
                         return request;
                     })
+                })
+            );
+    }
+
+    public load(id: number) {
+        const url = environment.api.url + environment.api.endpoints.creditRequests.get(id);
+        return this.remoteService.fetchOne<CreditRequest>(url)
+            .pipe(
+                map(request => {
+                    request.createdAt = formatDateTime(request.createdAt);
+                    request.updatedAt = request.updatedAt ? formatDateTime(request.updatedAt) : '';
+                    return request;
                 })
             );
     }

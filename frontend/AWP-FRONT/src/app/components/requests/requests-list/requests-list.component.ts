@@ -6,6 +6,7 @@ import { compare } from "../../../shared/sort-compare";
 import { BehaviorSubject, Subscription, switchMap } from "rxjs";
 import { CreditRequest, RequestStatus } from "../../../shared/models.interfaces";
 import { FormControl } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-requests-list',
@@ -21,18 +22,19 @@ export class RequestsListComponent implements OnInit, OnDestroy {
 
   requestStatusFilter = new FormControl('');
   
-  $requestSub = new Subscription();
-  statusSubj = new BehaviorSubject<string>('');
+  private $requestSub = new Subscription();
+  private statusSubj = new BehaviorSubject<string>('');
 
   constructor(
       public creditRequestService: CreditRequestService,
+      private router: Router,
+      private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.$requestSub = this.statusSubj
         .pipe(
-        switchMap(status => this.creditRequestService.loadAll(status))
-        )
+        switchMap(status => this.creditRequestService.loadAll(status)))
         .subscribe(requests => this.dataSource.data = requests);
   }
 
@@ -73,6 +75,10 @@ export class RequestsListComponent implements OnInit, OnDestroy {
 
   onFilterChange() {
     this.statusSubj.next(this.requestStatusFilter.value);
+  }
+
+  onRequestClick(id: number) {
+    this.router.navigate([id], {relativeTo: this.route});
   }
 
 }

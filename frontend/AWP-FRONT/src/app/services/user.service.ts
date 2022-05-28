@@ -4,6 +4,7 @@ import { environment } from "../../environments/environment";
 import { RemoteService } from "./remote.service";
 import * as moment from 'moment';
 import { map } from "rxjs";
+import { formatDateTime } from "../shared/format-date-time";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class UserService {
         .pipe(
             map(users => {
               return users.map(user => {
-                user.createdAt = moment(user.createdAt).format('DD.MM.YYYY, HH:mm:ss');
-                user.updatedAt = user.updatedAt ? moment(user.updatedAt).format('DD.MM.YYYY, HH:mm:ss') : '';
+                  user.createdAt = formatDateTime(user.createdAt);
+                  user.updatedAt = user.updatedAt ? formatDateTime(user.updatedAt) : '';
                 return user;
               })
             })
