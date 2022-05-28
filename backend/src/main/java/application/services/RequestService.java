@@ -1,5 +1,6 @@
 package application.services;
 
+import application.constants.RequestStatus;
 import application.dto.CreditRequestDto;
 import application.models.CreditRequest;
 import application.repositories.CreditRequestRepositoriy;
@@ -24,8 +25,9 @@ public class RequestService {
         return requestRepositoriy.findById(id);
     }
 
-    public List<CreditRequestDto> findAllRequestDto(){
+    public List<CreditRequestDto> findAllRequestDto(RequestStatus status) {
         return requestRepositoriy.findAll().stream()
+                .filter(creditRequest -> status == null || creditRequest.getStatus().equals(status))
                 .map(CreditRequestDto::valueOf)
                 .collect(Collectors.toUnmodifiableList());
     }

@@ -7,34 +7,42 @@ import * as moment from "moment";
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CreditRequestService {
 
-  private loadRequestsUrl = environment.api.url + environment.api.endpoints.creditRequests.list;
+    private loadRequestsUrl = environment.api.url + environment.api.endpoints.creditRequests.list;
 
-  constructor(
-      private remoteService: RemoteService
-  ) { }
+    constructor(
+        private remoteService: RemoteService
+    ) {
+    }
 
-  public loadAll() {
-    return this.remoteService.fetchAll<CreditRequest>(this.loadRequestsUrl)
-        .pipe(
-            map(requests => {
-              return requests.map(request => {
-                request.createdAt = moment(request.createdAt).format('DD.MM.YYYY, HH:mm:ss');
-                request.updatedAt = request.updatedAt ? moment(request.updatedAt).format('DD.MM.YYYY, HH:mm:ss') : '';
-                return request;
-              })
-            })
-        );
-  }
+    public loadAll(status: string) {
+        let url = this.loadRequestsUrl;
+        if (status !== '') {
+            url = `${url}?status=${status}`;
+        }
+        return this.remoteService.fetchAll<CreditRequest>(url)
+            .pipe(
+                map(requests => {
+                    return requests.map(request => {
+                        request.createdAt = moment(request.createdAt).format('DD.MM.YYYY, HH:mm:ss');
+                        request.updatedAt = request.updatedAt ? moment(request.updatedAt).format('DD.MM.YYYY, HH:mm:ss') : '';
+                        return request;
+                    })
+                })
+            );
+    }
 
     public renderRequestStatus(status: RequestStatus) {
         switch (status) {
-            case 'WAITING': return 'Ожидает решения';
-            case 'CONFIRMED': return 'Одобрена';
-            case 'REJECTION': return 'Отклонена';
+            case 'WAITING':
+                return 'Ожидает решения';
+            case 'CONFIRMED':
+                return 'Одобрена';
+            case 'REJECTION':
+                return 'Отклонена';
         }
         return '';
     }

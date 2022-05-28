@@ -1,5 +1,6 @@
 package application.controllers.v1;
 
+import application.constants.RequestStatus;
 import application.dto.CreditRequestDto;
 import application.exception.ResourceNotFoundException;
 import application.models.CreditRequest;
@@ -17,8 +18,10 @@ public class RequestController {
     private final RequestService requestService;
 
     @GetMapping("")
-    public List<CreditRequestDto> findAll() {
-        return requestService.findAllRequestDto();
+    public List<CreditRequestDto> findAll(
+            @RequestParam(required = false) RequestStatus status
+            ) {
+        return requestService.findAllRequestDto(status);
     }
 
     @GetMapping("/{id}")

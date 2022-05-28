@@ -3,7 +3,7 @@ import { CreditRequestService } from "../../../services/credit-request.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { Sort } from "@angular/material/sort";
 import { compare } from "../../../shared/sort-compare";
-import { Subscription } from "rxjs";
+import { BehaviorSubject, Subscription, switchMap } from "rxjs";
 import { CreditRequest, RequestStatus } from "../../../shared/models.interfaces";
 import { FormControl } from "@angular/forms";
 
@@ -22,15 +22,18 @@ export class RequestsListComponent implements OnInit, OnDestroy {
   requestStatusFilter = new FormControl('');
   
   $requestSub = new Subscription();
+  statusSubj = new BehaviorSubject<string>('');
 
   constructor(
       public creditRequestService: CreditRequestService,
   ) { }
 
   ngOnInit(): void {
-    this.$requestSub = this.creditRequestService.loadAll().subscribe(
-        requests => this.dataSource.data = requests
-    );
+    this.$requestSub = this.statusSubj
+        .pipe(
+        switchMap(status => this.creditRequestService.loadAll(status))
+        )
+        .subscribe(requests => this.dataSource.data = requests);
   }
 
   ngOnDestroy(): void {
@@ -69,7 +72,7 @@ export class RequestsListComponent implements OnInit, OnDestroy {
   }
 
   onFilterChange() {
-    console.log(this.requestStatusFilter.value);
+    this.statusSubj.next(this.requestStatusFilter.value);
   }
 
 }
