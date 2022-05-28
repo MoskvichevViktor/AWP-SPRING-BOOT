@@ -37,3 +37,7 @@ table {
 .status-filter {
   margin-left: 64px;
 }
+
+.period-month:after {
+  content: ' мес.';
+}
