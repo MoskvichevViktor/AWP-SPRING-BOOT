@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="wrapper" *ngIf="!isLoggedIn">
+        <h2>Введите логин и пароль для входа</h2>
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="wrapper">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="username"
+                    type="text"
+                    id="username"
+                    ngModel
+                    name="username"
+                    required/>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="password"
+                       type="password"
+                       id="password"
+                       ngModel
+                       name="password"
+                       autocomplete="off"
+                       required/>
+                <mat-error>Неверные данные входа</mat-error>
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary">Вход</button>
+        </form>
+        <div class="wrapper errors" *ngIf="loginErrors">
+            <mat-error>{{loginErrors}}</mat-error>
+            <mat-error>Забыли пароль? позвоните системному администратору</mat-error>
+        </div>
+    </div>
+</div>
+

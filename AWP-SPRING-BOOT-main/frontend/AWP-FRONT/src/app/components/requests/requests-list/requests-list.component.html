@@ -1,0 +1,54 @@
+<mat-card>
+    <mat-card-title>{{tableTitle | uppercase}}</mat-card-title>
+    <mat-card-content>
+        <div class="table-container">
+            <mat-form-field appearance="standard">
+                <mat-label>Поиск</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Напр. Иванов" #input>
+            </mat-form-field>
+
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+                <!-- ID Column -->
+                <ng-container matColumnDef="id" class="id-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> № заявки </th>
+                    <td mat-cell *matCellDef="let request"> {{request.id}} </td>
+                </ng-container>
+
+                <!-- Date Column -->
+                <ng-container matColumnDef="date" class="date-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="created"> Дата и время создания </th>
+                    <td mat-cell *matCellDef="let request"> {{request.created.toLocaleString()}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name" class="name-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Ф.И.О. заявителя </th>
+                    <td mat-cell *matCellDef="let request"> {{request.requesterFullName}} </td>
+                </ng-container>
+
+                <!-- Sum Column -->
+                <ng-container matColumnDef="creditSum" class="sum-column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="creditSum"> Запрашиваемая сумма, руб. </th>
+                    <td mat-cell *matCellDef="let request" class="sum-rub"> {{request.creditSum}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let request columns: displayedColumns;"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">Не найдено данных по запросу "{{input.value}}"</td>
+                </tr>
+            </table>
+
+
+        </div>
+    </mat-card-content>
+    <mat-card-footer>
+        <mat-paginator
+                [pageSizeOptions]="[10, 25, 50]"
+                aria-label="Выберите страницу"></mat-paginator>
+    </mat-card-footer>
+
+</mat-card>
+

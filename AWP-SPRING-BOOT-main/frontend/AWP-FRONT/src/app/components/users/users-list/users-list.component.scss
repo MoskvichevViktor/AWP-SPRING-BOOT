@@ -1,0 +1,33 @@
+@import "../../../../styles.scss";
+
+table {
+  width: 100%;
+  .mat-header-row {
+    background-color: $secLightColor;
+    font-weight: bold;
+    th.mat-header-cell {
+      border-bottom: 0;
+    }
+  }
+  th.mat-header-cell {
+    border-bottom: 0;
+  }
+  th.id-column {
+    width: 5%;
+  }
+  th.name-column {
+    width: 25%;
+  }
+  th.email-column {
+    width: 20%;
+  }
+  th.role-column {
+    width: 20%;
+  }
+  th.created-column {
+    width: 15%;
+  }
+  th.updated-column {
+    width: 15%;
+  }
+}

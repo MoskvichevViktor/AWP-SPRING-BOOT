@@ -1,0 +1,46 @@
+version: '4.8.1'
+
+volumes:
+  cloud-postgres:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:9.6
+    domainname: awp
+    ports:
+      - "5432:5433"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=712459
+    #      - POSTGRES_PASSWORD=postgres
+#      - POSTGRES_DB=awp
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
+      interval: 5s
+      timeout: 1s
+      retries: 2
+
+#  redis_comments:
+#    image: redis:5.0.8
+#    restart: always
+#    volumes:
+#      - ./storage/redis_comments/data:/data
+#    ports:
+#      - 6379:6379
+#
+#  redis_buy:
+#    image: redis:5.0.8
+#    restart: always
+#    volumes:
+#      - ./storage/redis_buy/data:/data
+#    ports:
+#      - 5000:5000
+
+
+
+
+#  zipkin:
+#    image: openzipkin/zipkin
+#    ports:
+#      - "9411:9411"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AWP-SPRING-BOOT-main/AWP-SPRING-BOOT.iml" filepath="$PROJECT_DIR$/AWP-SPRING-BOOT-main/AWP-SPRING-BOOT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AWP-SPRING-BOOT-main/backend/AWP-SPRING-BOOT-BACK.iml" filepath="$PROJECT_DIR$/AWP-SPRING-BOOT-main/backend/AWP-SPRING-BOOT-BACK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AWP-SPRING-BOOT-main (1).iml" filepath="$PROJECT_DIR$/.idea/AWP-SPRING-BOOT-main (1).iml" />
+    </modules>
+  </component>
+</project>
