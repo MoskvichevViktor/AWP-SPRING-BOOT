@@ -1,7 +1,6 @@
 package application.services.calculate;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class OutputDataImpl implements OutputData{
 
@@ -68,8 +67,6 @@ public class OutputDataImpl implements OutputData{
     public void setPartSum(BigDecimal partSum) {
         this.partSum = partSum;
     }
-
-
 
     public OutputDataImpl() {
 

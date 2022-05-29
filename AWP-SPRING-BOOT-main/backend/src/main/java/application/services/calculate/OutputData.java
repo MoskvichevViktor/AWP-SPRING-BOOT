@@ -1,7 +1,6 @@
 package application.services.calculate;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public interface OutputData {
     int getMonth();
@@ -23,6 +22,5 @@ public interface OutputData {
     BigDecimal getPartSum();
 
     void setPartSum(BigDecimal partSum);
-
 
 }

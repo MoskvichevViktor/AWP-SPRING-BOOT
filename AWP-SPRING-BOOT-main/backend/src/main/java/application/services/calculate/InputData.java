@@ -14,10 +14,7 @@ public class InputData {
         this.period = period;
     }
 
-    public InputData() {
-    }
-
-    public BigDecimal getSum() {
+        public BigDecimal getSum() {
         return sum;
     }
 

@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/calculator")
 @AllArgsConstructor
 public class CalculationController {
+
     private  final Calculation calculation;
 
     @PostMapping
