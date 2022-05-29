@@ -35,6 +35,13 @@ export interface CreditRequest {
     updatedAt: string
 }
 
+export interface CreditRequestDto {
+    clientId: number,
+    clientName: string,
+    period: number
+    sum: number
+}
+
 export interface User {
     id: number,
     userName: string,

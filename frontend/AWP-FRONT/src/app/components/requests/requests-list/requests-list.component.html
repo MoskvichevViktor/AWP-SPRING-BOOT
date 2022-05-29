@@ -58,14 +58,18 @@
                     <td class="mat-cell" colspan="4">Не найдено данных по запросу {{input.value}}</td>
                 </tr>
             </table>
-
         </div>
     </mat-card-content>
     <mat-card-footer>
+        <div class="button_block">
+            <button mat-mini-fab color="accent" (click)="onCreateClick()">
+                <mat-icon matTooltip="Создать новую заявку"
+                          matTooltipPosition="right">plus_one</mat-icon>
+            </button>
+        </div>
         <mat-paginator
                 [pageSizeOptions]="[10, 25, 50]"
                 aria-label="Выберите страницу"></mat-paginator>
     </mat-card-footer>
-
 </mat-card>
 

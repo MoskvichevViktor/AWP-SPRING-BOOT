@@ -81,4 +81,8 @@ export class RequestsListComponent implements OnInit, OnDestroy {
     this.router.navigate([id], {relativeTo: this.route});
   }
 
+  onCreateClick() {
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
 }

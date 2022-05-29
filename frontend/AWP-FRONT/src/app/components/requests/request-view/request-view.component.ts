@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreditRequestService } from "../../../services/credit-request.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { CreditRequest } from "../../../shared/models.interfaces";
 
@@ -18,6 +18,7 @@ export class RequestViewComponent implements OnInit, OnDestroy {
 
   constructor(
       private route: ActivatedRoute,
+      private router: Router,
       public creditRequestService: CreditRequestService,
   ) { }
 
@@ -38,7 +39,7 @@ export class RequestViewComponent implements OnInit, OnDestroy {
     if (!this.request) {
       return;
     }
-    console.log('EDIT ' + this.request.id);
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
   getRequestInfo(request: CreditRequest | null) {

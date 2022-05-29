@@ -17,6 +17,7 @@ import { UsersListComponent } from './components/users/users-list/users-list.com
 import { HeaderComponent } from './components/header/header.component';
 import { AuthInterceptorService } from "./services/auth-interceptor.service";
 import { RequestViewComponent } from './components/requests/request-view/request-view.component';
+import { RequestEditComponent } from './components/requests/request-edit/request-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { RequestViewComponent } from './components/requests/request-view/request
     ClientsListComponent,
     UsersListComponent,
     HeaderComponent,
-    RequestViewComponent
+    RequestViewComponent,
+    RequestEditComponent
   ],
   imports: [
     AppRoutingModule,

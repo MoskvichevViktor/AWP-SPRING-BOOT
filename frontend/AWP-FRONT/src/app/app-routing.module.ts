@@ -8,6 +8,7 @@ import { ClientsListComponent } from "./components/clients/clients-list/clients-
 import { UsersListComponent } from "./components/users/users-list/users-list.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { RequestViewComponent } from "./components/requests/request-view/request-view.component";
+import { RequestEditComponent } from "./components/requests/request-edit/request-edit.component";
 
 
 const routes: Routes = [
@@ -18,7 +19,9 @@ const routes: Routes = [
         children: [
             { path: '', component: MainPageStartComponent },
             { path: 'requests', component: RequestsListComponent },
+            { path: 'requests/new', component: RequestEditComponent },
             { path: 'requests/:id', component: RequestViewComponent },
+            { path: 'requests/:id/edit', component: RequestEditComponent },
             { path: 'clients', component: ClientsListComponent },
             { path: 'users', component: UsersListComponent },
         ] },
