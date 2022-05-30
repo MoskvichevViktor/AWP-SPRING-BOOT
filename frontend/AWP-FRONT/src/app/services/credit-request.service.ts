@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CreditRequest, RequestStatus } from "../shared/models.interfaces";
+import {CreditRequest, CreditRequestDto, RequestStatus} from "../shared/models.interfaces";
 import { map } from "rxjs";
 import { RemoteService } from "./remote.service";
 import { environment } from "../../environments/environment";
 import { formatDateTime } from "../shared/format-date-time";
-import * as moment from "moment";
 
 
 @Injectable({
@@ -46,6 +45,18 @@ export class CreditRequestService {
                     return request;
                 })
             );
+    }
+
+    public save(dto: CreditRequestDto) {
+        const url = environment.api.url + environment.api.endpoints.creditRequests.create;
+        this.remoteService.create<CreditRequestDto>(url, dto).subscribe();
+    }
+
+    public update(dto: CreditRequestDto) {
+        if (dto.id) {
+            const url = environment.api.url + environment.api.endpoints.creditRequests.update;
+            this.remoteService.update<CreditRequestDto>(url, dto).subscribe();
+        }
     }
 
     public renderRequestStatus(status: RequestStatus) {

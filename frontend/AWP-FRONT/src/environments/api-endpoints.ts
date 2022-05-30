@@ -5,9 +5,8 @@ export const ApiEndpoints = {
     creditRequests: {
         list: '/credit_requests',
         get: (id: number) => `/credit_requests/${id}`,
-        create: 'requests/create',
-        update: (id: number) => `/credit_requests/${id}`,
-        delete: (id: number) => `/credit_requests/${id}`,
+        create: '/credit_requests',
+        update: '/credit_requests',
     },
     creditResponses: {
         list: '/credit_responses',

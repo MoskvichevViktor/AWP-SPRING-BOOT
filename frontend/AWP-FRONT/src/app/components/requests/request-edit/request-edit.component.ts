@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { CreditRequestService } from "../../../services/credit-request.service";
 import {CreditRequest, CreditRequestDto, FormErrors} from "../../../shared/models.interfaces";
 import { Subscription } from "rxjs";
@@ -29,6 +29,7 @@ export class RequestEditComponent implements OnInit {
 
   constructor(
       private route: ActivatedRoute,
+      private router: Router,
       public creditRequestService: CreditRequestService,
   ) { }
 
@@ -65,21 +66,34 @@ export class RequestEditComponent implements OnInit {
     if (this.editMode) {
       this.requestDto.id = this.request ? this.request.id : null
     }
-    this.checkFormErrors();
+    this.checkAndShowFormErrors();
+    if (this.editForm.valid) {
+      this.saveOrUpdate(this.requestDto);
+      this.router.navigate(['/main/requests']);
+    }
   }
 
   onDiscardClick() {
     if (this.request) {
       this.prefillForm(this.request);
     }
+    this.formErrors = {};
   }
 
-  checkFormErrors() {
+  checkAndShowFormErrors() {
     for (const controlName in this.editForm.controls) {
       const formControl = this.editForm.controls[controlName];
       if (formControl.errors) {
         this.formErrors[controlName] = 'Проверьте правильность заполнения!'
       }
+    }
+  }
+
+  saveOrUpdate(dto: CreditRequestDto) {
+    if (this.editMode) {
+      this.creditRequestService.update(dto);
+    } else {
+      this.creditRequestService.save(dto);
     }
   }
 

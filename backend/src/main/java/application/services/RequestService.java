@@ -49,7 +49,4 @@ public class RequestService {
         }
     }
 
-//    public void deleteById(Long id){
-//        requestRepositoriy.deleteById(id);
-//    }
 }

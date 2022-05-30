@@ -42,9 +42,4 @@ public class RequestController {
         requestService.update(requestDto);
     }
 
-//    @DeleteMapping("/{id}")
-//    public void deleteById(@PathVariable Long id) {
-//        requestService.deleteById(id);
-//    }
-
 }
