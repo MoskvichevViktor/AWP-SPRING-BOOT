@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import {AuthRequest, AuthResponse, User} from "../shared/models.interfaces";
+import { AuthRequest, AuthResponse, User } from "../shared/models.interfaces";
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
 import { BehaviorSubject, catchError, of, take, tap } from "rxjs";
-import {StorageService} from "./storage.service";
+import { StorageService } from "./storage.service";
 
 @Injectable({
     providedIn: 'root'
@@ -49,7 +49,7 @@ export class AuthService {
     }
 
     private getUserProfile() {
-        return this.storageService.getItem(this.USER_PROFILE);
+        return this.storageService.getItem(this.USER_PROFILE, 'json');
     }
 
     private doLoginUser(authResponse: AuthResponse) {
@@ -68,7 +68,7 @@ export class AuthService {
 
     private saveCredentials(token: string, profile: User) {
         this.storageService.setItem(this.JWT_TOKEN, token);
-        this.storageService.setItem(this.USER_PROFILE, profile);
+        this.storageService.setItem(this.USER_PROFILE, profile, 'json');
     }
 
     private clearCredentials() {

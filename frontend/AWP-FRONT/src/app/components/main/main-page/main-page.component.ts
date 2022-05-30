@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { MenuItem, UserRole } from "../../../shared/models.interfaces";
-import { AuthService } from "../../../services/auth.service";
-import { BehaviorSubject, map } from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {MenuItem, UserRole} from "../../../shared/models.interfaces";
+import {AuthService} from "../../../services/auth.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-main-page',
@@ -11,50 +11,54 @@ import { BehaviorSubject, map } from "rxjs";
 })
 export class MainPageComponent implements OnInit {
 
-  private currentRoleSubj = new BehaviorSubject<UserRole>(UserRole.ROLE_MANAGER);
-
   menuItems: MenuItem[] = [
     {
       title: 'Главная',
       url: '',
-      active: true,
+      active: false,
       icon: 'home',
-      visible: true
+      visible: true,
+      showToRoles: [UserRole.ROLE_MANAGER, UserRole.ROLE_MAIN_MANAGER, UserRole.ROLE_ADMIN]
     },
     {
       title: 'Заявки',
       url: 'requests',
       active: false,
       icon: 'feedback',
-      visible: true
+      visible: true,
+      showToRoles: [UserRole.ROLE_MANAGER, UserRole.ROLE_MAIN_MANAGER, UserRole.ROLE_ADMIN]
     },
     {
       title: 'Рассмотренные заявки',
       url: 'responses',
       active: false,
       icon: 'thumb_up',
-      visible: true
+      visible: true,
+      showToRoles: [UserRole.ROLE_MANAGER, UserRole.ROLE_MAIN_MANAGER, UserRole.ROLE_ADMIN]
     },
     {
       title: 'Договоры',
       url: 'contracts',
       active: false,
       icon: 'assignment',
-      visible: true
+      visible: true,
+      showToRoles: [UserRole.ROLE_MANAGER, UserRole.ROLE_MAIN_MANAGER, UserRole.ROLE_ADMIN]
     },
     {
       title: 'Клиенты',
       url: 'clients',
       active: false,
       icon: 'face',
-      visible: true
+      visible: true,
+      showToRoles: [UserRole.ROLE_MANAGER, UserRole.ROLE_MAIN_MANAGER, UserRole.ROLE_ADMIN]
     },
     {
       title: 'Пользователи',
       url: 'users',
       active: false,
       icon: 'person',
-      visible: true
+      visible: false,
+      showToRoles: [UserRole.ROLE_ADMIN]
     },
   ];
 
@@ -66,12 +70,39 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.userProfile.subscribe(
-        profile => this.currentRoleSubj.next(profile ? profile.role : UserRole.ROLE_MANAGER)
+        profile => {
+          const currentRole = profile ? profile.role : UserRole.ROLE_MANAGER;
+          this.checkMenuItemsVisibility(currentRole);
+        }
     );
+    this.highlightActiveUrl();
+  }
+
+  highlightActiveUrl() {
+    const url = this.router.routerState.snapshot.url;
+    let activeUrl = url.split('/').slice(-1).toString();
+    if (activeUrl === 'main') {
+      activeUrl = '';
+    }
+    this.menuItems.forEach(i => {
+      if (i.url === activeUrl) {
+        i.active = true;
+      } else {
+        i.active = false;
+      }
+    });
+  }
+
+  checkMenuItemsVisibility(currentRole: UserRole) {
+    this.menuItems.forEach(i => {
+      if (i.showToRoles.includes(currentRole)) {
+        i.visible = true;
+      }
+    });
   }
 
   onMenuItemClick(item: MenuItem) {
-    this.menuItems.forEach(item => item.active = false);
+    this.menuItems.forEach(i => i.active = false);
     item.active = true;
     this.router.navigate([item.url], {relativeTo: this.route});
   }

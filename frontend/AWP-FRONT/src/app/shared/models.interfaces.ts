@@ -1,3 +1,5 @@
+import {Observable} from "rxjs";
+
 export interface AuthRequest {
     username: string,
     password: string
@@ -21,7 +23,8 @@ export interface MenuItem {
     url: string,
     icon?: string,
     active: boolean,
-    visible: boolean
+    visible: boolean,
+    showToRoles: UserRole[]
 }
 
 export interface CreditRequest {
