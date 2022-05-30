@@ -1,5 +1,3 @@
-import {Observable} from "rxjs";
-
 export interface AuthRequest {
     username: string,
     password: string
@@ -18,15 +16,6 @@ export interface Client {
     phone: string
 }
 
-export interface MenuItem {
-    title: string,
-    url: string,
-    icon?: string,
-    active: boolean,
-    visible: boolean,
-    showToRoles: UserRole[]
-}
-
 export interface CreditRequest {
     id: number,
     clientId: number,
@@ -39,10 +28,23 @@ export interface CreditRequest {
 }
 
 export interface CreditRequestDto {
+    id: number | null,
     clientId: number,
-    clientName: string,
     period: number
     sum: number
+}
+
+export interface FormErrors {
+    [key: string]: string
+}
+
+export interface MenuItem {
+    title: string,
+    url: string,
+    icon?: string,
+    active: boolean,
+    visible: boolean,
+    showToRoles: UserRole[]
 }
 
 export interface User {
@@ -54,14 +56,14 @@ export interface User {
     updatedAt: string
 }
 
-export enum UserRole {
-    ROLE_ADMIN = "ROLE_ADMIN",
-    ROLE_MANAGER = "ROLE_MANAGER",
-    ROLE_MAIN_MANAGER = "ROLE_MAIN_MANAGER",
-}
-
 export enum RequestStatus {
     WAITING = "WAITING",
     CONFIRMED = "CONFIRMED",
     REJECTION = "REJECTION",
+}
+
+export enum UserRole {
+    ROLE_ADMIN = "ROLE_ADMIN",
+    ROLE_MANAGER = "ROLE_MANAGER",
+    ROLE_MAIN_MANAGER = "ROLE_MAIN_MANAGER",
 }

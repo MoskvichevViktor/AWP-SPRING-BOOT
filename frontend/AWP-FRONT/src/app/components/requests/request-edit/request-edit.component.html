@@ -10,21 +10,21 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Ф.И.О заемщика</mat-label>
                         <input matInput placeholder="Иванов И.И." formControlName="clientId">
-                        <mat-error></mat-error>
+                        <mat-error *ngIf="formErrors['clientId']">{{formErrors['clientId']}}</mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="outline">
                         <mat-label>Сумма кредита, руб.</mat-label>
-                        <input matInput placeholder="10000" formControlName="sum">
-                        <mat-error></mat-error>
+                        <input matInput placeholder="10000" formControlName="sum" type="number">
+                        <mat-error *ngIf="formErrors['sum']">{{formErrors['sum']}}</mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="outline">
                         <mat-label>Срок кредита, мес.</mat-label>
-                        <input matInput placeholder="12" formControlName="period">
-                        <mat-error></mat-error>
+                        <input matInput placeholder="12" formControlName="period" type="number">
+                        <mat-error *ngIf="formErrors['period']">{{formErrors['period']}}</mat-error>
                     </mat-form-field>
                 </p>
             </form>
