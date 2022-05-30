@@ -31,9 +31,9 @@ public class RequestController {
                 .orElseThrow(() -> new ResourceNotFoundException("Request with Id: " + id + " not found"));
     }
 
-    @PostMapping("")
+    @PostMapping()
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void create(CreditRequestInputDto requestInputDto){
+    public void create(@RequestBody CreditRequestInputDto requestInputDto){
         requestService.save(requestInputDto);
     }
 
