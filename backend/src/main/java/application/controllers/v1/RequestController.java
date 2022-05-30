@@ -2,6 +2,7 @@ package application.controllers.v1;
 
 import application.constants.RequestStatus;
 import application.dto.CreditRequestDto;
+import application.dto.CreditRequestInputDto;
 import application.exception.ResourceNotFoundException;
 import application.models.CreditRequest;
 import application.services.RequestService;
@@ -30,10 +31,10 @@ public class RequestController {
                 .orElseThrow(() -> new ResourceNotFoundException("Request with Id: " + id + " not found"));
     }
 
-    @PostMapping
+    @PostMapping("")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void create(@RequestBody CreditRequestDto requestDto) {
-        requestService.save(requestDto);
+    public void create(CreditRequestInputDto requestInputDto){
+        requestService.save(requestInputDto);
     }
 
     @PutMapping()
