@@ -23,7 +23,7 @@ public class CreditRequest extends AbstractContractTemplate {
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne( cascade = CascadeType.ALL)
     @JoinColumn(updatable = false, name = "response_id")
     private CreditResponse creditResponse;
 }
