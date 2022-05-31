@@ -1,4 +1,16 @@
 <mat-card>
+    <mat-card-header>
+        <div mat-card-avatar>
+            <a routerLink="/main/requests">
+                <mat-icon
+                        matTooltip="Вернуться к списку заявок"
+                        matTooltipPosition="right"
+                        color="warn">
+                    close
+                </mat-icon>
+            </a>
+        </div>
+    </mat-card-header>
     <mat-card-subtitle>
         <h2>{{title | uppercase }}</h2>
     </mat-card-subtitle>

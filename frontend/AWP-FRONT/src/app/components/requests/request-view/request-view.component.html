@@ -4,8 +4,9 @@
             <a routerLink="/main/requests">
                 <mat-icon
                         matTooltip="Вернуться к списку заявок"
-                        matTooltipPosition="right">
-                    feedback
+                        matTooltipPosition="right"
+                        color="warn">
+                    close
                 </mat-icon>
             </a>
         </div>
@@ -37,11 +38,20 @@
                 <h4 matLine>Последнее обновление: </h4>
                 <p matLine>{{request?.updatedAt}}</p>
             </mat-list-item>
+            <mat-list-item>
+                <h4 matLine>Текущий статус: </h4>
+                <p matLine>{{request ? creditRequestService.renderRequestStatus(request.status) : ''}}</p>
+            </mat-list-item>
         </mat-list>
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions>
-        <button mat-stroked-button color="warn" (click)="onEditClick()">Редактировать</button>
+        <button mat-stroked-button
+                [disabled]="request?.status !== 'WAITING'"
+                color="warn"
+                (click)="onEditClick()">
+            Редактировать
+        </button>
     </mat-card-actions>
     <mat-card-footer></mat-card-footer>
 </mat-card>
