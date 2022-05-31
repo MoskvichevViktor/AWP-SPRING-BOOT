@@ -1,8 +1,19 @@
-GET http://localhost:8080/api/v1/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjUzNjUyNzkwLCJpYXQiOjE2NTM2NDkxOTB9.JowjKX6bZl3ntZriDnylRjkq6XOJG44vDsMIVO4dPXA
+POST http://localhost:8080/api/v1/credit_requests/
+Content-Type: application/json
+
+{
+  "clientId": "1",
+  "sum": "50000",
+  "period": "24"
+}
 
 ###
-GET http://localhost:8080/api/v1/credit_requests/all
+
+GET http://localhost:8080/api/v1/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZXMiOlsiUk9MRV9NQU5BR0VSIl0sImV4cCI6MTY1Mzk5OTE3OCwiaWF0IjoxNjUzOTk1NTc4fQ.w7B-bZvk-g0xm74B1I2a74wa7tr9kuIBP_1KWdZp9fg
+
+###
+GET http://localhost:8080/api/v1/credit_requests
 
 ###
 GET http://localhost:8080/api/v1/credit_responses
@@ -35,7 +46,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPT
 ###
 
 
-GET http://localhost:8080/api/v1/users/all
+GET http://localhost:8080/api/v1/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjUzNDk0ODQ5LCJpYXQiOjE2NTM0OTEyNDl9.veFTWmg2lQYlGSJucDJEvortcTZDRLMXEu_bP5jBUaE
 
 ###

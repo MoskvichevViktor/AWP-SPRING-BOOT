@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(AUTH_WHITELIST_HTTP)
                 .permitAll();
+
         http.addFilterBefore(jwcRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

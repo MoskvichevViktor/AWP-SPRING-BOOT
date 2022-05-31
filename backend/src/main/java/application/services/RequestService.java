@@ -56,14 +56,22 @@ public class RequestService {
     }
 
     public void update(CreditRequestDto requestDto) {
+
+
         if (requestRepositoriy.existsById(requestDto.getId())) {
             CreditRequest request = requestRepositoriy.getById(requestDto.getId());
+
+            RequestStatus status = request.getStatus();
+
             request.setSum(requestDto.getSum());
             request.setPeriod(requestDto.getPeriod());
-            if (requestDto.getStatus() == null) {
+            if (status == null) {
                 requestDto.setStatus(RequestStatus.WAITING);
             }
-            request.setStatus(requestDto.getStatus());
+            if (status != RequestStatus.WAITING) {
+                throw new IllegalArgumentException("Редактировать запрос со статусом: " + status + " запрещено");
+            }
+            request.setStatus(status);
             //   request.setCreditResponse(responseRepository.findById(requestDto.getResponseId()).orElse(null));
             if (requestDto.getResponseId() != null) {
                 if (responseRepository.existsById(requestDto.getResponseId())) {
