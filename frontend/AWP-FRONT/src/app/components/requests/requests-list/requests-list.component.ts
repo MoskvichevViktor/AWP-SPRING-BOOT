@@ -17,7 +17,7 @@ export class RequestsListComponent implements OnInit, OnDestroy {
 
   tableTitle = 'Список заявок на предоставление кредита';
   dataSource = new MatTableDataSource<CreditRequest>([]);
-  displayedColumns = ['id', 'date', 'name', 'sum', 'period', 'status'];
+  displayedColumns = ['menu', 'id', 'date', 'name', 'sum', 'period', 'status'];
   RequestStatus = RequestStatus;
 
   requestStatusFilter = new FormControl('');
@@ -81,8 +81,9 @@ export class RequestsListComponent implements OnInit, OnDestroy {
     this.router.navigate([id], {relativeTo: this.route});
   }
 
-  onCreateClick() {
-    this.router.navigate(['new'], {relativeTo: this.route});
+  onEditClick(id: number) {
+    this.router.navigate([id, 'edit'], {relativeTo: this.route});
   }
+
 
 }

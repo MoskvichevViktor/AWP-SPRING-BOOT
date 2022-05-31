@@ -16,6 +16,7 @@ export const ApiEndpoints = {
     },
     clients: {
         list: '/clients',
+        get: (id: number) => `/clients/${id}`,
     },
     users: {
         list: '/users',

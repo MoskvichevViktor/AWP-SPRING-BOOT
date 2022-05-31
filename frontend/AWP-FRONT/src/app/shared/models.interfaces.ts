@@ -13,7 +13,9 @@ export interface Client {
     name: string,
     passport: string,
     address: string,
-    phone: string
+    phone: string,
+    createdAt: string,
+    updatedAt: string
 }
 
 export interface CreditRequest {

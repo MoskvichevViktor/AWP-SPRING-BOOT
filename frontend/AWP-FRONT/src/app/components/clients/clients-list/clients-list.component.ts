@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import { Sort } from "@angular/material/sort";
 import { compare } from "../../../shared/sort-compare";
 import { Client } from "../../../shared/models.interfaces";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-clients-list',
@@ -15,11 +16,12 @@ export class ClientsListComponent implements OnInit, OnDestroy {
 
   tableTitle = 'Список клиентов';
   dataSource = new MatTableDataSource<Client>([]);
-  displayedColumns = ['id', 'name', 'passport', 'address', 'phone'];
+  displayedColumns = ['menu', 'id', 'name', 'passport', 'address', 'phone'];
 
   $clientsSub = new Subscription();
 
   constructor(
+      private router: Router,
       private clientService: ClientService
   ) { }
 
@@ -31,6 +33,10 @@ export class ClientsListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.$clientsSub.unsubscribe();
+  }
+
+  onCreateClick(id: number) {
+    this.router.navigate(['/main/requests/new', {clientId: id}]);
   }
 
   applyFilter(event: Event) {

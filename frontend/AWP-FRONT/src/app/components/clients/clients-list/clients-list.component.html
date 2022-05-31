@@ -10,6 +10,19 @@
             </mat-form-field>
 
             <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+                <!-- Menu button Column -->
+                <ng-container matColumnDef="menu" class="menu-column">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let client">
+                        <button mat-icon-button
+                                [matMenuTriggerFor]="menu"
+                                [matMenuTriggerData]="{clientId: client.id}"
+                                aria-label="Открыть меню">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
                 <!-- ID Column -->
                 <ng-container matColumnDef="id" class="id-column">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> № </th>
@@ -25,13 +38,13 @@
                 <!-- Passport Column -->
                 <ng-container matColumnDef="passport" class="passport-column">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header="passport"> № паспорта </th>
-                    <td mat-cell *matCellDef="let client"> {{client.pasport}} </td>
+                    <td mat-cell *matCellDef="let client"> {{client.passport}} </td>
                 </ng-container>
 
                 <!-- Address Column -->
                 <ng-container matColumnDef="address" class="address-column">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header="address"> Адрес </th>
-                    <td mat-cell *matCellDef="let client"> {{client.adress}} </td>
+                    <td mat-cell *matCellDef="let client"> {{client.address}} </td>
                 </ng-container>
 
                 <!-- Phone Column -->
@@ -48,8 +61,6 @@
                     <td class="mat-cell" colspan="4">Не найдено данных по запросу "{{input.value}}"</td>
                 </tr>
             </table>
-
-
         </div>
     </mat-card-content>
     <mat-card-footer>
@@ -59,3 +70,15 @@
     </mat-card-footer>
 </mat-card>
 
+<mat-menu #menu="matMenu">
+    <ng-template matMenuContent let-id="clientId">
+        <button mat-menu-item>
+            <mat-icon>feedback</mat-icon>
+            <span>Заявки клиента</span>
+        </button>
+        <button mat-menu-item (click)="onCreateClick(id)">
+            <mat-icon color="warn">plus_one</mat-icon>
+            <span>Создать новую заявку</span>
+        </button>
+    </ng-template>
+</mat-menu>

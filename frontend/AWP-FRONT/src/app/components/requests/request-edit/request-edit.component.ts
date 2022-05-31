@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { CreditRequestService } from "../../../services/credit-request.service";
-import {CreditRequest, CreditRequestDto, FormErrors} from "../../../shared/models.interfaces";
+import {Client, CreditRequest, CreditRequestDto, FormErrors} from "../../../shared/models.interfaces";
 import { Subscription } from "rxjs";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ClientService} from "../../../services/client.service";
 
 @Component({
   selector: 'app-reques-edit',
@@ -18,19 +19,21 @@ export class RequestEditComponent implements OnInit {
     id: null, clientId: 0, sum: 0, period: 0
   };
   editMode = false;
-  editForm = new FormGroup({
-    clientId: new FormControl('', Validators.required),
-    sum: new FormControl(0, [Validators.required, Validators.min(1)]),
-    period: new FormControl(0, [Validators.required, Validators.min(1)]),
+  editForm = this.fb.group({
+    clientName: [{value: 'Client', disabled: true}, Validators.required],
+    sum: [0, [Validators.required, Validators.min(1)]],
+    period: [0, [Validators.required, Validators.min(1)]],
   });
   formErrors: FormErrors = {};
 
   private $requestSub = new Subscription();
 
   constructor(
+      private fb: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
       public creditRequestService: CreditRequestService,
+      public clientService: ClientService,
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +44,12 @@ export class RequestEditComponent implements OnInit {
         const id = params['id'];
         this.creditRequestService.load(id).subscribe(req => {
           this.request = req;
-          this.prefillForm(req);
+          this.prefillFormForEdit(req);
+        });
+      } else {
+        const clientId = params['clientId'];
+        this.clientService.load(clientId).subscribe(client => {
+          this.prefillFormForCreate(client);
         });
       }
     });
@@ -51,21 +59,27 @@ export class RequestEditComponent implements OnInit {
     this.$requestSub.unsubscribe();
   }
 
-  private prefillForm(request: CreditRequest) {
+  private prefillFormForEdit(request: CreditRequest) {
+    this.requestDto.id = request.id;
+    this.requestDto.clientId = request.clientId;
     this.editForm.patchValue({
-      clientId: request.clientId,
+      clientName: request.clientName,
       sum: request.sum,
       period: request.period
     });
   }
 
+  private prefillFormForCreate(client: Client) {
+    this.requestDto.clientId = client.id;
+    this.editForm.patchValue({
+      clientName: client.name,
+    });
+  }
+
   onSaveClick() {
-    this.requestDto.clientId = this.editForm.value.clientId;
     this.requestDto.sum = this.editForm.value.sum;
     this.requestDto.period = this.editForm.value.period;
-    if (this.editMode) {
-      this.requestDto.id = this.request ? this.request.id : null
-    }
+
     this.checkAndShowFormErrors();
     if (this.editForm.valid) {
       this.saveOrUpdate(this.requestDto);
@@ -75,7 +89,10 @@ export class RequestEditComponent implements OnInit {
 
   onDiscardClick() {
     if (this.request) {
-      this.prefillForm(this.request);
+      this.prefillFormForEdit(this.request);
+    } else {
+      this.editForm.controls['sum'].reset();
+      this.editForm.controls['period'].reset();
     }
     this.formErrors = {};
   }

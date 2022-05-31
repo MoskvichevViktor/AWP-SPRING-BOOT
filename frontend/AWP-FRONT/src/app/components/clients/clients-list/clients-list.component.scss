@@ -12,6 +12,9 @@ table {
   th.mat-header-cell {
     border-bottom: 0;
   }
+  th.menu-column {
+    width: 2%;
+  }
   th.id-column {
     width: 5%;
   }
@@ -25,6 +28,6 @@ table {
     width: 30%;
   }
   th.phone-column {
-    width: 20%;
+    width: 18%;
   }
 }

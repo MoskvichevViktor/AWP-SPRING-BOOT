@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/credit_requests")
+@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 public class RequestController {
     private final RequestService requestService;

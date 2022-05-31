@@ -15,7 +15,6 @@ body {
 }
 
 .mat-row :hover {
-  background: $secColor;
   cursor: pointer;
 }
 
@@ -37,10 +36,6 @@ mat-list-item h4 {
 
 mat-list-item p {
   font-size: 1.2em !important;
-}
-
-mat-card-footer .button_block {
-  margin-left: 50px;
 }
 
 .edit-form-group {

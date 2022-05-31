@@ -5,23 +5,22 @@
     <mat-divider></mat-divider>
     <mat-card-content>
         <div class="edit-form-group">
-            <form [formGroup]="editForm">
+            <form [formGroup]="editForm" [style.fontSize.px]="16">
                 <p>
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" color="warn">
                         <mat-label>Ф.И.О заемщика</mat-label>
-                        <input matInput placeholder="Иванов И.И." formControlName="clientId">
-                        <mat-error *ngIf="formErrors['clientId']">{{formErrors['clientId']}}</mat-error>
+                        <input matInput placeholder="Иванов И.И." formControlName="clientName">
                     </mat-form-field>
                 </p>
                 <p>
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" color="warn">
                         <mat-label>Сумма кредита, руб.</mat-label>
                         <input matInput placeholder="10000" formControlName="sum" type="number">
                         <mat-error *ngIf="formErrors['sum']">{{formErrors['sum']}}</mat-error>
                     </mat-form-field>
                 </p>
                 <p>
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" color="warn">
                         <mat-label>Срок кредита, мес.</mat-label>
                         <input matInput placeholder="12" formControlName="period" type="number">
                         <mat-error *ngIf="formErrors['period']">{{formErrors['period']}}</mat-error>

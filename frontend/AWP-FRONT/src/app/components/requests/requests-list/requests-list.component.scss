@@ -12,6 +12,9 @@ table {
   th.mat-header-cell {
     border-bottom: 0;
   }
+  th.menu-column {
+    width: 2%;
+  }
   th.id-column {
     width: 5%;
   }
@@ -19,7 +22,7 @@ table {
     width: 20%;
   }
   th.name-column {
-    width: 30%;
+    width: 28%;
   }
   th.sum-column {
     width: 20%;
