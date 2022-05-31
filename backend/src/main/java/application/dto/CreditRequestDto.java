@@ -2,12 +2,14 @@ package application.dto;
 
 import application.constants.RequestStatus;
 import application.models.CreditRequest;
+import application.models.CreditResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -31,29 +33,13 @@ public class CreditRequestDto {
         requestDto.setStatus(request.getStatus());
         requestDto.setClientId(request.getClient().getId());
         requestDto.setClientName(request.getClient().getName());
-        requestDto.setResponseId(request.getCreditResponse().getId());
+        if (request.getCreditResponse() != null){
+            requestDto.setResponseId(request.getCreditResponse().getId());
+        }else {
+            requestDto.setResponseId(null);
+        }
         requestDto.setCreatedAt(request.getCreatedAt());
         requestDto.setUpdatedAt(request.getUpdatedAt());
         return requestDto;
     }
-
-// TODO: 28.05.2022 перенести в сервис - создание нового Request на основе ДТО
-    //    public CreditRequest mapToCreditRequest(){
-//        CreditRequest newRequest = new CreditRequest();
-//        newRequest.setId(id);
-//        newRequest.setSum(sum);
-//        newRequest.setPeriod(period);
-//        newRequest.setStatus(status);
-//        newRequest.setClient(client);
-//        newRequest.setCreditResponse(response);
-//        return newRequest;
-//    }
-    //todo 28.05.2022 перенести в сервис - обновление Request на основе ДТО
-//    public CreditRequest updateCreditRequest(CreditRequest request){
-//        request.setStatus(status);
-//        request.setSum(sum);
-//        request.setPeriod(period);
-//        request.setCreditResponse(response);
-//        return request;
-//    }
 }

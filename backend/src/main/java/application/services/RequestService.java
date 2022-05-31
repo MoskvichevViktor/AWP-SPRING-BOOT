@@ -62,9 +62,15 @@ public class RequestService {
             request.setSum(requestDto.getSum());
             request.setPeriod(requestDto.getPeriod());
             request.setStatus(requestDto.getStatus());
-            if (responseRepository.existsById(requestDto.getResponseId())){
-                CreditResponse response = responseRepository.getById(requestDto.getResponseId());
-                request.setCreditResponse(response);
+       //   request.setCreditResponse(responseRepository.findById(requestDto.getResponseId()).orElse(null));
+            if (requestDto.getResponseId() != null){
+                if (responseRepository.existsById(requestDto.getResponseId())){
+                    request.setCreditResponse(responseRepository.getById(requestDto.getResponseId()));
+                }else{
+                    throw  new ResourceNotFoundException("Incorrect credit response id: " + requestDto.getResponseId() + " Not exists!");
+                }
+            }else{
+                request.setCreditResponse(null);
             }
             requestRepositoriy.save(request);
         } else {
