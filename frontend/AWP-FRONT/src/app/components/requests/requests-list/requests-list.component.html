@@ -20,7 +20,7 @@
                     <td mat-cell *matCellDef="let request">
                         <button mat-icon-button
                                 [matMenuTriggerFor]="menu"
-                                [matMenuTriggerData]="{requestId: request.id}"
+                                [matMenuTriggerData]="{requestId: request.id, status: request.status}"
                                 aria-label="Открыть меню">
                             <mat-icon>more_vert</mat-icon>
                         </button>
@@ -81,8 +81,9 @@
 </mat-card>
 
 <mat-menu #menu="matMenu">
-    <ng-template matMenuContent let-id="requestId">
-        <button mat-menu-item (click)="onEditClick(id)">
+    <ng-template matMenuContent let-id="requestId" let-status="status">
+        <button mat-menu-item [disabled]="status !== 'WAITING'"
+                (click)="onEditClick(id)">
             <mat-icon>edit</mat-icon>
             <span>Редактировать заявку</span>
         </button>
