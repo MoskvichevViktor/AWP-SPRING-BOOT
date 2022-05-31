@@ -6,7 +6,6 @@ import application.dto.CreditRequestInputDto;
 import application.exception.ResourceNotFoundException;
 import application.models.Client;
 import application.models.CreditRequest;
-import application.models.CreditResponse;
 import application.repositories.ClientRepository;
 import application.repositories.CreditRequestRepositoriy;
 import application.repositories.CreditResponseRepository;
@@ -61,15 +60,18 @@ public class RequestService {
             CreditRequest request = requestRepositoriy.getById(requestDto.getId());
             request.setSum(requestDto.getSum());
             request.setPeriod(requestDto.getPeriod());
+            if (requestDto.getStatus() == null) {
+                requestDto.setStatus(RequestStatus.WAITING);
+            }
             request.setStatus(requestDto.getStatus());
-       //   request.setCreditResponse(responseRepository.findById(requestDto.getResponseId()).orElse(null));
-            if (requestDto.getResponseId() != null){
-                if (responseRepository.existsById(requestDto.getResponseId())){
+            //   request.setCreditResponse(responseRepository.findById(requestDto.getResponseId()).orElse(null));
+            if (requestDto.getResponseId() != null) {
+                if (responseRepository.existsById(requestDto.getResponseId())) {
                     request.setCreditResponse(responseRepository.getById(requestDto.getResponseId()));
-                }else{
-                    throw  new ResourceNotFoundException("Incorrect credit response id: " + requestDto.getResponseId() + " Not exists!");
+                } else {
+                    throw new ResourceNotFoundException("Incorrect credit response id: " + requestDto.getResponseId() + " Not exists!");
                 }
-            }else{
+            } else {
                 request.setCreditResponse(null);
             }
             requestRepositoriy.save(request);
