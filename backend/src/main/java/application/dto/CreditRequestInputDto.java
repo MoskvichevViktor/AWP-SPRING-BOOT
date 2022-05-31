@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreditRequestInputDto {
+    private Long id;
     private Long clientId;
     private BigDecimal sum;
     private Integer period;

@@ -3,11 +3,13 @@ package application.controllers.v1;
 import application.constants.RequestStatus;
 import application.dto.CreditRequestDto;
 import application.dto.CreditRequestInputDto;
+import application.exception.AwpError;
 import application.exception.ResourceNotFoundException;
 import application.models.CreditRequest;
 import application.services.RequestService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,9 +41,15 @@ public class RequestController {
     }
 
     @PutMapping()
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void update(@RequestBody CreditRequestDto requestDto) {
-        requestService.update(requestDto);
+    public ResponseEntity<?> update(@RequestBody CreditRequestInputDto requestInputDto) {
+        CreditRequest creditRequest = requestService
+                .findById(requestInputDto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Request with Id: " + requestInputDto.getId() + " not found"));
+        if (!RequestStatus.WAITING.equals(creditRequest.getStatus())) {
+            return new ResponseEntity<>(new AwpError("Denied modifying request with id: " + + requestInputDto.getId()), HttpStatus.FORBIDDEN);
+        }
+        requestService.update(requestInputDto);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
 }

@@ -3,7 +3,6 @@ package application.services;
 import application.constants.RequestStatus;
 import application.dto.CreditRequestDto;
 import application.dto.CreditRequestInputDto;
-import application.exception.ResourceNotFoundException;
 import application.models.Client;
 import application.models.CreditRequest;
 import application.repositories.ClientRepository;
@@ -55,25 +54,11 @@ public class RequestService {
         }
     }
 
-    public void update(CreditRequestDto requestDto) {
+    public void update(CreditRequestInputDto requestDto) {
         if (requestRepositoriy.existsById(requestDto.getId())) {
             CreditRequest request = requestRepositoriy.getById(requestDto.getId());
             request.setSum(requestDto.getSum());
             request.setPeriod(requestDto.getPeriod());
-            if (requestDto.getStatus() == null) {
-                requestDto.setStatus(RequestStatus.WAITING);
-            }
-            request.setStatus(requestDto.getStatus());
-            //   request.setCreditResponse(responseRepository.findById(requestDto.getResponseId()).orElse(null));
-            if (requestDto.getResponseId() != null) {
-                if (responseRepository.existsById(requestDto.getResponseId())) {
-                    request.setCreditResponse(responseRepository.getById(requestDto.getResponseId()));
-                } else {
-                    throw new ResourceNotFoundException("Incorrect credit response id: " + requestDto.getResponseId() + " Not exists!");
-                }
-            } else {
-                request.setCreditResponse(null);
-            }
             requestRepositoriy.save(request);
         } else {
             throw new NoSuchElementException();
