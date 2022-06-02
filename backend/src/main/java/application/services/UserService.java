@@ -2,10 +2,11 @@ package application.services;
 
 import application.constants.UserRole;
 import application.dto.UserRegistrationDto;
-import application.exception.ResourceNotFoundException;
+import application.exception.AwpException;
 import application.models.User;
 import application.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,10 +46,11 @@ public class UserService implements UserDetailsService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @SneakyThrows
     @Transactional
     public ResponseEntity<?> delete(Long id) {
         User user = getUserById(id).orElseThrow(() ->
-                new ResourceNotFoundException("user with id:" + id + " tot found"));
+                new AwpException("user with id:" + id + " tot found"));
         if (user == null || user.getUsername().equals("admin")) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

@@ -1,10 +1,11 @@
 package application.controllers.v1;
 
 
-import application.exception.ResourceNotFoundException;
+import application.exception.AwpException;
 import application.models.Client;
 import application.services.ClientsService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1/clients")
 @RequiredArgsConstructor
 //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_MAIN_MANAGER')")
-public class ClientController {
+public class ClientController extends AbstractMethodError {
     private final ClientsService clientsService;
 
     @GetMapping("")
@@ -32,11 +33,12 @@ public class ClientController {
 //        return clientsService.delete(id);
 //    }
 
+    @SneakyThrows
     @GetMapping("/{id}")
     public Client getById(@PathVariable Long id) {
         return clientsService.
                 getById(id).
-                orElseThrow(() -> new ResourceNotFoundException("No client with Id: " + id));
+                orElseThrow(() -> new AwpException("No client with Id: " + id));
     }
 
 
