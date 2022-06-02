@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { ClientService } from "../../../services/client.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { Subscription } from "rxjs";
@@ -7,13 +7,16 @@ import { compare } from "../../../shared/sort-compare";
 import { Client } from "../../../shared/models.interfaces";
 import {Router} from "@angular/router";
 import {CommonFilterService} from "../../../services/common-filter.service";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-clients-list',
   templateUrl: './clients-list.component.html',
   styleUrls: ['./clients-list.component.scss']
 })
-export class ClientsListComponent implements OnInit, OnDestroy {
+export class ClientsListComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
   tableTitle = 'Список клиентов';
   dataSource = new MatTableDataSource<Client>([]);
@@ -31,6 +34,10 @@ export class ClientsListComponent implements OnInit, OnDestroy {
     this.$clientsSub = this.clientService.loadAll().subscribe(
         clients => this.dataSource.data = clients
     );
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
