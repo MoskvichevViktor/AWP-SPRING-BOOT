@@ -33,7 +33,8 @@ export interface CreditRequestDto {
     id: number | null,
     clientId: number,
     period: number
-    sum: number
+    sum: number,
+    status?: RequestStatus
 }
 
 export interface FormErrors {
