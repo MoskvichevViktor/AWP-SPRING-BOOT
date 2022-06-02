@@ -25,9 +25,10 @@ public class RequestService {
     private final CreditResponseRepository responseRepository;
 
 
-    public List<CreditRequestDto> findAllRequestDto(RequestStatus status) {
+    public List<CreditRequestDto> findAllRequestDto(RequestStatus status, Long clientId) {
         return requestRepository.findAll().stream()
                 .filter(creditRequest -> status == null || creditRequest.getStatus().equals(status))
+                .filter(creditRequest -> clientId == null || creditRequest.getClient().getId().equals(clientId))
                 .map(CreditRequestDto::valueOf)
                 .collect(Collectors.toUnmodifiableList());
     }
@@ -49,30 +50,26 @@ public class RequestService {
     }
 
     public void update(CreditRequestDto requestDto) {
-
-        CreditRequest request = requestRepository.getById(requestDto.getId());
-        if (request != null) {
-            RequestStatus status = request.getStatus();
-            request.setSum(requestDto.getSum());
-            request.setPeriod(requestDto.getPeriod());
-            request.setStatus(status);
-            if (status != RequestStatus.WAITING) {
-                throw new IllegalArgumentException("Редактировать запрос со статусом: " + status + " запрещено");
-            }
-            //   request.setCreditResponse(responseRepository.findById(requestDto.getResponseId()).orElse(null));
-            if (requestDto.getResponseId() != null) {
-                if (responseRepository.existsById(requestDto.getResponseId())) {
-                    request.setCreditResponse(responseRepository.getById(requestDto.getResponseId()));
-                } else {
-                    throw new ResourceNotFoundException("Incorrect credit response id: " + requestDto.getResponseId() + " Not exists!");
-                }
-            } else {
-                request.setCreditResponse(null);
-            }
-            requestRepository.save(request);
-        } else {
-            throw new NoSuchElementException();
+        CreditRequest request = requestRepository.findById(requestDto.getId()).orElseThrow(() ->
+                new NoSuchElementException(String.format("Incorrect credit request ID: %d", requestDto.getId())));
+        RequestStatus status = request.getStatus();
+        if (status != RequestStatus.WAITING) {
+            throw new IllegalArgumentException("Редактировать запрос со статусом: " + status + " запрещено");
         }
+        request.setSum(requestDto.getSum());
+        request.setPeriod(requestDto.getPeriod());
+        request.setStatus(requestDto.getStatus());
+        //   request.setCreditResponse(responseRepository.findById(requestDto.getResponseId()).orElse(null));
+        if (requestDto.getResponseId() != null) {
+            if (responseRepository.existsById(requestDto.getResponseId())) {
+                request.setCreditResponse(responseRepository.getById(requestDto.getResponseId()));
+            } else {
+                throw new ResourceNotFoundException("Incorrect credit response id: " + requestDto.getResponseId() + " Not exists!");
+            }
+        } else {
+            request.setCreditResponse(null);
+        }
+        requestRepository.save(request);
     }
 
 }

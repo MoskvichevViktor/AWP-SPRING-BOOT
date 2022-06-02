@@ -20,9 +20,10 @@ public class RequestController {
 
     @GetMapping("")
     public List<CreditRequestDto> findAll(
-            @RequestParam(required = false) RequestStatus status
+            @RequestParam(required = false) RequestStatus status,
+            @RequestParam(required = false) Long clientId
             ) {
-        return requestService.findAllRequestDto(status);
+        return requestService.findAllRequestDto(status, clientId);
     }
 
     @GetMapping("/{id}")
