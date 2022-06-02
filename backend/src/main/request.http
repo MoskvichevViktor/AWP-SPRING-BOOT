@@ -13,7 +13,7 @@ GET http://localhost:8080/api/v1/users/55
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjU0MTY5MzM2LCJpYXQiOjE2NTQxNjU3MzZ9.kGOqcbKX7uUnjXxPQs6NdBSSqntAyP80jnpj6a79Nm0
 
 ###
-GET http://localhost:8080/api/v1/credit_requests/1
+GET http://localhost:8080/api/v1/credit_requests/100
 
 ###
 GET http://localhost:8080/api/v1/credit_responses
