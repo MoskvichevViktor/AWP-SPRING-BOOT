@@ -7,14 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
+@RestControllerAdvice
 public abstract class AbstractAwpExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     private final HttpStatus DEFAULT_HTTP_STATUS = HttpStatus.BAD_REQUEST;
@@ -23,6 +24,14 @@ public abstract class AbstractAwpExceptionHandlerController extends ResponseEnti
     public ResponseEntity<ExceptionResponseDto> handleException(AwpException e) {
         ExceptionResponseDto responseDto = new ExceptionResponseDto(e.getMessage());
         return new ResponseEntity<>(responseDto, DEFAULT_HTTP_STATUS);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ExceptionResponseDto> doFilterInternalRuntimeException(RuntimeException e) {
+        ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto("Произошла внутренняя ошибка сервера."
+                + e.getMessage());
+        return new ResponseEntity<>(exceptionResponseDto, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
