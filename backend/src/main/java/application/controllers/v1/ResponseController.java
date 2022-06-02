@@ -1,10 +1,12 @@
 package application.controllers.v1;
 
+import application.controllers.exception_handler.AbstractAwpExceptionHandlerController;
 import application.dto.CreditResponseDto;
-import application.exception.ResourceNotFoundException;
+import application.exception.AwpException;
 import application.models.CreditResponse;
 import application.services.ResponseService;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/credit_responses")
 @AllArgsConstructor
-public class ResponseController {
+public class ResponseController extends AbstractAwpExceptionHandlerController {
     private final ResponseService responseService;
 
     @GetMapping("")
@@ -21,11 +23,12 @@ public class ResponseController {
         return responseService.findAll();
     }
 
+    @SneakyThrows
     @GetMapping("/{id}")
     public CreditResponse getById(@PathVariable Long id) {
         return responseService.
                 findById(id).
-                orElseThrow(() -> new ResourceNotFoundException("No credit response with Id: " + id));
+                orElseThrow(() -> new AwpException("No credit response with Id: " + id));
     }
 
     @GetMapping("/dto")
@@ -33,10 +36,11 @@ public class ResponseController {
         return responseService.findAllResponseDto();
     }
 
+    @SneakyThrows
     @GetMapping("/dto/{id}")
     public CreditResponseDto findDtoById(@PathVariable Long id) {
         return responseService.findResponseDtoById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Credit request with id:" + id + " not found"));
+                .orElseThrow(() -> new AwpException("Credit request with id:" + id + " not found"));
     }
 
     @PostMapping
