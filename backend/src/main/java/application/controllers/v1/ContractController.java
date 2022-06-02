@@ -1,9 +1,10 @@
 package application.controllers.v1;
 
-import application.exception.ResourceNotFoundException;
+import application.exception.AwpException;
 import application.models.Contract;
 import application.services.ContractService;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,11 @@ public class ContractController {
         return contractService.findAll();
     }
 
+    @SneakyThrows
     @GetMapping("/{id}")
     public Contract getById(@PathVariable Long id) {
         return contractService.
                 findById(id).
-                orElseThrow(() -> new ResourceNotFoundException("No contract with Id: " + id));
+                orElseThrow(() -> new AwpException("No contract with Id: " + id));
     }
 }
