@@ -72,7 +72,7 @@
 
 <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-id="clientId">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="onFilterClick(id)">
             <mat-icon>feedback</mat-icon>
             <span>Заявки клиента</span>
         </button>

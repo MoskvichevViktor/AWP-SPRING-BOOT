@@ -49,6 +49,11 @@ export interface MenuItem {
     showToRoles: UserRole[]
 }
 
+export interface Param {
+    name: string,
+    value: string
+}
+
 export interface User {
     id: number,
     userName: string,

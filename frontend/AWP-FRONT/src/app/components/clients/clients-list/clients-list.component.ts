@@ -6,6 +6,7 @@ import { Sort } from "@angular/material/sort";
 import { compare } from "../../../shared/sort-compare";
 import { Client } from "../../../shared/models.interfaces";
 import {Router} from "@angular/router";
+import {CommonFilterService} from "../../../services/common-filter.service";
 
 @Component({
   selector: 'app-clients-list',
@@ -22,7 +23,8 @@ export class ClientsListComponent implements OnInit, OnDestroy {
 
   constructor(
       private router: Router,
-      private clientService: ClientService
+      private clientService: ClientService,
+      private filterService: CommonFilterService
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +39,11 @@ export class ClientsListComponent implements OnInit, OnDestroy {
 
   onCreateClick(id: number) {
     this.router.navigate(['/main/requests/new', {clientId: id}]);
+  }
+
+  onFilterClick(id: number) {
+    this.filterService.setClientFilter(id);
+    this.router.navigate(['/main/requests']);
   }
 
   applyFilter(event: Event) {
