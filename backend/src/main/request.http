@@ -1,3 +1,7 @@
+GET http://localhost:8080/api/v1/contracts/status1/WAITING_SIGNING
+
+###
+
 POST http://localhost:8080/api/v1/credit_requests/
 Content-Type: application/json
 
@@ -13,7 +17,7 @@ GET http://localhost:8080/api/v1/users/55
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjU0MTY5MzM2LCJpYXQiOjE2NTQxNjU3MzZ9.kGOqcbKX7uUnjXxPQs6NdBSSqntAyP80jnpj6a79Nm0
 
 ###
-GET http://localhost:8080/api/v1/credit_requests/100
+GET http://localhost:8080/api/v1/credit_requests/
 
 ###
 GET http://localhost:8080/api/v1/credit_responses
@@ -61,7 +65,7 @@ POST http://localhost:8080/api/v1/users
 Content-Type: application/json
 
 {
-  "username": "admin",
+  "username": "a",
   "password": "admin"
 }
 

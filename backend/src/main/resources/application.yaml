@@ -6,11 +6,18 @@ jwt:
 spring:
   security:
 
-  profiles:
-    active: dev
-    dev: dev
-    work: work
   jta:
     atomikos:
       properties:
         default-max-wait-time-on-shutdown:
+
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
+  profiles:
+    active: dev
+    dev: dev
+    work: work

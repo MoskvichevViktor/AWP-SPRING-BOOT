@@ -28,11 +28,6 @@ public class ClientController extends AbstractMethodError {
         return clientsService.save(client);
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<?> delete(@PathVariable Long id) {
-//        return clientsService.delete(id);
-//    }
-
     @SneakyThrows
     @GetMapping("/{id}")
     public Client getById(@PathVariable Long id) {

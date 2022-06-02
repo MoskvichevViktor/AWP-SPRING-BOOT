@@ -1,10 +1,11 @@
 package application.services;
 
-import application.models.Client;
+import application.constants.ContractStatus;
 import application.models.Contract;
-import application.models.CreditResponse;
 import application.repositories.ContractRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,4 +24,7 @@ public class ContractService {
         return contractRepository.findById(id);
     }
 
+    public ResponseEntity<?> findContractsByStatus(ContractStatus status) {
+        return new ResponseEntity<>(contractRepository.findContractsByStatus(status), HttpStatus.OK);
+    }
 }
