@@ -43,4 +43,10 @@ public class ContractController {
         }
         return contractService.findContractsByStatus(status);
     }
+
+    @SneakyThrows
+    @GetMapping("/client_id/{clientid}")
+    public List<Contract> findByClientId(@PathVariable Long clientid) {
+        return contractService.findByClientId(clientid);
+    }
 }
