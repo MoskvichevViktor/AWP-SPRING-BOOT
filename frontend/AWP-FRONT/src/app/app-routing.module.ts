@@ -9,6 +9,7 @@ import { UsersListComponent } from "./components/users/users-list/users-list.com
 import { AuthGuard } from "./guards/auth.guard";
 import { RequestViewComponent } from "./components/requests/request-view/request-view.component";
 import { RequestEditComponent } from "./components/requests/request-edit/request-edit.component";
+import {ResponsesListComponent} from "./components/responses/responses-list/responses-list.component";
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
             { path: 'requests/new', component: RequestEditComponent },
             { path: 'requests/:id', component: RequestViewComponent },
             { path: 'requests/:id/edit', component: RequestEditComponent },
+            { path: 'responses', component: ResponsesListComponent },
             { path: 'clients', component: ClientsListComponent },
             { path: 'users', component: UsersListComponent },
         ] },

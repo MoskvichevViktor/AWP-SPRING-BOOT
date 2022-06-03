@@ -34,18 +34,17 @@ public class ResponseService {
         return  responseRepository.findById(id).map(CreditResponseDto::valueOf);
     }
 
+    // TODO: 03.06.2022 по аналогии с RequestService
     public void save(CreditResponseDto responseDto){
-        responseRepository.save(responseDto.mapToCreditResponse());
+//        responseRepository.save(responseDto.mapToCreditResponse());
     }
 
+    // TODO: 03.06.2022 по аналогии с RequestService
     public void update(CreditResponseDto responseDto) {
         if (responseRepository.existsById(responseDto.getId())) {
             CreditResponse response = responseRepository.getById(responseDto.getId());
-            responseRepository.save(responseDto.updateCreditResponse(response));
+//            responseRepository.save(responseDto.updateCreditResponse(response));
         }
     }
 
-//    public void deleteById(Long id){
-//        responseRepository.deleteById(id);
-//    }
 }

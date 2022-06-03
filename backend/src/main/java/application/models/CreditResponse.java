@@ -24,7 +24,8 @@ public class CreditResponse extends AbstractContractTemplate {
     @JoinColumn(name = "contract_id")
     Contract contract;
 
-    @Column(name = "client_id")
-    Long clientId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private Client client;
 
 }

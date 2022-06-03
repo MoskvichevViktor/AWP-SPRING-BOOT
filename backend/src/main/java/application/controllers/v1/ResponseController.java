@@ -14,30 +14,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/credit_responses")
+@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 public class ResponseController extends AbstractAwpExceptionHandlerController {
     private final ResponseService responseService;
 
     @GetMapping("")
-    public List<CreditResponse> getAll() {
-        return responseService.findAll();
-    }
-
-    @SneakyThrows
-    @GetMapping("/{id}")
-    public CreditResponse getById(@PathVariable Long id) {
-        return responseService.
-                findById(id).
-                orElseThrow(() -> new AwpException("No credit response with Id: " + id));
-    }
-
-    @GetMapping("/dto")
     public List<CreditResponseDto> findAllDto() {
         return responseService.findAllResponseDto();
     }
 
     @SneakyThrows
-    @GetMapping("/dto/{id}")
+    @GetMapping("/{id}")
     public CreditResponseDto findDtoById(@PathVariable Long id) {
         return responseService.findResponseDtoById(id)
                 .orElseThrow(() -> new AwpException("Credit request with id:" + id + " not found"));
@@ -55,8 +43,4 @@ public class ResponseController extends AbstractAwpExceptionHandlerController {
         responseService.update(responseDto);
     }
 
-//    @DeleteMapping("/{id}")
-//    public void deleteById(@PathVariable Long id) {
-//        responseService.deleteById(id);
-//    }
 }

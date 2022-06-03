@@ -10,6 +10,9 @@ export const ApiEndpoints = {
     },
     creditResponses: {
         list: '/credit_responses',
+        get: (id: number) => `/credit_responses/${id}`,
+        create: '/credit_responses',
+        update: '/credit_responses',
     },
     contracts: {
         list: '/contracts',

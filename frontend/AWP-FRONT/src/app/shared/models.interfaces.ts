@@ -22,9 +22,22 @@ export interface CreditRequest {
     id: number,
     clientId: number,
     clientName: string,
-    period: number
+    period: number,
     sum: number,
-    status: RequestStatus
+    status: RequestStatus,
+    createdAt: string,
+    updatedAt: string
+}
+
+export interface CreditResponse {
+    id: number,
+    clientId: number,
+    clientName: string,
+    contractId: number,
+    period: number,
+    sum: number,
+    percent: number,
+    status: ResponseStatus,
     createdAt: string,
     updatedAt: string
 }
@@ -32,7 +45,7 @@ export interface CreditRequest {
 export interface CreditRequestDto {
     id: number | null,
     clientId: number,
-    period: number
+    period: number,
     sum: number,
     status?: RequestStatus
 }
@@ -65,6 +78,12 @@ export interface User {
 }
 
 export enum RequestStatus {
+    WAITING = "WAITING",
+    CONFIRMED = "CONFIRMED",
+    REJECTION = "REJECTION",
+}
+
+export enum ResponseStatus {
     WAITING = "WAITING",
     CONFIRMED = "CONFIRMED",
     REJECTION = "REJECTION",

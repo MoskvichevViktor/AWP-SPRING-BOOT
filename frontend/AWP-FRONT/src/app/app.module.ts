@@ -19,6 +19,7 @@ import { AuthInterceptorService } from "./services/auth-interceptor.service";
 import { RequestViewComponent } from './components/requests/request-view/request-view.component';
 import { RequestEditComponent } from './components/requests/request-edit/request-edit.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
+import { ResponsesListComponent } from './components/responses/responses-list/responses-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
     HeaderComponent,
     RequestViewComponent,
     RequestEditComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ResponsesListComponent
   ],
   imports: [
     AppRoutingModule,
