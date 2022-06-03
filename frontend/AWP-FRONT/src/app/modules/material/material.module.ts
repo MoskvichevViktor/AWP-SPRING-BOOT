@@ -14,6 +14,8 @@ import { MatListModule } from "@angular/material/list";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatSliderModule} from "@angular/material/slider";
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import {MatDialogModule} from "@angular/material/dialog";
         MatListModule,
         MatTooltipModule,
         MatMenuModule,
-        MatDialogModule
+        MatDialogModule,
+        MatGridListModule,
+        MatSliderModule
     ],
     exports: [
         MatSidenavModule,
@@ -50,7 +54,9 @@ import {MatDialogModule} from "@angular/material/dialog";
         MatListModule,
         MatTooltipModule,
         MatMenuModule,
-        MatDialogModule
+        MatDialogModule,
+        MatGridListModule,
+        MatSliderModule
     ]
 })
 export class MaterialModule {

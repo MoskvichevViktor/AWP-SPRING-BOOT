@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-title>{{title | uppercase}}</mat-card-title>
+    <mat-card-content class="calc_block">
+        <mat-grid-list cols="3" rowHeight="100px">
+
+            <mat-grid-tile id="calc_controls"  colspan="1" rowspan="5">
+                <mat-slider vertical
+                [step]="percentSliderConfig.step"
+                [min]="percentSliderConfig.minValue"
+                [max]="percentSliderConfig.maxValue"
+                [thumbLabel]="percentSliderConfig.showThumb"
+                [(ngModel)]="percentValue">
+                </mat-slider>
+                <mat-label class="percent">{{percentValue}}</mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile id="calc_content" colspan="2" rowspan="5">
+
+            </mat-grid-tile>
+            <mat-grid-tile id="calc_footer" colspan="3" rowspan="1">
+
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>
+

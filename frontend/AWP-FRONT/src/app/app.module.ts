@@ -20,6 +20,7 @@ import { RequestViewComponent } from './components/requests/request-view/request
 import { RequestEditComponent } from './components/requests/request-edit/request-edit.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { ResponsesListComponent } from './components/responses/responses-list/responses-list.component';
+import { CalculationComponent } from './components/calculation/calculation/calculation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { ResponsesListComponent } from './components/responses/responses-list/re
     RequestViewComponent,
     RequestEditComponent,
     ConfirmationDialogComponent,
-    ResponsesListComponent
+    ResponsesListComponent,
+    CalculationComponent
   ],
   imports: [
     AppRoutingModule,
