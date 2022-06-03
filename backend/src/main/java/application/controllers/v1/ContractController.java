@@ -46,4 +46,9 @@ public class ContractController {
     public ResponseEntity<?> setStatus(@PathVariable Long id, @PathVariable ContractStatus status) {
         return contractService.setStatus(id, status);
     }
+
+    @PostMapping()
+    public ResponseEntity<?> create(@RequestBody Contract contract) {
+        return contractService.save(contract);
+    }
 }

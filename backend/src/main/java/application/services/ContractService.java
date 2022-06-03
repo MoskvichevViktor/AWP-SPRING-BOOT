@@ -42,8 +42,11 @@ public class ContractService {
         Contract contract = findById(id).orElseThrow(() -> new AwpException("Договора с id:" + id + " не найдено."));
         contract.setStatus(status);
         contractRepository.save(contract);
-        return new ResponseEntity<>(status, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-
+    public ResponseEntity<?> save(Contract contract) {
+        contractRepository.save(contract);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }
