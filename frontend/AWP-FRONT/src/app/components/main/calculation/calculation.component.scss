@@ -1,0 +1,53 @@
+@import "../../../../settings";
+
+.calc_block {
+  margin-right: 20%;
+}
+
+.calc-form-field {
+  width: 70%;
+  position: absolute;
+  left: 25%;
+}
+
+.sum-field {
+  top: 30%;
+}
+
+.percent-field {
+  bottom: 30%
+}
+
+.calc-button {
+  position: absolute;
+  bottom: 7%;
+  left: 25%;
+  width: 70%;
+}
+
+mat-slider {
+  height: 80%;
+  position: absolute;
+  left: 7%;
+  bottom: 5%;
+}
+
+.slider-label {
+  font-weight: bold;
+  position: absolute;
+  left: 10%;
+  top: 10%;
+}
+
+#calc_footer {
+  background: $secColor;
+}
+
+#calc_controls {
+  background: $backgroundColor;
+}
+
+#calc_content {
+  background: $backgroundColor;
+}
+

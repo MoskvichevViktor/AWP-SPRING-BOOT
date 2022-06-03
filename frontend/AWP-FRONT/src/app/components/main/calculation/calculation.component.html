@@ -1,0 +1,41 @@
+<mat-card>
+    <mat-card-title>{{title | uppercase}}</mat-card-title>
+    <mat-card-content class="calc_block">
+        <mat-grid-list cols="3" rowHeight="100px">
+
+            <mat-grid-tile id="calc_controls"  colspan="1" rowspan="5">
+                <mat-slider vertical color="warn"
+                [step]="percentSliderConfig.step"
+                [min]="percentSliderConfig.minValue"
+                [max]="percentSliderConfig.maxValue"
+                [thumbLabel]="percentSliderConfig.showThumb"
+                [(ngModel)]="percentValue">
+                </mat-slider>
+                <mat-label class="percent slider-label">{{percentValue}}</mat-label>
+                <mat-form-field class="calc-form-field sum-field" appearance="fill">
+                    <mat-label>Сумма кредита, руб.</mat-label>
+                    <input matInput type="text" [(ngModel)]="sum">
+                    <button *ngIf="sum" matSuffix mat-icon-button (click)="sum=minSum">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+                <mat-form-field class="calc-form-field percent-field" appearance="fill">
+                    <mat-label>Срок кредита, мес.</mat-label>
+                    <input matInput type="text" [(ngModel)]="period">
+                    <button *ngIf="sum" matSuffix mat-icon-button (click)="period=minPeriod">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+                <button mat-raised-button class="calc-button" color="primary">Рассчитать</button>
+            </mat-grid-tile>
+            <mat-grid-tile id="calc_content" colspan="2" rowspan="5">
+
+            </mat-grid-tile>
+            <mat-grid-tile id="calc_footer" colspan="3" rowspan="1">
+
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>
+
