@@ -18,6 +18,7 @@ spring:
       add-mappings: false
 
   profiles:
-    active: dev
+    active: dock
     dev: dev
     work: work
+    dock: dock
