@@ -1,9 +1,11 @@
 package application.services;
 
 import application.constants.ContractStatus;
+import application.exception.AwpException;
 import application.models.Contract;
 import application.repositories.ContractRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,14 +27,23 @@ public class ContractService {
         return contractRepository.findById(id);
     }
 
-    public ResponseEntity<?> findContractsByStatus(ContractStatus status) {
+    public ResponseEntity<?> findByStatus(ContractStatus status) {
         return new ResponseEntity<>(contractRepository.findContractsByStatus(status), HttpStatus.OK);
     }
-
 
     public List<Contract> findByClientId(Long clientId) {
         return contractRepository.findByClientId(clientId)
                 .stream()
                 .collect(Collectors.toList());
     }
+
+    @SneakyThrows
+    public ResponseEntity<?> setStatus(Long id, ContractStatus status) {
+        Contract contract = findById(id).orElseThrow(() -> new AwpException("Договора с id:" + id + " не найдено."));
+        contract.setStatus(status);
+        contractRepository.save(contract);
+        return new ResponseEntity<>(status, HttpStatus.ACCEPTED);
+    }
+
+
 }

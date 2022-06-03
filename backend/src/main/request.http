@@ -1,8 +1,11 @@
+PUT http://localhost:8080/api/v1/contracts/status/1/ACTIVE
+
+###
 GET http://localhost:8080/api/v1/contracts/status/WAITING_SIGNING
 
 ###
 
-GET http://localhost:8080/api/v1/contracts/client_id/
+GET http://localhost:8080/api/v1/contracts/client_id/1
 
 ###
 
@@ -14,7 +17,6 @@ Content-Type: application/json
   "sum": "50000",
   "period": "24"
 }
-
 ###
 
 GET http://localhost:8080/api/v1/users/55
