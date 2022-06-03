@@ -1,13 +1,15 @@
 @import "../../../../settings";
 
 .calc_block {
-  margin-right: 20%;
+  margin-right: 1%;
 }
 
 .calc-form-field {
   width: 70%;
   position: absolute;
   left: 25%;
+  font-size: 1.5em;
+  color: $primaryColor;
 }
 
 .sum-field {
@@ -15,7 +17,7 @@
 }
 
 .percent-field {
-  bottom: 30%
+  bottom: 25%
 }
 
 .calc-button {
@@ -37,6 +39,8 @@ mat-slider {
   position: absolute;
   left: 10%;
   top: 10%;
+  color: $primaryDarkColor;
+  font-size: 1.5em;
 }
 
 #calc_footer {
@@ -44,10 +48,20 @@ mat-slider {
 }
 
 #calc_controls {
-  background: $backgroundColor;
+
 }
 
 #calc_content {
-  background: $backgroundColor;
+
+}
+
+.calc_content__table {
+  padding: 40px;
+  text-align: left;
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  top: 5%;
+  border: 1px solid $backgroundColor;
 }
 
