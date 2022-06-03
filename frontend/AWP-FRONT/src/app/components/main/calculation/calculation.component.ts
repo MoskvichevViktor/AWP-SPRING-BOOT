@@ -17,6 +17,10 @@ export class CalculationComponent implements OnInit {
   };
 
   percentValue = 20;
+  sum = 100;
+  minSum = 100;
+  period = 1;
+  minPeriod = 1;
 
   constructor() { }
 
