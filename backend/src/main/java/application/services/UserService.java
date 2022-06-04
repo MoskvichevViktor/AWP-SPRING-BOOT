@@ -49,7 +49,7 @@ public class UserService implements UserDetailsService {
     @SneakyThrows
     @Transactional
     public ResponseEntity<?> delete(Long id) {
-        User user = getUserById(id).orElseThrow(() ->
+        User user = getById(id).orElseThrow(() ->
                 new AwpException("user with id:" + id + " tot found"));
         if (user == null || user.getUsername().equals("admin")) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -79,7 +79,7 @@ public class UserService implements UserDetailsService {
         return userRepository.existsAllByUsernameEquals(username);
     }
 
-    public Optional<User> getUserById(Long id) {
+    public Optional<User> getById(Long id) {
         return userRepository.findById(id);
     }
 
