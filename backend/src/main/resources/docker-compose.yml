@@ -9,7 +9,7 @@ services:
     image: postgres:9.6
 #    domainname: awp
     ports:
-      - "5435:5433"
+      - "5432:5433"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

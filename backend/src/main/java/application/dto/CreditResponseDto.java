@@ -1,6 +1,5 @@
 package application.dto;
 
-import application.constants.CreditResponseStatus;
 import application.constants.RequestStatus;
 import application.models.CreditResponse;
 import lombok.AllArgsConstructor;

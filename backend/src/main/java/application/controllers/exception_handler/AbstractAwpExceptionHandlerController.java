@@ -29,7 +29,7 @@ public abstract class AbstractAwpExceptionHandlerController extends ResponseEnti
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<ExceptionResponseDto> doFilterInternalRuntimeException(RuntimeException e) {
-        ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto("Произошла внутренняя ошибка сервера."
+        ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto("Ответ сервера: "
                 + e.getMessage());
         return new ResponseEntity<>(exceptionResponseDto, HttpStatus.INTERNAL_SERVER_ERROR);
     }

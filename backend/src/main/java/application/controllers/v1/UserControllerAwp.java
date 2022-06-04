@@ -54,4 +54,9 @@ public class UserControllerAwp extends AbstractAwpExceptionHandlerController {
         return userService.createNewUser(userDto);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userService.getUserById(id).orElse(null);
+    }
 }

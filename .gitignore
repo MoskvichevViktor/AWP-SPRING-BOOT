@@ -4,6 +4,7 @@
 /backend/src/main/resources/application.yaml
 /backend/src/main/resources/application-work.yml
 /backend/src/main/resources/application-dev.yml
+/backend/src/main/resources/application-dock.yml
 /backend/target/
 /backend/target/classes/
 /backend/target/classes/application/
