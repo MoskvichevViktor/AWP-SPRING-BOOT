@@ -24,6 +24,6 @@ public class CreditRequest extends AbstractContractTemplate {
     private RequestStatus status;
 
     @OneToOne( cascade = CascadeType.ALL)
-    @JoinColumn(updatable = false, name = "response_id")
+    @JoinColumn(name = "response_id")
     private CreditResponse creditResponse;
 }

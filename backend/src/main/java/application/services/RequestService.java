@@ -6,9 +6,9 @@ import application.dto.CreditRequestInputDto;
 import application.exception.AwpException;
 import application.models.Client;
 import application.models.CreditRequest;
+import application.models.CreditResponse;
 import application.repositories.ClientRepository;
 import application.repositories.CreditRequestRepository;
-import application.repositories.CreditResponseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
 public class RequestService {
     private final CreditRequestRepository requestRepository;
     private final ClientRepository clientRepository;
-    private final CreditResponseRepository responseRepository;
-
 
     public List<CreditRequestDto> findAllRequestDto(RequestStatus status, Long clientId) {
         return requestRepository.findAll().stream()
@@ -61,15 +59,12 @@ public class RequestService {
         request.setSum(requestDto.getSum());
         request.setPeriod(requestDto.getPeriod());
         request.setStatus(requestDto.getStatus());
-        if (requestDto.getResponseId() != null) {
-            if (responseRepository.existsById(requestDto.getResponseId())) {
-                request.setCreditResponse(responseRepository.getById(requestDto.getResponseId()));
-            } else {
-                throw new AwpException("Incorrect credit response id: " + requestDto.getResponseId() + " Not exists!");
-            }
-        } else {
-            request.setCreditResponse(null);
-        }
+        requestRepository.save(request);
+    }
+
+    public void updateStatusWithResponse(CreditRequest request, CreditResponse response){
+        request.setCreditResponse(response);
+        request.setStatus(response.getStatus());
         requestRepository.save(request);
     }
 

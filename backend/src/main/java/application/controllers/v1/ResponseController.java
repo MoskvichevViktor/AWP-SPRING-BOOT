@@ -1,7 +1,9 @@
 package application.controllers.v1;
 
+import application.constants.RequestStatus;
 import application.controllers.exception_handler.AbstractAwpExceptionHandlerController;
 import application.dto.CreditResponseDto;
+import application.dto.CreditResponseInputDto;
 import application.exception.AwpException;
 import application.models.CreditResponse;
 import application.services.ResponseService;
@@ -20,21 +22,22 @@ public class ResponseController extends AbstractAwpExceptionHandlerController {
     private final ResponseService responseService;
 
     @GetMapping("")
-    public List<CreditResponseDto> findAllDto() {
-        return responseService.findAllResponseDto();
+    public List<CreditResponseDto> findAll(@RequestParam(required = false) RequestStatus status,
+                                       @RequestParam(required = false) Long clientId) {
+        return responseService.findAll(status, clientId);
     }
 
     @SneakyThrows
     @GetMapping("/{id}")
-    public CreditResponseDto findDtoById(@PathVariable Long id) {
-        return responseService.findResponseDtoById(id)
-                .orElseThrow(() -> new AwpException("Credit request with id:" + id + " not found"));
+    public CreditResponseDto getById(@PathVariable Long id) {
+        return responseService.findById(id)
+                        .orElseThrow(() -> new AwpException("Credit request with id:" + id + " not found"));
     }
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void create(@RequestBody CreditResponseDto responseDto) {
-        responseService.save(responseDto);
+    public void create(@RequestBody CreditResponseInputDto responseDto) {
+       responseService.save(responseDto);
     }
 
     @PutMapping
