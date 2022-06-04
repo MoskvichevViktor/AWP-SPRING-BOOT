@@ -1,6 +1,7 @@
 package application.dto;
 
-import application.constants.ResponseStatus;
+import application.constants.CreditResponseStatus;
+import application.constants.RequestStatus;
 import application.models.CreditResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class CreditResponseDto {
     private BigDecimal sum;
     private Integer period;
     private Float percent;
-    private ResponseStatus status;
+    private RequestStatus status;
     private Long contractId;
     private Long clientId;
     private String clientName;
