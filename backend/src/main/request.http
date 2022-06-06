@@ -41,7 +41,7 @@ GET http://localhost:8080/api/v1/credit_responses/all
 
 ###
 
-GET http://localhost:8080/api/v1/contracts
+GET http://localhost:8080/api/v1/contracts/
 
 ###
 
