@@ -31,6 +31,18 @@ export interface Client {
     updatedAt: string
 }
 
+export interface Contract {
+    id: number,
+    clientId: number,
+    clientName: string,
+    period: number,
+    sum: number,
+    percent: number,
+    status: ContractStatus,
+    createdAt: string,
+    updatedAt: string
+}
+
 export interface CreditRequest {
     id: number,
     clientId: number,
@@ -88,6 +100,12 @@ export interface User {
     role: UserRole,
     createdAt: string,
     updatedAt: string
+}
+
+export enum ContractStatus {
+    WAITING_SIGNING = "WAITING_SIGNING",
+    ACTIVE = "ACTIVE",
+    COMPLETED = "COMPLETED",
 }
 
 export enum RequestStatus {

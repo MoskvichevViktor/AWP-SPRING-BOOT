@@ -21,6 +21,7 @@ import { RequestEditComponent } from './components/requests/request-edit/request
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { ResponsesListComponent } from './components/responses/responses-list/responses-list.component';
 import { CalculationComponent } from './components/main/calculation/calculation.component';
+import { ContractsListComponent } from './components/contracts/contracts-list/contracts-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { CalculationComponent } from './components/main/calculation/calculation.
     RequestEditComponent,
     ConfirmationDialogComponent,
     ResponsesListComponent,
-    CalculationComponent
+    CalculationComponent,
+    ContractsListComponent
   ],
   imports: [
     AppRoutingModule,
