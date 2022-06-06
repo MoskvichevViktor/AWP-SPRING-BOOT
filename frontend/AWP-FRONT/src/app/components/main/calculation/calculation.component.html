@@ -9,24 +9,26 @@
                 [min]="percentSliderConfig.minValue"
                 [max]="percentSliderConfig.maxValue"
                 [thumbLabel]="percentSliderConfig.showThumb"
-                [(ngModel)]="percentValue">
+                [(ngModel)]="calcDto.percent">
                 </mat-slider>
-                <mat-label class="percent slider-label">{{percentValue}}</mat-label>
+                <mat-label class="percent slider-label">{{calcDto.percent}}</mat-label>
                 <mat-form-field class="calc-form-field sum-field" appearance="fill">
                     <mat-label>Сумма кредита, руб.</mat-label>
-                    <input matInput type="text" [(ngModel)]="sum">
-                    <button *ngIf="sum" matSuffix mat-icon-button (click)="sum=minSum">
+                    <input matInput type="text" [(ngModel)]="calcDto.sum">
+                    <button matSuffix mat-icon-button (click)="calcDto.sum=minSum">
                         <mat-icon>close</mat-icon>
                     </button>
                 </mat-form-field>
                 <mat-form-field class="calc-form-field percent-field" appearance="fill">
                     <mat-label>Срок кредита, мес.</mat-label>
-                    <input matInput type="text" [(ngModel)]="period">
-                    <button *ngIf="sum" matSuffix mat-icon-button (click)="period=minPeriod">
+                    <input matInput type="text" [(ngModel)]="calcDto.period">
+                    <button matSuffix mat-icon-button (click)="calcDto.period=minPeriod">
                         <mat-icon>close</mat-icon>
                     </button>
                 </mat-form-field>
-                <button mat-raised-button class="calc-button" color="primary">Рассчитать</button>
+                <button mat-raised-button class="calc-button" color="primary" (click)="onCalculateClick()">
+                    Рассчитать
+                </button>
             </mat-grid-tile>
             <mat-grid-tile id="calc_content" colspan="2" rowspan="5">
                 <table class="calc_content__table">

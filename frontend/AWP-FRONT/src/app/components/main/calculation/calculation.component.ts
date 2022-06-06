@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CalculationService} from "../../../services/calculation.service";
+import {CalcInputDto} from "../../../shared/models.interfaces";
 
 @Component({
   selector: 'app-calculation',
@@ -16,15 +18,24 @@ export class CalculationComponent implements OnInit {
     showThumb: true
   };
 
-  percentValue = 20;
-  sum = 100;
   minSum = 100;
-  period = 1;
   minPeriod = 1;
 
-  constructor() { }
+  calcDto: CalcInputDto = {
+    sum: 100,
+    percent: 20,
+    period: 12
+  }
+
+  constructor(
+      private calcService: CalculationService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onCalculateClick() {
+    this.calcService.process(this.calcDto).subscribe();
   }
 
 }
