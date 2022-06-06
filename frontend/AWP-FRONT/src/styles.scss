@@ -14,7 +14,17 @@ body {
   text-align: left;
 }
 
-.mat-row :hover {
+.table_icon {
+  font-size: 1.5em;
+  position: relative;
+  top: 4px;
+}
+
+.table_icon_holder {
+  display: inline-block;
+}
+
+.table_icon_holder :hover {
   cursor: pointer;
 }
 

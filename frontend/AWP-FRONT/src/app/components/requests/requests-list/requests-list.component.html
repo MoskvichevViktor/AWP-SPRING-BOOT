@@ -30,7 +30,7 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="id" class="id-column">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> № заявки </th>
-                    <td mat-cell *matCellDef="let request" (click)="onRequestClick(request.id)"> {{request.id}} </td>
+                    <td mat-cell *matCellDef="let request"> {{request.id}} </td>
                 </ng-container>
 
                 <!-- Date Column -->
@@ -42,7 +42,11 @@
                 <!-- Name Column -->
                 <ng-container matColumnDef="name" class="name-column">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Заявитель </th>
-                    <td mat-cell *matCellDef="let request"> {{request.clientName}} </td>
+                    <td mat-cell *matCellDef="let request">
+                        <div class="table_icon_holder" (click)="onUserClick(request.clientId)">
+                            <mat-icon class="table_icon">face</mat-icon>{{request.clientName}}
+                        </div>
+                    </td>
                 </ng-container>
 
                 <!-- Sum Column -->
@@ -82,10 +86,15 @@
 
 <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-id="requestId" let-status="status">
+        <button mat-menu-item
+                (click)="onViewClick(id)">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>Показать</span>
+        </button>
         <button mat-menu-item [disabled]="status !== 'WAITING'"
                 (click)="onEditClick(id)">
             <mat-icon>edit</mat-icon>
-            <span>Редактировать заявку</span>
+            <span>Редактировать</span>
         </button>
     </ng-template>
 </mat-menu>

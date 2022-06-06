@@ -2,6 +2,9 @@ export const ApiEndpoints = {
     auth: {
         login: '/auth',
     },
+    calculation: {
+        process: '/calculator',
+    },
     creditRequests: {
         list: '/credit_requests',
         get: (id: number) => `/credit_requests/${id}`,

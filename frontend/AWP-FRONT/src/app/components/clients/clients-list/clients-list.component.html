@@ -72,13 +72,17 @@
 
 <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-id="clientId">
-        <button mat-menu-item (click)="onFilterClick(id)">
-            <mat-icon>feedback</mat-icon>
-            <span>Заявки клиента</span>
-        </button>
         <button mat-menu-item (click)="onCreateClick(id)">
             <mat-icon color="warn">plus_one</mat-icon>
             <span>Создать новую заявку</span>
+        </button>
+        <button mat-menu-item (click)="onRequestFilterClick(id)">
+            <mat-icon>feedback</mat-icon>
+            <span>Заявки клиента</span>
+        </button>
+        <button mat-menu-item (click)="onResponseFilterClick(id)">
+            <mat-icon>thumb_up</mat-icon>
+            <span>Ответы на заявки клиента</span>
         </button>
     </ng-template>
 </mat-menu>

@@ -8,6 +8,19 @@ export interface AuthResponse {
     profile: User
 }
 
+export interface CalcInputDto {
+    sum: number,
+    percent: number,
+    period: number
+}
+
+export interface CalcOutputDto {
+    month: number,
+    partPercent: number,
+    partPayment: number,
+    partSum: number
+}
+
 export interface Client {
     id: number,
     name: string,
