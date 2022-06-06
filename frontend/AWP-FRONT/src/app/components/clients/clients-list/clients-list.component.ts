@@ -48,9 +48,14 @@ export class ClientsListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate(['/main/requests/new', {clientId: id}]);
   }
 
-  onFilterClick(id: number) {
+  onRequestFilterClick(id: number) {
     this.filterService.setClientFilter(id);
     this.router.navigate(['/main/requests']);
+  }
+
+  onResponseFilterClick(id: number) {
+    this.filterService.setClientFilter(id);
+    this.router.navigate(['/main/responses']);
   }
 
   applyFilter(event: Event) {

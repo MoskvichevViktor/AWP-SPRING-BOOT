@@ -84,7 +84,11 @@ export class RequestsListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.statusSubj.next(this.requestStatusFilter.value);
   }
 
-  onRequestClick(id: number) {
+  onUserClick(id: number) {
+    this.router.navigate(['/main/users']);
+  }
+
+  onViewClick(id: number) {
     this.router.navigate([id], {relativeTo: this.route});
   }
 
