@@ -62,6 +62,7 @@ export class RequestEditComponent implements OnInit {
   private prefillFormForEdit(request: CreditRequest) {
     this.requestDto.id = request.id;
     this.requestDto.clientId = request.clientId;
+    this.requestDto.status = request.status;
     this.editForm.patchValue({
       clientName: request.clientName,
       sum: request.sum,
