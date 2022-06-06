@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {CalculationService} from "../../../services/calculation.service";
-import {CalcInputDto} from "../../../shared/models.interfaces";
+import { CalculationService } from "../../../services/calculation.service";
+import { CalcInputDto, CalcOutputDto } from "../../../shared/models.interfaces";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: 'app-calculation',
   templateUrl: './calculation.component.html',
   styleUrls: ['./calculation.component.scss']
 })
-export class CalculationComponent implements OnInit {
+export class CalculationComponent {
 
   title = 'Кредитный калькулятор';
 
@@ -22,20 +23,22 @@ export class CalculationComponent implements OnInit {
   minPeriod = 1;
 
   calcDto: CalcInputDto = {
-    sum: 100,
+    sum: 1000,
     percent: 20,
     period: 12
   }
+
+  dataSource = new MatTableDataSource<CalcOutputDto>([]);
+  displayedColumns = ['month', 'partPercent', 'partPayment', 'partSum'];
 
   constructor(
       private calcService: CalculationService
   ) { }
 
-  ngOnInit(): void {
-  }
-
   onCalculateClick() {
-    this.calcService.process(this.calcDto).subscribe();
+    this.calcService.process(this.calcDto).subscribe(
+        calculations  => this.dataSource.data = calculations
+    );
   }
 
 }

@@ -52,16 +52,35 @@ mat-slider {
 }
 
 #calc_content {
-
+  overflow-y: scroll;
 }
 
-.calc_content__table {
-  padding: 40px;
-  text-align: left;
+table {
   position: absolute;
   width: 100%;
-  height: 90%;
-  top: 5%;
-  border: 1px solid $backgroundColor;
+  left: 5%;
+  right: 5%;
+  top: 0;
+
+  .mat-header-row {
+    background-color: $secLightColor;
+    font-weight: bold;
+    th.mat-header-cell {
+      border-bottom: 0;
+    }
+  }
+
+  th.month-column {
+    width: 15%;
+  }
+  th.percent-column {
+    width: 15%;
+  }
+  th.payment-column {
+    width: 30%;
+  }
+  th.sum-column {
+    width: 30%;
+  }
 }
 

@@ -30,7 +30,7 @@ export class RemoteService {
         );
   }
 
-  public create<T> (url: string, object: T): Observable<T> {
+  public create<T> (url: string, object: any): Observable<T> {
     return this.http.post<T>(url, object)
         .pipe(
             catchError((err) => this.handleError(err))
