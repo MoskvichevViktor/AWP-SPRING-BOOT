@@ -3,9 +3,7 @@ package application.models;
 import application.constants.ContractStatus;
 import application.models.abstractentity.AbstractContractTemplate;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -15,6 +13,10 @@ import javax.persistence.*;
 @Table(name = "contract")
 public class Contract extends AbstractContractTemplate {
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private Client client;
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ContractStatus status;
@@ -22,7 +24,5 @@ public class Contract extends AbstractContractTemplate {
     @Column(name = "percent")
     private Float percent;
 
-    @Column(name = "client_id")
-    Long clientId;
 }
 

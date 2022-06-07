@@ -23,6 +23,9 @@ public class CreditResponseDto {
     private String clientName;
     private Date createdAt;
     private Date updatedAt;
+    private String phone;
+    private String address;
+    private String pasport;
 
     public static CreditResponseDto valueOf(CreditResponse response){
         CreditResponseDto responseDto = new CreditResponseDto();

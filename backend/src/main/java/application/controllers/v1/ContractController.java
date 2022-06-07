@@ -1,14 +1,20 @@
 package application.controllers.v1;
 
 import application.constants.ContractStatus;
+import application.dto.ContractDto;
+import application.dto.CreditResponseDto;
 import application.exception.AwpException;
 import application.models.Contract;
 import application.services.ContractService;
+import application.services.generateContract.GenerateContractService;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -16,15 +22,16 @@ import java.util.List;
 @AllArgsConstructor
 public class ContractController {
     private final ContractService contractService;
+    private final GenerateContractService generateContractService;
 
     @GetMapping("")
-    public List<Contract> getAllClients() {
+    public List<ContractDto> getAll() {
         return contractService.findAll();
     }
 
     @SneakyThrows
     @GetMapping("/{id}")
-    public Contract getById(@PathVariable Long id) {
+    public ContractDto getById(@PathVariable Long id) {
         return contractService.
                 findById(id).
                 orElseThrow(() -> new AwpException("No contract with Id: " + id));
@@ -37,7 +44,7 @@ public class ContractController {
     }
 
     @GetMapping("/client_id/{clientid}")
-    public List<Contract> findByClientId(@PathVariable Long clientid) {
+    public List<ContractDto> findByClientId(@PathVariable Long clientid) {
         return contractService.findByClientId(clientid);
     }
 
@@ -51,4 +58,12 @@ public class ContractController {
     public ResponseEntity<?> create(@RequestBody Contract contract) {
         return contractService.save(contract);
     }
+
+    @PostMapping("/generate")
+    public ResponseEntity<?> generate(@RequestBody CreditResponseDto creditResponseDto) throws IOException, InvalidFormatException {
+        generateContractService.generate(creditResponseDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+
 }

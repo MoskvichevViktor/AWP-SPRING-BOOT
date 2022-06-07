@@ -1,6 +1,7 @@
 package application.services;
 
 import application.constants.ContractStatus;
+import application.dto.ContractDto;
 import application.exception.AwpException;
 import application.models.Contract;
 import application.repositories.ContractRepository;
@@ -19,27 +20,35 @@ import java.util.stream.Collectors;
 public class ContractService {
     private final ContractRepository contractRepository;
 
-    public List<Contract> findAll() {
-        return contractRepository.findAll();
+    public List<ContractDto> findAll() {
+        return contractRepository.findAll().stream()
+                .map(contract -> ContractDto.valueOf(contract))
+                .collect(Collectors.toList());
     }
 
-    public Optional<Contract> findById(Long id) {
-        return contractRepository.findById(id);
+    public Optional<ContractDto> findById(Long id) {
+        return contractRepository.findById(id)
+                .map(contract -> ContractDto.valueOf(contract));
     }
 
     public ResponseEntity<?> findByStatus(ContractStatus status) {
-        return new ResponseEntity<>(contractRepository.findContractsByStatus(status), HttpStatus.OK);
+        return new ResponseEntity<>(contractRepository.findContractsByStatus(status)
+                .stream()
+                .map(contract -> ContractDto.valueOf(contract))
+                , HttpStatus.OK);
     }
 
-    public List<Contract> findByClientId(Long clientId) {
+    public List<ContractDto> findByClientId(Long clientId) {
         return contractRepository.findByClientId(clientId)
                 .stream()
+                .map(contract -> ContractDto.valueOf(contract))
                 .collect(Collectors.toList());
     }
 
     @SneakyThrows
     public ResponseEntity<?> setStatus(Long id, ContractStatus status) {
-        Contract contract = findById(id).orElseThrow(() -> new AwpException("Договора с id:" + id + " не найдено."));
+        Contract contract = contractRepository.findById(id)
+                .orElseThrow(() -> new AwpException("Договора с id:" + id + " не найдено."));
         contract.setStatus(status);
         contractRepository.save(contract);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);

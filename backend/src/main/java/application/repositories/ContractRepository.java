@@ -14,6 +14,6 @@ import java.util.Optional;
 public interface ContractRepository extends JpaRepository<Contract, Long> {
     List<Contract> findContractsByStatus(ContractStatus status);
 
-    @Query(value = "select c  from Contract c where c.clientId = :client_id")
+    @Query(value = "select c  from Contract c where c.client.id = :client_id")
     Optional<Contract> findByClientId(@Param("client_id") Long client_id);
 }
