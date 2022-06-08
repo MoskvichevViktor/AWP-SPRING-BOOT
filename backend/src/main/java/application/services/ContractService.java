@@ -1,6 +1,7 @@
 package application.services;
 
 import application.constants.ContractStatus;
+import application.constants.CreditResponseStatus;
 import application.constants.RequestStatus;
 import application.dto.ContractDto;
 import application.dto.ContractInputDto;
@@ -64,7 +65,7 @@ public class ContractService {
         Long contractId = contractDto.getContractId();
         CreditResponse creditResponse = creditResponseRepository.findById(contractId).
                 orElseThrow(() -> new AwpException("CreditResponse Id:" + contractId + "not found"));
-        if (creditResponse.getStatus() != RequestStatus.CONFIRMED) {
+        if (creditResponse.getStatus() != CreditResponseStatus.CONFIRMED) {
             throw new AwpException("The response status must be " + RequestStatus.CONFIRMED);
         }
         Contract contract = new Contract();
