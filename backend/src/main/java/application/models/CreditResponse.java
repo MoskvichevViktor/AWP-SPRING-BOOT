@@ -1,5 +1,6 @@
 package application.models;
 
+import application.constants.CreditResponseStatus;
 import application.constants.RequestStatus;
 import application.models.abstractentity.AbstractContractTemplate;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class CreditResponse extends AbstractContractTemplate {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private RequestStatus status;
+    private CreditResponseStatus status;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contract_id")

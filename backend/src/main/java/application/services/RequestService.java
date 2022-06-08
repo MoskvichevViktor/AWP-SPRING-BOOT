@@ -1,5 +1,6 @@
 package application.services;
 
+import application.constants.CreditResponseStatus;
 import application.constants.RequestStatus;
 import application.dto.CreditRequestDto;
 import application.dto.CreditRequestInputDto;
@@ -54,7 +55,7 @@ public class RequestService {
                 new NoSuchElementException(String.format("Incorrect credit request ID: %d", requestDto.getId())));
         RequestStatus status = request.getStatus();
         if (status != RequestStatus.WAITING) {
-            throw new AwpException("Редактировать запрос со статусом: " + status + " запрещено");
+            throw new AwpException("Request editing with status: " + status + " is forbidden");
         }
         request.setSum(requestDto.getSum());
         request.setPeriod(requestDto.getPeriod());
@@ -64,7 +65,17 @@ public class RequestService {
 
     public void updateStatusWithResponse(CreditRequest request, CreditResponse response){
         request.setCreditResponse(response);
-        request.setStatus(response.getStatus());
+        switch (response.getStatus()){
+            case CONFIRMED:
+                    request.setStatus(RequestStatus.CONFIRMED);
+                    break;
+            case REJECTION:
+                request.setStatus(RequestStatus.REJECTION);
+                break;
+            default:
+                request.setStatus(request.getStatus());
+                break;
+        }
         requestRepository.save(request);
     }
 

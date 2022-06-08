@@ -1,5 +1,6 @@
 package application.controllers.v1;
 
+import application.constants.CreditResponseStatus;
 import application.constants.RequestStatus;
 import application.controllers.exception_handler.AbstractAwpExceptionHandlerController;
 import application.dto.CreditResponseDto;
@@ -22,7 +23,7 @@ public class ResponseController extends AbstractAwpExceptionHandlerController {
     private final ResponseService responseService;
 
     @GetMapping("")
-    public List<CreditResponseDto> findAll(@RequestParam(required = false) RequestStatus status,
+    public List<CreditResponseDto> findAll(@RequestParam(required = false) CreditResponseStatus status,
                                        @RequestParam(required = false) Long clientId) {
         return responseService.findAll(status, clientId);
     }

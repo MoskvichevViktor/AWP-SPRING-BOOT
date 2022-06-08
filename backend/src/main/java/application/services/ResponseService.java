@@ -1,5 +1,6 @@
 package application.services;
 
+import application.constants.CreditResponseStatus;
 import application.constants.RequestStatus;
 import application.dto.CreditResponseDto;
 import application.dto.CreditResponseInputDto;
@@ -24,7 +25,7 @@ public class ResponseService {
     private final CreditRequestRepository requestRepository;
     private final RequestService requestService;
 
-    public List<CreditResponseDto> findAll(RequestStatus status, Long clientId){
+    public List<CreditResponseDto> findAll(CreditResponseStatus status, Long clientId){
         return responseRepository.findAll().stream()
                 .filter(creditResponse -> status == null || creditResponse.getStatus().equals(status))
                 .filter((creditResponse -> clientId == null || creditResponse.getClient().getId().equals(clientId)))
@@ -41,8 +42,8 @@ public class ResponseService {
         CreditRequest request = requestRepository.findById(responseDto.getRequestId())
                 .orElseThrow(() -> new NoSuchElementException("Credit request witn ID = " + responseDto.getRequestId()+ " not found"));
         if (request.getCreditResponse() != null){
-          //  throw new IllegalArgumentException("Incorrect input: credit response already exists!");
-            new AwpException("Incorrect input: credit response already exists!");
+            throw new IllegalArgumentException("Incorrect input: credit response already exists!");
+           // new AwpException("Incorrect input: credit response already exists!");
         }
         CreditResponse response = new CreditResponse();
         response.setSum(responseDto.getSum());
@@ -59,15 +60,15 @@ public class ResponseService {
         CreditResponse response = responseRepository.findById(responseDto.getId()).orElseThrow(() ->
                 new NoSuchElementException(String.format("Incorrect credit response ID: %d", responseDto.getId())));
         if (response.getContract() != null){
-           // throw new RuntimeException("Редактирование запрещено, существует контракт");
-            new AwpException("Редактирование запрещено, существует контракт");
+            throw new RuntimeException("Editing is forbidden, there is a contract");
+          //  new AwpException("Редактирование запрещено, существует контракт");
         }
         response.setPeriod(responseDto.getPeriod());
         response.setSum(responseDto.getSum());
         response.setPercent(responseDto.getPercent());
         response.setStatus(responseDto.getStatus());
         CreditRequest request = requestRepository.findByCreditResponse(response).orElseThrow(() ->
-                new NoSuchElementException(""));
+                new NoSuchElementException(("The corresponding credit request not found")));
         responseRepository.save(response);
         requestService.updateStatusWithResponse(request, response);
 
