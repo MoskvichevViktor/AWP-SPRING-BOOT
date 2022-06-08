@@ -2,9 +2,9 @@ package application.controllers.v1;
 
 import application.constants.ContractStatus;
 import application.dto.ContractDto;
+import application.dto.ContractInputDto;
 import application.dto.CreditResponseDto;
 import application.exception.AwpException;
-import application.models.Contract;
 import application.services.ContractService;
 import application.services.generateContract.GenerateContractService;
 import lombok.AllArgsConstructor;
@@ -55,8 +55,9 @@ public class ContractController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> create(@RequestBody Contract contract) {
-        return contractService.save(contract);
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void create(@RequestBody ContractInputDto contract) {
+        contractService.save(contract);
     }
 
     @PostMapping("/generate")
