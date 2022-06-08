@@ -1,10 +1,14 @@
 package application.services;
 
 import application.constants.ContractStatus;
+import application.constants.RequestStatus;
 import application.dto.ContractDto;
+import application.dto.ContractInputDto;
 import application.exception.AwpException;
 import application.models.Contract;
+import application.models.CreditResponse;
 import application.repositories.ContractRepository;
+import application.repositories.CreditResponseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
@@ -19,6 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ContractService {
     private final ContractRepository contractRepository;
+    private final CreditResponseRepository creditResponseRepository;
 
     public List<ContractDto> findAll() {
         return contractRepository.findAll().stream()
@@ -54,8 +59,20 @@ public class ContractService {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    public ResponseEntity<?> save(Contract contract) {
+    @SneakyThrows
+    public void save(ContractInputDto contractDto) {
+        Long contractId = contractDto.getContractId();
+        CreditResponse creditResponse = creditResponseRepository.findById(contractId).
+                orElseThrow(() -> new AwpException("CreditResponse Id:" + contractId + "not found"));
+        if (creditResponse.getStatus() != RequestStatus.CONFIRMED) {
+            throw new AwpException("The response status must be " + RequestStatus.CONFIRMED);
+        }
+        Contract contract = new Contract();
+        contract.setClient(creditResponse.getClient());
+        contract.setPeriod(contractDto.getPeriod());
+        contract.setSum(contractDto.getSum());
+        contract.setPercent(contractDto.getPercent());
+        contract.setStatus(ContractStatus.WAITING_SIGNING);
         contractRepository.save(contract);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
