@@ -66,5 +66,11 @@ public class ContractController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PutMapping()
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    public void update(@RequestBody ContractDto contractDto) {
+        contractService.update(contractDto);
+    }
+
 
 }

@@ -2,12 +2,13 @@ package application.services;
 
 import application.constants.ContractStatus;
 import application.constants.CreditResponseStatus;
-import application.constants.RequestStatus;
 import application.dto.ContractDto;
 import application.dto.ContractInputDto;
 import application.exception.AwpException;
+import application.models.Client;
 import application.models.Contract;
 import application.models.CreditResponse;
+import application.repositories.ClientRepository;
 import application.repositories.ContractRepository;
 import application.repositories.CreditResponseRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 public class ContractService {
     private final ContractRepository contractRepository;
     private final CreditResponseRepository creditResponseRepository;
+    private final ClientRepository clientRepository;
 
     public List<ContractDto> findAll() {
         return contractRepository.findAll().stream()
@@ -66,7 +68,7 @@ public class ContractService {
         CreditResponse creditResponse = creditResponseRepository.findById(contractId).
                 orElseThrow(() -> new AwpException("CreditResponse Id:" + contractId + "not found"));
         if (creditResponse.getStatus() != CreditResponseStatus.CONFIRMED) {
-            throw new AwpException("The response status must be " + RequestStatus.CONFIRMED);
+            throw new AwpException("The response status must be " + CreditResponseStatus.CONFIRMED);
         }
         Contract contract = new Contract();
         contract.setClient(creditResponse.getClient());
@@ -74,6 +76,18 @@ public class ContractService {
         contract.setSum(contractDto.getSum());
         contract.setPercent(contractDto.getPercent());
         contract.setStatus(ContractStatus.WAITING_SIGNING);
+        contractRepository.save(contract);
+    }
+
+    public void update(ContractDto contractDto) {
+        Client client = clientRepository.getById(contractDto.getClientId());
+
+        Contract contract = new Contract();
+        contract.setClient(client);
+        contract.setPeriod(contractDto.getPeriod());
+        contract.setSum(contractDto.getSum());
+        contract.setPercent(contractDto.getPercent());
+        contract.setStatus(contractDto.getStatus());
         contractRepository.save(contract);
     }
 }
