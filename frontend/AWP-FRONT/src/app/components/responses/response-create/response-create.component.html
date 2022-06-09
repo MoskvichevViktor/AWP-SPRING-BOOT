@@ -1,16 +1,4 @@
 <mat-card>
-    <mat-card-header>
-        <div mat-card-avatar>
-            <a routerLink="/main/requests">
-                <mat-icon
-                        matTooltip="Вернуться к списку заявок"
-                        matTooltipPosition="right"
-                        color="warn">
-                    close
-                </mat-icon>
-            </a>
-        </div>
-    </mat-card-header>
     <mat-card-subtitle>
         <h2>{{title | uppercase }}</h2>
     </mat-card-subtitle>
@@ -38,13 +26,21 @@
                         <mat-error *ngIf="formErrors['period']">{{formErrors['period']}}</mat-error>
                     </mat-form-field>
                 </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Процентная ставка, %.</mat-label>
+                        <input matInput placeholder="4" formControlName="percent" type="number">
+                        <mat-error *ngIf="formErrors['percent']">{{formErrors['percent']}}</mat-error>
+                    </mat-form-field>
+                </p>
             </form>
         </div>
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions>
         <button mat-stroked-button color="primary" (click)="onSaveClick()">Сохранить</button>
-        <button mat-stroked-button color="accent"  (click)="onDiscardClick()">Отменить изменения</button>
+        <button mat-stroked-button color="accent"  (click)="onCancelClick()">Отменить</button>
     </mat-card-actions>
     <mat-card-footer></mat-card-footer>
 </mat-card>
+

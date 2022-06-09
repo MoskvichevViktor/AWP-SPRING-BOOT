@@ -5,7 +5,7 @@ import {CommonFilterService} from "./common-filter.service";
 import {
   CreditRequest,
   CreditRequestDto,
-  CreditResponse,
+  CreditResponse, CreditResponseDto,
   RequestStatus,
   ResponseStatus
 } from "../shared/models.interfaces";
@@ -61,9 +61,9 @@ export class CreditResponseService {
         );
   }
 
-  public save(dto: CreditRequestDto) {
+  public save(dto: CreditResponseDto) {
     const url = environment.api.url + environment.api.endpoints.creditRequests.create;
-    this.remoteService.create<CreditRequestDto>(url, dto).subscribe();
+    this.remoteService.create<CreditResponseDto>(url, dto).subscribe();
   }
 
   public update(dto: CreditRequestDto) {
@@ -78,8 +78,6 @@ export class CreditResponseService {
 
   public renderResponseStatus(status: ResponseStatus) {
     switch (status) {
-      case 'WAITING':
-        return 'Ожидает решения';
       case 'CONFIRMED':
         return 'Одобрена';
       case 'REJECTION':

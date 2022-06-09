@@ -24,7 +24,7 @@ export class MainPageComponent implements OnInit {
       title: 'Заявки',
       url: 'requests',
       active: false,
-      icon: 'feedback',
+      icon: 'speaker_notes',
       visible: true,
       showToRoles: [UserRole.ROLE_MANAGER, UserRole.ROLE_MAIN_MANAGER, UserRole.ROLE_ADMIN]
     },
@@ -32,7 +32,7 @@ export class MainPageComponent implements OnInit {
       title: 'Рассмотренные заявки',
       url: 'responses',
       active: false,
-      icon: 'thumb_up',
+      icon: 'feedback',
       visible: true,
       showToRoles: [UserRole.ROLE_MANAGER, UserRole.ROLE_MAIN_MANAGER, UserRole.ROLE_ADMIN]
     },

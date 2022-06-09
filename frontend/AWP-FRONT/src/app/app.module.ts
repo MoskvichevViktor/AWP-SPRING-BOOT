@@ -22,6 +22,7 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
 import { ResponsesListComponent } from './components/responses/responses-list/responses-list.component';
 import { CalculationComponent } from './components/main/calculation/calculation.component';
 import { ContractsListComponent } from './components/contracts/contracts-list/contracts-list.component';
+import { ResponseCreateComponent } from './components/responses/response-create/response-create.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { ContractsListComponent } from './components/contracts/contracts-list/co
     ConfirmationDialogComponent,
     ResponsesListComponent,
     CalculationComponent,
-    ContractsListComponent
+    ContractsListComponent,
+    ResponseCreateComponent
   ],
   imports: [
     AppRoutingModule,

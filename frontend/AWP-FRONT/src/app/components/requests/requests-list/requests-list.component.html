@@ -89,13 +89,24 @@
         <button mat-menu-item
                 (click)="onViewClick(id)">
             <mat-icon>remove_red_eye</mat-icon>
-            <span>Показать</span>
+            <span>Просмотреть</span>
         </button>
-        <button mat-menu-item [disabled]="status !== 'WAITING'"
+        <button mat-menu-item *ngIf="status === 'WAITING'"
                 (click)="onEditClick(id)">
-            <mat-icon>edit</mat-icon>
+            <mat-icon color="primary">edit</mat-icon>
             <span>Редактировать</span>
+        </button>
+        <button mat-menu-item
+                *ngIf="isAbleToChangeStatus && status === 'WAITING'"
+                (click)="onConfirmClick(id)">
+            <mat-icon style="color: lightgreen">thumb_up</mat-icon>
+            <span>Одобрить</span>
+        </button>
+        <button mat-menu-item
+                *ngIf="isAbleToChangeStatus && status === 'WAITING'"
+                (click)="onRejectClick(id)">
+            <mat-icon color="warn">close</mat-icon>
+            <span>Отклонить</span>
         </button>
     </ng-template>
 </mat-menu>
-

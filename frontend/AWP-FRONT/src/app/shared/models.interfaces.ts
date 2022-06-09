@@ -75,6 +75,14 @@ export interface CreditRequestDto {
     status?: RequestStatus
 }
 
+export interface CreditResponseDto {
+    requestId: number,
+    period?: number,
+    sum?: number,
+    percent?: number,
+    status: ResponseStatus
+}
+
 export interface FormErrors {
     [key: string]: string
 }
@@ -115,7 +123,6 @@ export enum RequestStatus {
 }
 
 export enum ResponseStatus {
-    WAITING = "WAITING",
     CONFIRMED = "CONFIRMED",
     REJECTION = "REJECTION",
 }

@@ -5,7 +5,7 @@
                 <mat-icon
                         matTooltip="Вернуться к списку заявок"
                         matTooltipPosition="right"
-                        color="warn">
+                        color="primary">
                     subdirectory_arrow_left
                 </mat-icon>
             </a>
@@ -14,20 +14,6 @@
     <mat-card-title>{{getRequestInfo(request)}}</mat-card-title>
     <mat-card-subtitle>
         <h2>{{title | uppercase }}</h2>
-        <div class="approval-block" *ngIf="isAbleToChangeStatus">
-            <button class="approval-block__button" (click)="openDialog('confirm')"
-                    mat-mini-fab color="primary"
-                    matTooltip="Одобрить заявку"
-                    matTooltipPosition="above">
-                <mat-icon>check_circle_outline</mat-icon>
-            </button>
-            <button class="approval-block__button" (click)="openDialog('reject')"
-                    mat-mini-fab color="accent"
-                    matTooltip="Отклонить заявку"
-                    matTooltipPosition="above">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
     </mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-content>
