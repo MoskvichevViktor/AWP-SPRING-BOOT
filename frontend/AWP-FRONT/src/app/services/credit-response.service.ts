@@ -62,18 +62,13 @@ export class CreditResponseService {
   }
 
   public save(dto: CreditResponseDto) {
-    const url = environment.api.url + environment.api.endpoints.creditRequests.create;
-    this.remoteService.create<CreditResponseDto>(url, dto).subscribe();
+    const url = environment.api.url + environment.api.endpoints.creditResponses.create;
+    return this.remoteService.create<CreditResponseDto>(url, dto);
   }
 
-  public update(dto: CreditRequestDto) {
-    const url = environment.api.url + environment.api.endpoints.creditRequests.update;
-    this.remoteService.update<CreditRequestDto>(url, dto).subscribe();
-  }
-
-  public updateWithReply(dto: CreditRequestDto) {
-    const url = environment.api.url + environment.api.endpoints.creditRequests.update;
-    return this.remoteService.update<CreditRequestDto>(url, dto);
+  public update(dto: CreditResponseDto) {
+    const url = environment.api.url + environment.api.endpoints.creditResponses.update;
+    this.remoteService.update<CreditResponseDto>(url, dto).subscribe();
   }
 
   public renderResponseStatus(status: ResponseStatus) {

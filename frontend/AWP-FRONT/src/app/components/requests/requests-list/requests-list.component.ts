@@ -141,7 +141,9 @@ export class RequestsListComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((result: CreditResponseDto | null) => {
       if (result) {
-        this.creditResponseService.save(result);
+        this.creditResponseService.save(result).subscribe(
+            () => this.router.navigate(['/main/responses'])
+        );
       }
     });
   }
@@ -161,10 +163,11 @@ export class RequestsListComponent implements OnInit, AfterViewInit, OnDestroy {
             requestId: requestId,
             status: ResponseStatus.REJECTION
           };
-          this.creditResponseService.save(responseDto);
+          this.creditResponseService.save(responseDto).subscribe(
+              () => this.router.navigate(['/main/responses'])
+          );
         }
       });
   }
-
 
 }
