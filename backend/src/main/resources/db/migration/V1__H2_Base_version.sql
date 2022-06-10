@@ -111,14 +111,14 @@ INSERT INTO credit_response(id, period, sum, percent, status, client_id, contrac
 VALUES (1, 6, 25000, 17, 'REJECTION', 1, null),
        (2, 24, 30000, 15, 'CONFIRMED', 1, 1),
        (3, 24, 100000, 19, 'CONFIRMED', 1, null),
-       (4, 24, 100000, 19, 'WAITING', 1, null),
-       (5, 24, 100000, 19, 'WAITING', 5, null),
-       (6, 24, 100000, 19, 'WAITING', 6, null),
-       (7, 24, 100000, 19, 'WAITING', 7, null),
-       (8, 24, 100000, 19, 'WAITING', 8, null),
-       (9, 24, 100000, 19, 'WAITING', 9, null),
-       (10, 24, 100000, 19, 'WAITING', 10, null),
-       (11, 24, 100000, 19, 'WAITING', 11, null);
+       (4, 24, 100000, 19, 'CONFIRMED', 1, null),
+       (5, 24, 100000, 19, 'REJECTION', 5, null),
+       (6, 24, 100000, 19, 'CONFIRMED', 6, null),
+       (7, 24, 100000, 19, 'REJECTION', 7, null),
+       (8, 24, 100000, 19, 'CONFIRMED', 8, null),
+       (9, 24, 100000, 19, 'REJECTION', 9, null),
+       (10, 24, 100000, 19, 'CONFIRMED', 10, null),
+       (11, 24, 100000, 19, 'REJECTION', 11, null);
 
 INSERT INTO credit_request(id, period, sum, status, client_id, response_id)
 VALUES (1, 12, 100000, 'WAITING', 1, 1),
