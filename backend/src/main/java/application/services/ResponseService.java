@@ -46,11 +46,24 @@ public class ResponseService {
            // new AwpException("Incorrect input: credit response already exists!");
         }
         CreditResponse response = new CreditResponse();
-        response.setSum(responseDto.getSum());
-        response.setPeriod(responseDto.getPeriod());
-        response.setPercent(responseDto.getPercent());
-        response.setClient(request.getClient());
-        response.setStatus(responseDto.getStatus());
+        switch (responseDto.getStatus()){
+            case REJECTION:
+                response.setPeriod(request.getPeriod());
+                response.setSum(request.getSum());
+                response.setStatus(responseDto.getStatus());
+                response.setPercent(0f);
+                response.setClient(request.getClient());
+                break;
+            case CONFIRMED:
+                response.setSum(responseDto.getSum());
+                response.setPeriod(responseDto.getPeriod());
+                response.setPercent(responseDto.getPercent());
+                response.setClient(request.getClient());
+                response.setStatus(responseDto.getStatus());
+                break;
+            default:
+                throw new IllegalArgumentException("Wrong operation: entered status is incorrect!");
+        }
         CreditResponse newResponse = responseRepository.save(response);
         requestService.updateStatusWithResponse(request,newResponse);
     }

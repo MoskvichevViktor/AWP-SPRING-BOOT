@@ -108,27 +108,23 @@ VALUES (1, 24, 30000, 15, 'WAITING_SIGNING', 1);
 
 
 INSERT INTO credit_response(id, period, sum, percent, status, client_id, contract_id)
-VALUES (1, 6, 25000, 17, 'REJECTION', 1, null),
+VALUES (1, 12, 100000, 17, 'REJECTION', 1, null),
        (2, 24, 30000, 15, 'CONFIRMED', 1, 1),
-       (3, 24, 100000, 19, 'CONFIRMED', 1, null),
-       (4, 24, 100000, 19, 'CONFIRMED', 1, null),
+       (3, 24, 600000, 19, 'CONFIRMED', 1, null),
+       (4, 24, 400000, 19, 'CONFIRMED', 1, null),
        (5, 24, 100000, 19, 'REJECTION', 5, null),
-       (6, 24, 100000, 19, 'CONFIRMED', 6, null),
-       (7, 24, 100000, 19, 'REJECTION', 7, null),
-       (8, 24, 100000, 19, 'CONFIRMED', 8, null),
-       (9, 24, 100000, 19, 'REJECTION', 9, null),
-       (10, 24, 100000, 19, 'CONFIRMED', 10, null),
-       (11, 24, 100000, 19, 'REJECTION', 11, null);
+       (6, 24, 300000, 19, 'CONFIRMED', 6, null),
+       (7, 24, 600000, 19, 'REJECTION', 7, null);
 
 INSERT INTO credit_request(id, period, sum, status, client_id, response_id)
-VALUES (1, 12, 100000, 'WAITING', 1, 1),
+VALUES (1, 12, 100000, 'REJECTION', 1, 1),
        (2, 24, 50000, 'CONFIRMED', 1, 2),
-       (3, 24, 600000, 'WAITING', 1, 3),
-       (4, 24, 400000, 'WAITING', 4, 4),
-       (5, 24, 100000, 'WAITING', 5, 5),
-       (6, 24, 300000, 'WAITING', 6, 6),
-       (7, 24, 600000, 'WAITING', 7, 7),
-       (8, 24, 600000, 'WAITING', 8, 8),
-       (9, 24, 600000, 'WAITING', 9, 9),
-       (10, 24, 600000, 'WAITING', 10, 10),
-       (11, 24, 600000, 'WAITING', 11, 11);
+       (3, 24, 600000, 'CONFIRMED', 1, 3),
+       (4, 24, 400000, 'CONFIRMED', 4, 4),
+       (5, 24, 100000, 'REJECTION', 5, 5),
+       (6, 24, 300000, 'CONFIRMED', 6, 6),
+       (7, 24, 600000, 'REJECTION', 7, 7),
+       (8, 24, 600000, 'WAITING', 8,null),
+       (9, 24, 600000, 'WAITING', 9, null),
+       (10, 24, 600000, 'WAITING', 10, null),
+       (11, 24, 600000, 'WAITING', 11, null);
