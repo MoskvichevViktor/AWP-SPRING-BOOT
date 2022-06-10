@@ -18,7 +18,7 @@ export class ResponsesListComponent implements OnInit, AfterViewInit, OnDestroy 
 
     @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-    tableTitle = 'Список рассмотренных заявок';
+    tableTitle = 'Список ответов на заявки';
     dataSource = new MatTableDataSource<CreditResponse>([]);
     displayedColumns = ['menu', 'id', 'date', 'name', 'sum', 'percent', 'period', 'status'];
     ResponseStatus = ResponseStatus;

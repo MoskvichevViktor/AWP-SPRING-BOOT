@@ -8,7 +8,7 @@
             </mat-form-field>
 
             <mat-button-toggle-group class="status-filter" [formControl]="responseStatusFilter" (change)="onFilterChange()">
-                <mat-button-toggle value="">Все заявки</mat-button-toggle>
+                <mat-button-toggle value="">Все ответы на заявки</mat-button-toggle>
                 <mat-button-toggle *ngFor="let status of ResponseStatus | keyvalue"
                                    [value]=status.key>{{creditResponseService.renderResponseStatus(status.value)}}</mat-button-toggle>
             </mat-button-toggle-group>
@@ -51,7 +51,7 @@
 
                 <!-- Sum Column -->
                 <ng-container matColumnDef="sum" class="sum-column">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="sum"> Сумма, руб. </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="sum"> Одобрена сумма, руб. </th>
                     <td mat-cell *matCellDef="let response" class="sum-rub"> {{response.sum}} </td>
                 </ng-container>
 

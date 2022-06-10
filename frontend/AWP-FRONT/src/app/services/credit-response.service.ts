@@ -71,9 +71,9 @@ export class CreditResponseService {
     public renderResponseStatus(status: ResponseStatus) {
         switch (status) {
             case 'CONFIRMED':
-                return 'Одобрена';
+                return 'Заявка одобрена';
             case 'REJECTION':
-                return 'Отклонена';
+                return 'Заявка отклонена';
         }
         return '';
     }

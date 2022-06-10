@@ -79,11 +79,11 @@
     <ng-template matMenuContent let-id="clientId">
         <button mat-menu-item (click)="onCreateClick(id)">
             <mat-icon color="warn">plus_one</mat-icon>
-            <span>Создать новую заявку</span>
+            <span>Новая заявка клиента</span>
         </button>
         <button mat-menu-item (click)="onRequestFilterClick(id)">
             <mat-icon>speaker_notes</mat-icon>
-            <span>Заявки клиента</span>
+            <span>Все заявки клиента</span>
         </button>
         <button mat-menu-item (click)="onResponseFilterClick(id)">
             <mat-icon>feedback</mat-icon>
@@ -92,7 +92,7 @@
         <mat-divider></mat-divider>
         <button mat-menu-item (click)="onEditClientClick(id)">
             <mat-icon color="primary">edit</mat-icon>
-            <span>Редактировать данные клиента</span>
+            <span>Редактировать данные</span>
         </button>
     </ng-template>
 </mat-menu>
