@@ -1,7 +1,6 @@
 package application.models;
 
 import application.constants.CreditResponseStatus;
-import application.constants.RequestStatus;
 import application.models.abstractentity.AbstractContractTemplate;
 import lombok.Data;
 import lombok.NoArgsConstructor;

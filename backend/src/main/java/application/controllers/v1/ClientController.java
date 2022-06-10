@@ -24,8 +24,13 @@ public class ClientController extends AbstractMethodError {
         return clientsService.findAll();
     }
 
+    @PutMapping("")
+    public ResponseEntity<?> update(@RequestBody Client client) {
+        return clientsService.save(client);
+    }
+
     @PostMapping("")
-    public ResponseEntity<?> saveOrUpdate(@RequestBody Client client) {
+    public ResponseEntity<?> create(@RequestBody Client client) {
         return clientsService.save(client);
     }
 
