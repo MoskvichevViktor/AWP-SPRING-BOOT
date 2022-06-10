@@ -29,7 +29,7 @@ export class MainPageComponent implements OnInit {
       showToRoles: [UserRole.ROLE_MANAGER, UserRole.ROLE_MAIN_MANAGER, UserRole.ROLE_ADMIN]
     },
     {
-      title: 'Рассмотренные заявки',
+      title: 'Ответы',
       url: 'responses',
       active: false,
       icon: 'feedback',

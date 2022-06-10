@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CreditRequestService} from "../../../services/credit-request.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription} from "rxjs";
-import {CreditRequest, RequestStatus, User, UserRole} from "../../../shared/models.interfaces";
-import {MatDialog} from "@angular/material/dialog";
-import {AuthService} from "../../../services/auth.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CreditRequestService } from "../../../services/credit-request.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { CreditRequest, RequestStatus, User, UserRole } from "../../../shared/models.interfaces";
+import { MatDialog } from "@angular/material/dialog";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
     selector: 'app-request-view',

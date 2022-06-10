@@ -23,6 +23,7 @@ import { ResponsesListComponent } from './components/responses/responses-list/re
 import { CalculationComponent } from './components/main/calculation/calculation.component';
 import { ContractsListComponent } from './components/contracts/contracts-list/contracts-list.component';
 import { ResponseCreateComponent } from './components/responses/response-create/response-create.component';
+import { ResponseViewComponent } from './components/responses/response-view/response-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { ResponseCreateComponent } from './components/responses/response-create/
     ResponsesListComponent,
     CalculationComponent,
     ContractsListComponent,
-    ResponseCreateComponent
+    ResponseCreateComponent,
+    ResponseViewComponent
   ],
   imports: [
     AppRoutingModule,
