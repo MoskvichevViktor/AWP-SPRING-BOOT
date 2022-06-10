@@ -1,0 +1,59 @@
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar>
+            <a routerLink="/main/clients">
+                <mat-icon
+                    matTooltip="Вернуться к списку клиентов"
+                    matTooltipPosition="right"
+                    color="warn">
+                    close
+                </mat-icon>
+            </a>
+        </div>
+    </mat-card-header>
+    <mat-card-subtitle>
+        <h2>{{title | uppercase }}</h2>
+    </mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <div class="edit-form-group">
+            <form [formGroup]="editForm" [style.fontSize.px]="16">
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Ф.И.О. заемщика</mat-label>
+                        <input matInput placeholder="Горбунков Семен Иванович" formControlName="name" type="text">
+                        <mat-error *ngIf="formErrors['name']">{{formErrors['name']}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Паспортные данные</mat-label>
+                        <input matInput placeholder="0123 456789" formControlName="passport" type="text">
+                        <mat-error *ngIf="formErrors['passport']">{{formErrors['passport']}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Адрес</mat-label>
+                        <input matInput placeholder="Ленинград, ул.3-я Строителей, д.25, кв.12" formControlName="address" type="text">
+                        <mat-error *ngIf="formErrors['address']">{{formErrors['address']}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Телефон</mat-label>
+                        <input matInput placeholder="+79107003344" formControlName="phone" type="text">
+                        <mat-error *ngIf="formErrors['phone']">{{formErrors['phone']}}</mat-error>
+                    </mat-form-field>
+                </p>
+            </form>
+        </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+        <button mat-stroked-button color="primary" (click)="onSaveClick()">Сохранить</button>
+        <button mat-stroked-button color="accent"  (click)="onDiscardClick()">Отменить изменения</button>
+    </mat-card-actions>
+    <mat-card-footer></mat-card-footer>
+</mat-card>
+

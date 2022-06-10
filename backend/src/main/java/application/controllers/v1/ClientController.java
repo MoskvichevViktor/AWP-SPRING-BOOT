@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/clients")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_MAIN_MANAGER')")
 public class ClientController extends AbstractMethodError {

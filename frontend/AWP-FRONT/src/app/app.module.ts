@@ -24,6 +24,7 @@ import { CalculationComponent } from './components/main/calculation/calculation.
 import { ContractsListComponent } from './components/contracts/contracts-list/contracts-list.component';
 import { ResponseCreateComponent } from './components/responses/response-create/response-create.component';
 import { ResponseViewComponent } from './components/responses/response-view/response-view.component';
+import { ClientEditComponent } from './components/clients/client-edit/client-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { ResponseViewComponent } from './components/responses/response-view/resp
     CalculationComponent,
     ContractsListComponent,
     ResponseCreateComponent,
-    ResponseViewComponent
+    ResponseViewComponent,
+    ClientEditComponent
   ],
   imports: [
     AppRoutingModule,

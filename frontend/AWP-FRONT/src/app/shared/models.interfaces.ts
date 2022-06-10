@@ -31,6 +31,14 @@ export interface Client {
     updatedAt: string
 }
 
+export interface ClientDto {
+    id: number | null,
+    name: string,
+    passport: string,
+    address: string,
+    phone: string
+}
+
 export interface Contract {
     id: number,
     clientId: number,

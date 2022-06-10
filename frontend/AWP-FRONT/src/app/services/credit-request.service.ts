@@ -66,11 +66,6 @@ export class CreditRequestService {
         this.remoteService.update<CreditRequestDto>(url, dto).subscribe();
     }
 
-    public updateWithReply(dto: CreditRequestDto) {
-        const url = environment.api.url + environment.api.endpoints.creditRequests.update;
-        return this.remoteService.update<CreditRequestDto>(url, dto);
-    }
-
     public renderRequestStatus(status: RequestStatus) {
         switch (status) {
             case 'WAITING':

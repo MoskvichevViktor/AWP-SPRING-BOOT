@@ -7,7 +7,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {ClientService} from "../../../services/client.service";
 
 @Component({
-  selector: 'app-reques-edit',
+  selector: 'app-request-edit',
   templateUrl: './request-edit.component.html',
   styleUrls: ['./request-edit.component.scss']
 })
@@ -107,7 +107,7 @@ export class RequestEditComponent implements OnInit {
     }
   }
 
-  saveOrUpdate(dto: CreditRequestDto) {
+  private saveOrUpdate(dto: CreditRequestDto) {
     if (this.editMode) {
       this.creditRequestService.update(dto);
     } else {

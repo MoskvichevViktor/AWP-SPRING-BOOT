@@ -8,6 +8,11 @@
                 <mat-label>Поиск</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Напр. Иванов" #input>
             </mat-form-field>
+            <button mat-raised-button color="accent"
+                    class="add_client_button"
+                    (click)="onAddClientClick()">
+                Добавить нового клиента
+            </button>
 
             <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
                 <!-- Menu button Column -->
@@ -83,6 +88,11 @@
         <button mat-menu-item (click)="onResponseFilterClick(id)">
             <mat-icon>feedback</mat-icon>
             <span>Ответы на заявки клиента</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="onEditClientClick(id)">
+            <mat-icon color="primary">edit</mat-icon>
+            <span>Редактировать данные клиента</span>
         </button>
     </ng-template>
 </mat-menu>
