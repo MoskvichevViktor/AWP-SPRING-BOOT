@@ -91,9 +91,16 @@ public class ContractService {
                 .orElseThrow(() -> new AwpException("Договор с Id: " + id + " не существует."));
 
         ContractStatus contractStatus = contract.getStatus();
-        if (contractStatus != ContractStatus.WAITING_SIGNING) {
-            throw new AwpException("Договор со статусом " + contractStatus + " не может быть подписан");
+        ContractStatus contractStatusDto = contractDto.getStatus();
+
+        if (!contractStatus.equals(ContractStatus.WAITING_SIGNING) && contractStatusDto.equals(ContractStatus.ACTIVE)) {
+            throw new AwpException("Договор со статусом " + contractStatus + " не может быть подписан.");
         }
+
+        if (!contractStatus.equals(ContractStatus.ACTIVE) && contractStatusDto.equals(ContractStatus.COMPLETED)) {
+            throw new AwpException("Договор со статусом " + contractStatus + " не может быть завершен.");
+        }
+
         contract.setStatus(contractDto.getStatus());
         contractRepository.save(contract);
     }

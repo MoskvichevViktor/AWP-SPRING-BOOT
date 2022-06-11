@@ -42,5 +42,4 @@ public class ClientController extends AbstractMethodError {
                 orElseThrow(() -> new AwpException("No client with Id: " + id));
     }
 
-
 }
