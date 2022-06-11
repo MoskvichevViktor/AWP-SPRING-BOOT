@@ -138,6 +138,7 @@ export enum RequestStatus {
 export enum ResponseStatus {
     CONFIRMED = "CONFIRMED",
     REJECTION = "REJECTION",
+    PROCESSED = "PROCESSED",
 }
 
 export enum UserRole {

@@ -74,6 +74,8 @@ export class CreditResponseService {
                 return 'Заявка одобрена';
             case 'REJECTION':
                 return 'Заявка отклонена';
+            case 'PROCESSED':
+                return 'Оформлен договор';
         }
         return '';
     }
