@@ -1,0 +1,48 @@
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar>
+            <a routerLink="/main/clients">
+                <mat-icon
+                        matTooltip="Вернуться к списку клиентов"
+                        matTooltipPosition="right"
+                        color="primary">
+                    subdirectory_arrow_left
+                </mat-icon>
+            </a>
+        </div>
+    </mat-card-header>
+    <mat-card-subtitle>
+        <h2>{{title | uppercase }}</h2>
+    </mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item>
+                <h4 matLine>Ф.И.О.</h4>
+                <p matLine>{{client?.name}}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 matLine>Паспортные данные</h4>
+                <p matLine>{{client?.passport}}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 matLine>Адрес</h4>
+                <p matLine>{{client?.address}}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 matLine>Телефон</h4>
+                <p matLine>{{client?.phone}}</p>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+        <button mat-stroked-button
+                color="warn"
+                (click)="onEditClick()">
+            Редактировать
+        </button>
+    </mat-card-actions>
+    <mat-card-footer></mat-card-footer>
+</mat-card>
+

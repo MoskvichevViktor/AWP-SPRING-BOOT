@@ -64,6 +64,10 @@ export class ClientsListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.router.navigate(['new'], {relativeTo: this.route});
     }
 
+    onViewClientClick(id: number) {
+        this.router.navigate([id], {relativeTo: this.route});
+    }
+
     onEditClientClick(id: number) {
         this.router.navigate([id, 'edit'], {relativeTo: this.route});
     }
