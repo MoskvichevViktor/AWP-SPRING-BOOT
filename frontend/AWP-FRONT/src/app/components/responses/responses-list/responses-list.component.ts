@@ -1,13 +1,15 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { CreditResponse, ResponseStatus } from "../../../shared/models.interfaces";
+import { ContractDto, CreditResponse, ResponseStatus } from "../../../shared/models.interfaces";
 import { FormControl } from "@angular/forms";
 import { BehaviorSubject, Subscription, switchMap } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Sort } from "@angular/material/sort";
 import { compare } from "../../../shared/sort-compare";
 import { CreditResponseService } from "../../../services/credit-response.service";
+import { ContractCreateComponent } from "../../contracts/contract-create/contract-create.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
     selector: 'app-responses-list',
@@ -31,7 +33,8 @@ export class ResponsesListComponent implements OnInit, AfterViewInit, OnDestroy 
     constructor(
         public creditResponseService: CreditResponseService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        public dialog: MatDialog,
     ) {
     }
 
@@ -95,8 +98,17 @@ export class ResponsesListComponent implements OnInit, AfterViewInit, OnDestroy 
         this.router.navigate([id], {relativeTo: this.route});
     }
 
-    onEditClick(id: number) {
-        this.router.navigate([id, 'edit'], {relativeTo: this.route});
+    onCreateContractClick(id: number) {
+        const dialogRef = this.dialog.open(ContractCreateComponent, {
+            data: {
+                responseId: id
+            },
+        });
+        dialogRef.afterClosed().subscribe((result: ContractDto | null) => {
+            if (result) {
+                this.router.navigate(['/main/contracts'])
+            }
+        });
     }
 
 }

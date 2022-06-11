@@ -30,7 +30,7 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="id" class="id-column">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> № договора </th>
-                    <td mat-cell *matCellDef="let contract" (click)="onContractClick(contract.id)"> {{contract.id}} </td>
+                    <td mat-cell *matCellDef="let contract"> {{contract.id}} </td>
                 </ng-container>
 
                 <!-- Date Column -->
@@ -88,10 +88,10 @@
 
 <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-id="contractId" let-status="status">
-        <button mat-menu-item [disabled]="status !== 'WAITING'"
-                (click)="onEditClick(id)">
-            <mat-icon>edit</mat-icon>
-            <span>Редактировать договор</span>
+        <button mat-menu-item
+                (click)="onViewClick(id)">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>Просмотреть</span>
         </button>
     </ng-template>
 </mat-menu>

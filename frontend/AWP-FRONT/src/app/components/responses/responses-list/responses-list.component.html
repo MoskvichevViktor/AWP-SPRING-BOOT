@@ -95,10 +95,10 @@
         <button mat-menu-item
                 (click)="onViewClick(id)">
             <mat-icon>remove_red_eye</mat-icon>
-            <span>Показать</span>
+            <span>Просмотреть</span>
         </button>
-        <button mat-menu-item [disabled]="status !== 'CONFIRMED'"
-                (click)="onEditClick(id)">
+        <button mat-menu-item *ngIf="status === 'CONFIRMED'"
+                (click)="onCreateContractClick(id)">
             <mat-icon>assignment</mat-icon>
             <span>Создать договор</span>
         </button>

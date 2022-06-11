@@ -23,7 +23,7 @@
                 <p matLine>{{response?.clientName}}</p>
             </mat-list-item>
             <mat-list-item>
-                <h4 matLine>Одобрена сумма: </h4>
+                <h4 matLine>{{response?.status === 'CONFIRMED' ? 'Одобрена сумма:' : 'Запрашиваемая сумма:'}}</h4>
                 <p matLine class="sum-rub">{{response?.sum}}</p>
             </mat-list-item>
             <mat-list-item>

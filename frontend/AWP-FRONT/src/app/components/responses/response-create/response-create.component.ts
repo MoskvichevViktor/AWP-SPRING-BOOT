@@ -11,7 +11,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 })
 export class ResponseCreateComponent implements OnInit {
 
-    title = 'Создать новую заявку';
+    title = 'Ответ на кредитную заявку';
     responseDto: CreditResponseDto = {
         requestId: 0, status: ResponseStatus.CONFIRMED
     };

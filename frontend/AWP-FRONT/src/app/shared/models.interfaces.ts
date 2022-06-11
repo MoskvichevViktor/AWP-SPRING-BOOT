@@ -51,6 +51,11 @@ export interface Contract {
     updatedAt: string
 }
 
+export interface ContractDto {
+    responseId: number,
+    status: ContractStatus
+}
+
 export interface CreditRequest {
     id: number,
     clientId: number,

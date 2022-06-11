@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {RemoteService} from "./remote.service";
 import {environment} from "../../environments/environment";
-import {Contract, ContractStatus } from "../shared/models.interfaces";
+import { Contract, ContractDto, ContractStatus, CreditResponse, CreditResponseDto } from "../shared/models.interfaces";
 import {map} from "rxjs";
 import {formatDateTime} from "../shared/format-date-time";
 import {CommonFilterService} from "./common-filter.service";
@@ -42,10 +42,27 @@ export class ContractService {
         );
   }
 
+  public load(id: number) {
+    const url = environment.api.url + environment.api.endpoints.contracts.get(id);
+    return this.remoteService.fetchOne<Contract>(url)
+        .pipe(
+            map(contract => {
+              contract.createdAt = formatDateTime(contract.createdAt);
+              contract.updatedAt = contract.updatedAt ? formatDateTime(contract.updatedAt) : '';
+              return contract;
+            })
+        );
+  }
+
+  public save(dto: ContractDto) {
+    const url = environment.api.url + environment.api.endpoints.contracts.create;
+    return this.remoteService.create<ContractDto>(url, dto);
+  }
+
   public renderContractStatus(status: ContractStatus) {
     switch (status) {
       case 'WAITING_SIGNING':
-        return 'Ожидает подписания клиентом';
+        return 'Ожидает подписания';
       case 'ACTIVE':
         return 'Действующий';
       case 'COMPLETED':
