@@ -51,8 +51,13 @@ export interface Contract {
     updatedAt: string
 }
 
-export interface ContractDto {
+export interface ContractCreateDto {
     responseId: number,
+    status: ContractStatus
+}
+
+export interface ContractUpdateDto {
+    contractId: number,
     status: ContractStatus
 }
 

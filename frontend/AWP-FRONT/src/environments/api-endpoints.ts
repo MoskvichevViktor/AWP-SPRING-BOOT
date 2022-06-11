@@ -21,6 +21,7 @@ export const ApiEndpoints = {
         list: '/contracts',
         get: (id: number) => `/contracts/${id}`,
         create: '/contracts',
+        update: '/contracts',
     },
     clients: {
         list: '/clients',

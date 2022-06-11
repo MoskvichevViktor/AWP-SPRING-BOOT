@@ -89,6 +89,10 @@
             <mat-icon>feedback</mat-icon>
             <span>Ответы на заявки клиента</span>
         </button>
+        <button mat-menu-item (click)="onContractFilterClick(id)">
+            <mat-icon>assignment</mat-icon>
+            <span>Договоры клиента</span>
+        </button>
         <mat-divider></mat-divider>
         <button mat-menu-item (click)="onViewClientClick(id)">
             <mat-icon>remove_red_eye</mat-icon>

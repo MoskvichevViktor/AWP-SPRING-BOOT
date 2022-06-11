@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ContractDto, ContractStatus, CreditResponse } from "../../../shared/models.interfaces";
+import { ContractCreateDto, ContractStatus, CreditResponse } from "../../../shared/models.interfaces";
 import { FormBuilder } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { CreditResponseService } from "../../../services/credit-response.service";
@@ -13,7 +13,7 @@ import { ContractService } from "../../../services/contract.service";
 export class ContractCreateComponent implements OnInit {
 
     title = 'Создать новый договор';
-    contractDto: ContractDto = {
+    contractDto: ContractCreateDto = {
         responseId: 0, status: ContractStatus.WAITING_SIGNING
     };
     editForm = this.fb.group({

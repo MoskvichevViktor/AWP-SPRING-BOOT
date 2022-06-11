@@ -97,6 +97,18 @@
             <mat-icon>remove_red_eye</mat-icon>
             <span>Просмотреть</span>
         </button>
+        <button mat-menu-item
+                *ngIf="status === 'WAITING_SIGNING'"
+                (click)="onSignClick(id)">
+            <mat-icon color="primary">thumb_up</mat-icon>
+            <span>Подписать</span>
+        </button>
+        <button mat-menu-item
+                *ngIf="status === 'ACTIVE'"
+                (click)="onCompleteClick(id)">
+            <mat-icon color="warn">done</mat-icon>
+            <span>Завершить</span>
+        </button>
     </ng-template>
 </mat-menu>
 

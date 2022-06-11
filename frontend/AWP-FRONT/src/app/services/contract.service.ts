@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import {RemoteService} from "./remote.service";
 import {environment} from "../../environments/environment";
-import { Contract, ContractDto, ContractStatus, CreditResponse, CreditResponseDto } from "../shared/models.interfaces";
+import {
+  Contract,
+  ContractCreateDto,
+  ContractStatus,
+  ContractUpdateDto,
+  CreditResponse,
+  CreditResponseDto
+} from "../shared/models.interfaces";
 import {map} from "rxjs";
 import {formatDateTime} from "../shared/format-date-time";
 import {CommonFilterService} from "./common-filter.service";
@@ -54,9 +61,14 @@ export class ContractService {
         );
   }
 
-  public save(dto: ContractDto) {
+  public save(dto: ContractCreateDto) {
     const url = environment.api.url + environment.api.endpoints.contracts.create;
-    return this.remoteService.create<ContractDto>(url, dto);
+    return this.remoteService.create<ContractCreateDto>(url, dto);
+  }
+
+  public update(dto: ContractUpdateDto) {
+    const url = environment.api.url + environment.api.endpoints.contracts.update;
+    return this.remoteService.update<ContractUpdateDto>(url, dto);
   }
 
   public renderContractStatus(status: ContractStatus) {

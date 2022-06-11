@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Subscription, switchMap } from "rxjs";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { Contract, ContractStatus } from "../../../shared/models.interfaces";
+import { Contract, ContractStatus, ContractUpdateDto } from "../../../shared/models.interfaces";
 import { ContractService } from "../../../services/contract.service";
 import { Sort } from "@angular/material/sort";
 import { compare } from "../../../shared/sort-compare";
@@ -91,6 +91,28 @@ export class ContractsListComponent implements OnInit, AfterViewInit, OnDestroy 
 
     onViewClick(id: number) {
         this.router.navigate([id], {relativeTo: this.route});
+    }
+
+    onSignClick(id: number) {
+        const contractDto: ContractUpdateDto = {
+            contractId: id,
+            status: ContractStatus.ACTIVE
+        };
+        this.updateContract(contractDto);
+    }
+
+    onCompleteClick(id: number) {
+        const contractDto: ContractUpdateDto = {
+            contractId: id,
+            status: ContractStatus.COMPLETED
+        };
+        this.updateContract(contractDto);
+    }
+
+    private updateContract(dto: ContractUpdateDto) {
+        this.contractService.update(dto).subscribe(
+            () => {}
+        );
     }
 
 }

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { ContractDto, CreditResponse, ResponseStatus } from "../../../shared/models.interfaces";
+import { ContractCreateDto, CreditResponse, ResponseStatus } from "../../../shared/models.interfaces";
 import { FormControl } from "@angular/forms";
 import { BehaviorSubject, Subscription, switchMap } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -104,7 +104,7 @@ export class ResponsesListComponent implements OnInit, AfterViewInit, OnDestroy 
                 responseId: id
             },
         });
-        dialogRef.afterClosed().subscribe((result: ContractDto | null) => {
+        dialogRef.afterClosed().subscribe((result: ContractCreateDto | null) => {
             if (result) {
                 this.router.navigate(['/main/contracts'])
             }

@@ -60,6 +60,11 @@ export class ClientsListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.router.navigate(['/main/responses']);
     }
 
+    onContractFilterClick(id: number) {
+        this.filterService.setClientFilter(id);
+        this.router.navigate(['/main/contracts']);
+    }
+
     onAddClientClick() {
         this.router.navigate(['new'], {relativeTo: this.route});
     }
