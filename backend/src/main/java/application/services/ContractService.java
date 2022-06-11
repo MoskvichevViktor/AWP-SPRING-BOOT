@@ -4,8 +4,8 @@ import application.constants.ContractStatus;
 import application.constants.CreditResponseStatus;
 import application.dto.ContractCreateDto;
 import application.dto.ContractDto;
+import application.dto.ContractStatusChangeDTO;
 import application.exception.AwpException;
-import application.models.Client;
 import application.models.Contract;
 import application.models.CreditResponse;
 import application.repositories.ClientRepository;
@@ -84,14 +84,16 @@ public class ContractService {
         creditResponseRepository.save(creditResponse);
     }
 
-    public void update(ContractDto contractDto) {
-        Client client = clientRepository.getById(contractDto.getClientId());
+    @SneakyThrows
+    public void update(ContractStatusChangeDTO contractDto) {
+        Long id = contractDto.getContractId();
+        Contract contract = contractRepository.findById(id)
+                .orElseThrow(() -> new AwpException("Договор с Id: " + id + " не существует."));
 
-        Contract contract = new Contract();
-        contract.setClient(client);
-        contract.setPeriod(contractDto.getPeriod());
-        contract.setSum(contractDto.getSum());
-        contract.setPercent(contractDto.getPercent());
+        ContractStatus contractStatus = contract.getStatus();
+        if (contractStatus != ContractStatus.WAITING_SIGNING) {
+            throw new AwpException("Договор со статусом " + contractStatus + " не может быть подписан");
+        }
         contract.setStatus(contractDto.getStatus());
         contractRepository.save(contract);
     }

@@ -3,6 +3,7 @@ package application.controllers.v1;
 import application.constants.ContractStatus;
 import application.dto.ContractCreateDto;
 import application.dto.ContractDto;
+import application.dto.ContractStatusChangeDTO;
 import application.dto.CreditResponseDto;
 import application.exception.AwpException;
 import application.services.ContractService;
@@ -68,7 +69,7 @@ public class ContractController {
 
     @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void update(@RequestBody ContractDto contractDto) {
+    public void update(@RequestBody ContractStatusChangeDTO contractDto) {
         contractService.update(contractDto);
     }
 

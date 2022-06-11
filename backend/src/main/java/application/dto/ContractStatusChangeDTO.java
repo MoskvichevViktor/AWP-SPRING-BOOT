@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ContractCreateDto {
-    Long responseId;
+public class ContractStatusChangeDTO {
+    Long contractId;
     ContractStatus status;
 }
