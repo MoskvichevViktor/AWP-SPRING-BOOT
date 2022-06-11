@@ -2,8 +2,8 @@ package application.services;
 
 import application.constants.ContractStatus;
 import application.constants.CreditResponseStatus;
+import application.dto.ContractCreateDto;
 import application.dto.ContractDto;
-import application.dto.ContractInputDto;
 import application.exception.AwpException;
 import application.models.Client;
 import application.models.Contract;
@@ -16,6 +16,7 @@ import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,20 +64,24 @@ public class ContractService {
     }
 
     @SneakyThrows
-    public void save(ContractInputDto contractDto) {
-        Long contractId = contractDto.getContractId();
-        CreditResponse creditResponse = creditResponseRepository.findById(contractId).
-                orElseThrow(() -> new AwpException("CreditResponse Id:" + contractId + "not found"));
+    @Transactional
+    public void save(ContractCreateDto contractDto) {
+        Long responseId = contractDto.getResponseId();
+        CreditResponse creditResponse = creditResponseRepository.findById(responseId).
+                orElseThrow(() -> new AwpException("CreditResponse Id:" + responseId + "not found"));
         if (creditResponse.getStatus() != CreditResponseStatus.CONFIRMED) {
             throw new AwpException("The response status must be " + CreditResponseStatus.CONFIRMED);
         }
         Contract contract = new Contract();
         contract.setClient(creditResponse.getClient());
-        contract.setPeriod(contractDto.getPeriod());
-        contract.setSum(contractDto.getSum());
-        contract.setPercent(contractDto.getPercent());
+        contract.setPeriod(creditResponse.getPeriod());
+        contract.setSum(creditResponse.getSum());
+        contract.setPercent(creditResponse.getPercent());
         contract.setStatus(ContractStatus.WAITING_SIGNING);
         contractRepository.save(contract);
+
+        creditResponse.setStatus(CreditResponseStatus.PROCESSED);
+        creditResponseRepository.save(creditResponse);
     }
 
     public void update(ContractDto contractDto) {
