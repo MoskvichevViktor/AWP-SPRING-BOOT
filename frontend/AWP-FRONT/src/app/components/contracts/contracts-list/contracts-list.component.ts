@@ -85,6 +85,10 @@ export class ContractsListComponent implements OnInit, AfterViewInit, OnDestroy 
         this.statusSubj.next(this.contractStatusFilter.value);
     }
 
+    onUserClick(id: number) {
+        this.router.navigate(['/main/clients']);
+    }
+
     onViewClick(id: number) {
         this.router.navigate([id], {relativeTo: this.route});
     }

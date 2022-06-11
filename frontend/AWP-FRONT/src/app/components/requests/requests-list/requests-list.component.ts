@@ -107,7 +107,7 @@ export class RequestsListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onUserClick(id: number) {
-    this.router.navigate(['/main/users']);
+    this.router.navigate(['/main/clients']);
   }
 
   onViewClick(id: number) {
