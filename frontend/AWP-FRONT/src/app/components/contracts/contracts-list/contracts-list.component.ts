@@ -25,7 +25,7 @@ export class ContractsListComponent implements OnInit, AfterViewInit, OnDestroy 
 
     contractStatusFilter = new FormControl('');
 
-    private $requestSub = new Subscription();
+    private $contractsSub = new Subscription();
     private statusSubj = new BehaviorSubject<string>('');
 
     constructor(
@@ -36,10 +36,15 @@ export class ContractsListComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     ngOnInit(): void {
-        this.$requestSub = this.statusSubj
+        this.$contractsSub = this.statusSubj
             .pipe(
                 switchMap(status => this.contractService.loadAll(status)))
-            .subscribe(requests => this.dataSource.data = requests);
+            .subscribe(contracts => this.dataSource.data = contracts);
+    }
+
+    private reloadContracts() {
+        this.contractService.loadAll()
+            .subscribe(contracts => this.dataSource.data = contracts);
     }
 
     ngAfterViewInit() {
@@ -47,7 +52,7 @@ export class ContractsListComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     ngOnDestroy(): void {
-        this.$requestSub.unsubscribe();
+        this.$contractsSub.unsubscribe();
     }
 
     applyFilter(event: Event) {
@@ -111,7 +116,7 @@ export class ContractsListComponent implements OnInit, AfterViewInit, OnDestroy 
 
     private updateContract(dto: ContractUpdateDto) {
         this.contractService.update(dto).subscribe(
-            () => {}
+            () => this.reloadContracts()
         );
     }
 
