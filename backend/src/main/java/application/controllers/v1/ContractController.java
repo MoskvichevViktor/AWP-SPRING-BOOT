@@ -1,8 +1,8 @@
 package application.controllers.v1;
 
 import application.constants.ContractStatus;
+import application.dto.ContractCreateDto;
 import application.dto.ContractDto;
-import application.dto.ContractInputDto;
 import application.dto.CreditResponseDto;
 import application.exception.AwpException;
 import application.services.ContractService;
@@ -56,7 +56,7 @@ public class ContractController {
 
     @PostMapping()
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void create(@RequestBody ContractInputDto contract) {
+    public void create(@RequestBody ContractCreateDto contract) {
         contractService.save(contract);
     }
 

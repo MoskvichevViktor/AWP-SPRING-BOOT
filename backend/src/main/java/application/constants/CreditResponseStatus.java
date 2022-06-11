@@ -3,8 +3,8 @@ package application.constants;
 public enum CreditResponseStatus {
     WAITING("waiting"),
     CONFIRMED("confirmed"),
-    REJECTION("rejection");
-
+    REJECTION("rejection"),
+    PROCESSED("processed");
 
     private final String statusName;
 
