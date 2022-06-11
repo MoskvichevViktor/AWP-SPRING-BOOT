@@ -14,6 +14,7 @@ import { ContractsListComponent } from "./components/contracts/contracts-list/co
 import { ResponseViewComponent } from "./components/responses/response-view/response-view.component";
 import { ClientEditComponent } from "./components/clients/client-edit/client-edit.component";
 import { ContractViewComponent } from "./components/contracts/contract-view/contract-view.component";
+import { ClientViewComponent } from "./components/clients/client-view/client-view.component";
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
             { path: 'contracts/:id', component: ContractViewComponent },
             { path: 'clients', component: ClientsListComponent },
             { path: 'clients/new', component: ClientEditComponent },
+            { path: 'clients/:id', component: ClientViewComponent },
             { path: 'clients/:id/edit', component: ClientEditComponent },
             { path: 'users', component: UsersListComponent },
         ] },

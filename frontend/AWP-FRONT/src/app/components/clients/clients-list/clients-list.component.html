@@ -90,6 +90,10 @@
             <span>Ответы на заявки клиента</span>
         </button>
         <mat-divider></mat-divider>
+        <button mat-menu-item (click)="onViewClientClick(id)">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>Просмотреть данные</span>
+        </button>
         <button mat-menu-item (click)="onEditClientClick(id)">
             <mat-icon color="primary">edit</mat-icon>
             <span>Редактировать данные</span>

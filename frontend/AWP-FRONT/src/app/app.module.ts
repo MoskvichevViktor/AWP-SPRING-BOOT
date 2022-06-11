@@ -27,6 +27,7 @@ import { ResponseViewComponent } from './components/responses/response-view/resp
 import { ClientEditComponent } from './components/clients/client-edit/client-edit.component';
 import { ContractCreateComponent } from './components/contracts/contract-create/contract-create.component';
 import { ContractViewComponent } from './components/contracts/contract-view/contract-view.component';
+import { ClientViewComponent } from './components/clients/client-view/client-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { ContractViewComponent } from './components/contracts/contract-view/cont
     ResponseViewComponent,
     ClientEditComponent,
     ContractCreateComponent,
-    ContractViewComponent
+    ContractViewComponent,
+    ClientViewComponent
   ],
   imports: [
     AppRoutingModule,

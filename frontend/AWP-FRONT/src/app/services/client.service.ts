@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RemoteService } from "./remote.service";
 import { environment } from "../../environments/environment";
-import { Client, ClientDto, CreditRequestDto } from "../shared/models.interfaces";
+import { Client, ClientDto } from "../shared/models.interfaces";
 import { map } from "rxjs";
 import { formatDateTime } from "../shared/format-date-time";
 

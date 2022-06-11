@@ -90,8 +90,8 @@ export class ResponsesListComponent implements OnInit, AfterViewInit, OnDestroy 
         this.statusSubj.next(this.responseStatusFilter.value);
     }
 
-    onUserClick(id: number) {
-        this.router.navigate(['/main/clients']);
+    onClientClick(id: number) {
+        this.router.navigate(['/main/clients', id]);
     }
 
     onViewClick(id: number) {
