@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreditResponse } from "../../../shared/models.interfaces";
 import { Subscription } from "rxjs";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
-import { AuthService } from "../../../services/auth.service";
 import { CreditResponseService } from "../../../services/credit-response.service";
 
 @Component({
@@ -20,10 +19,8 @@ export class ResponseViewComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
         public dialog: MatDialog,
-        public creditResponseService: CreditResponseService,
-        private authService: AuthService
+        public creditResponseService: CreditResponseService
     ) {
     }
 

@@ -13,6 +13,7 @@ import { ResponsesListComponent } from "./components/responses/responses-list/re
 import { ContractsListComponent } from "./components/contracts/contracts-list/contracts-list.component";
 import { ResponseViewComponent } from "./components/responses/response-view/response-view.component";
 import { ClientEditComponent } from "./components/clients/client-edit/client-edit.component";
+import { ContractViewComponent } from "./components/contracts/contract-view/contract-view.component";
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
             { path: 'responses', component: ResponsesListComponent },
             { path: 'responses/:id', component: ResponseViewComponent },
             { path: 'contracts', component: ContractsListComponent },
+            { path: 'contracts/:id', component: ContractViewComponent },
             { path: 'clients', component: ClientsListComponent },
             { path: 'clients/new', component: ClientEditComponent },
             { path: 'clients/:id/edit', component: ClientEditComponent },
