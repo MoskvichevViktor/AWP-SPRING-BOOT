@@ -34,6 +34,10 @@ mat-slider {
   bottom: 5%;
 }
 
+mat-chip {
+  padding: 8px 32px;
+}
+
 .slider-label {
   font-weight: bold;
   position: absolute;
@@ -48,39 +52,11 @@ mat-slider {
 }
 
 #calc_controls {
-
 }
 
 #calc_content {
   overflow-y: auto;
 }
 
-table {
-  position: absolute;
-  width: 100%;
-  left: 5%;
-  right: 5%;
-  top: 0;
 
-  .mat-header-row {
-    background-color: $secLightColor;
-    font-weight: bold;
-    th.mat-header-cell {
-      border-bottom: 0;
-    }
-  }
-
-  th.month-column {
-    width: 15%;
-  }
-  th.percent-column {
-    width: 15%;
-  }
-  th.payment-column {
-    width: 30%;
-  }
-  th.sum-column {
-    width: 30%;
-  }
-}
 

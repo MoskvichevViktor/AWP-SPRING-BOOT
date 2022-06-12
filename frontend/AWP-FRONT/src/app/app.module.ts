@@ -20,7 +20,7 @@ import { RequestViewComponent } from './components/requests/request-view/request
 import { RequestEditComponent } from './components/requests/request-edit/request-edit.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { ResponsesListComponent } from './components/responses/responses-list/responses-list.component';
-import { CalculationComponent } from './components/main/calculation/calculation.component';
+import { CalculationControlsComponent } from './components/main/calculation/calculation-controls.component';
 import { ContractsListComponent } from './components/contracts/contracts-list/contracts-list.component';
 import { ResponseCreateComponent } from './components/responses/response-create/response-create.component';
 import { ResponseViewComponent } from './components/responses/response-view/response-view.component';
@@ -28,6 +28,7 @@ import { ClientEditComponent } from './components/clients/client-edit/client-edi
 import { ContractCreateComponent } from './components/contracts/contract-create/contract-create.component';
 import { ContractViewComponent } from './components/contracts/contract-view/contract-view.component';
 import { ClientViewComponent } from './components/clients/client-view/client-view.component';
+import { CalculationListComponent } from './components/calculation/calculation-list/calculation-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,14 +43,15 @@ import { ClientViewComponent } from './components/clients/client-view/client-vie
     RequestEditComponent,
     ConfirmationDialogComponent,
     ResponsesListComponent,
-    CalculationComponent,
+    CalculationControlsComponent,
     ContractsListComponent,
     ResponseCreateComponent,
     ResponseViewComponent,
     ClientEditComponent,
     ContractCreateComponent,
     ContractViewComponent,
-    ClientViewComponent
+    ClientViewComponent,
+    CalculationListComponent
   ],
   imports: [
     AppRoutingModule,

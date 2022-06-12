@@ -1,0 +1,33 @@
+<table mat-table [dataSource]="dataSource">
+    <!-- Month Column -->
+    <ng-container matColumnDef="month" class="month-column">
+        <th mat-header-cell *matHeaderCellDef> Месяц </th>
+        <td mat-cell *matCellDef="let calculation"> {{calculation.month}} </td>
+    </ng-container>
+
+    <!-- Percent Column -->
+    <ng-container matColumnDef="partPercent" class="percent-column">
+        <th mat-header-cell *matHeaderCellDef> Проценты </th>
+        <td mat-cell *matCellDef="let calculation"> {{calculation.partPercent}} </td>
+    </ng-container>
+
+    <!-- Payment Column -->
+    <ng-container matColumnDef="partPayment" class="payment-column">
+        <th mat-header-cell *matHeaderCellDef> Платеж, руб. </th>
+        <td mat-cell *matCellDef="let calculation" class="sum-rub"> {{calculation.partPayment}} </td>
+    </ng-container>
+
+    <!-- Sum Column -->
+    <ng-container matColumnDef="partSum" class="sum-column">
+        <th mat-header-cell *matHeaderCellDef> Остаток, руб. </th>
+        <td mat-cell *matCellDef="let calculation" class="sum-rub"> {{calculation.partSum}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let request columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4"></td>
+    </tr>
+</table>
