@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Contract } from "../../../shared/models.interfaces";
-import { Subscription } from "rxjs";
+import { CalcInputDto, Contract, CreditResponse } from "../../../shared/models.interfaces";
+import { BehaviorSubject, Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ContractService } from "../../../services/contract.service";
@@ -14,6 +14,14 @@ export class ContractViewComponent implements OnInit {
 
     title = 'Кредитный договор';
     contract: Contract | null = null;
+
+    calcDto: CalcInputDto = {
+        sum: 1000,
+        percent: 20,
+        period: 12
+    }
+
+    $calcDtoSubj = new BehaviorSubject<CalcInputDto>(this.calcDto);
 
     private $contractSub = new Subscription();
 
@@ -37,8 +45,18 @@ export class ContractViewComponent implements OnInit {
 
     private loadResponse(id: number) {
         this.contractService.load(id).subscribe(
-            res => this.contract = res
+            res => {
+                this.contract = res;
+                this.fillCalcDtoFromContract(res);
+            }
         );
+    }
+
+    private fillCalcDtoFromContract(contract: Contract) {
+        this.calcDto.sum = contract.sum;
+        this.calcDto.percent = contract.percent;
+        this.calcDto.period = contract.period;
+        this.$calcDtoSubj.next(this.calcDto);
     }
 
     getContractInfo(contract: Contract | null) {

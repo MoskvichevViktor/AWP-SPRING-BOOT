@@ -17,32 +17,40 @@
     </mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-content>
-        <mat-list>
-            <mat-list-item>
-                <h4 matLine>Заемщик: </h4>
-                <p matLine>{{contract?.clientName}}</p>
-            </mat-list-item>
-            <mat-list-item>
-                <h4 matLine>Кредит на сумму: </h4>
-                <p matLine class="sum-rub">{{contract?.sum}}</p>
-            </mat-list-item>
-            <mat-list-item>
-                <h4 matLine>Начало действия договора: </h4>
-                <p matLine>{{contract?.createdAt}}</p>
-            </mat-list-item>
-            <mat-list-item>
-                <h4 matLine>Срок кредита: </h4>
-                <p matLine class="period-month">{{contract?.period}}</p>
-            </mat-list-item>
-            <mat-list-item>
-                <h4 matLine>Процентная ставка: </h4>
-                <p matLine class="percent">{{contract?.percent}}</p>
-            </mat-list-item>
-            <mat-list-item>
-                <h4 matLine>Текущий статус: </h4>
-                <p matLine>{{contract ? contractService.renderContractStatus(contract.status) : ''}}</p>
-            </mat-list-item>
-        </mat-list>
+        <div class="card-container">
+            <div class="card_list">
+                <mat-list>
+                    <mat-list-item>
+                        <h4 matLine>Заемщик: </h4>
+                        <p matLine>{{contract?.clientName}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>Кредит на сумму: </h4>
+                        <p matLine class="sum-rub">{{contract?.sum}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>Начало действия договора: </h4>
+                        <p matLine>{{contract?.createdAt}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>Срок кредита: </h4>
+                        <p matLine class="period-month">{{contract?.period}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>Процентная ставка: </h4>
+                        <p matLine class="percent">{{contract?.percent}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>Текущий статус: </h4>
+                        <p matLine>{{contract ? contractService.renderContractStatus(contract.status) : ''}}</p>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div class="card_calculation">
+                <h4>График платежей:</h4>
+                <app-calculation-list [$calcDtoSubj]="$calcDtoSubj"></app-calculation-list>
+            </div>
+        </div>
     </mat-card-content>
     <mat-card-footer></mat-card-footer>
 </mat-card>
