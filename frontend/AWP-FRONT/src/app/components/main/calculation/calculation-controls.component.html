@@ -31,8 +31,10 @@
                 </button>
             </mat-grid-tile>
             <mat-grid-tile id="calc_content" colspan="2" rowspan="5">
-                <app-calculation-list [$calcDtoSubj]="$calcDtoSubj">
-                </app-calculation-list>
+                <div class="calc_content__container">
+                    <app-calculation-list [$calcDtoSubj]="$calcDtoSubj">
+                    </app-calculation-list>
+                </div>
             </mat-grid-tile>
             <mat-grid-tile id="calc_footer" colspan="3" rowspan="1">
                 <mat-chip-list>
