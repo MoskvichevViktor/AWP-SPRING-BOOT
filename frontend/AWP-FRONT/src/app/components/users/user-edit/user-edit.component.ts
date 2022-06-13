@@ -15,7 +15,7 @@ export class UserEditComponent implements OnInit {
   title = 'Данные нового пользователя';
   user: User | null = null;
   userDto: UserDto = {
-    userName: '', email: '', password: '', role: UserRole.ROLE_MANAGER
+    id: null, userName: '', email: '', password: '', role: UserRole.ROLE_MANAGER
   };
   editMode = false;
   editForm = this.fb.group({

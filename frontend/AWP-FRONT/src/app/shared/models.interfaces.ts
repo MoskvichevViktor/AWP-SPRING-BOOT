@@ -129,7 +129,7 @@ export interface User {
 }
 
 export interface UserDto {
-    id?: number,
+    id: number | null,
     userName: string,
     email: string,
     password: string,
