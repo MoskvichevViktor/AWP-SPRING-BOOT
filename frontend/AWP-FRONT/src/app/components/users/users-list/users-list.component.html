@@ -8,8 +8,26 @@
                 <mat-label>Поиск</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Напр. Иванов" #input>
             </mat-form-field>
+            <button mat-raised-button color="primary"
+                    class="add_user_button"
+                    (click)="onAddUserClick()">
+                Добавить нового пользователя
+            </button>
 
             <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+                <!-- Menu button Column -->
+                <ng-container matColumnDef="menu" class="menu-column">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let user">
+                        <button mat-icon-button
+                                [matMenuTriggerFor]="menu"
+                                [matMenuTriggerData]="{userId: user.id}"
+                                aria-label="Открыть меню">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
                 <!-- ID Column -->
                 <ng-container matColumnDef="id" class="id-column">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> № </th>
@@ -62,3 +80,12 @@
                 aria-label="Выберите страницу"></mat-paginator>
     </mat-card-footer>
 </mat-card>
+
+<mat-menu #menu="matMenu">
+    <ng-template matMenuContent let-id="userId">
+        <button mat-menu-item (click)="onEditUserClick(id)">
+            <mat-icon color="primary">edit</mat-icon>
+            <span>Редактировать данные</span>
+        </button>
+    </ng-template>
+</mat-menu>

@@ -15,6 +15,7 @@ import { ResponseViewComponent } from "./components/responses/response-view/resp
 import { ClientEditComponent } from "./components/clients/client-edit/client-edit.component";
 import { ContractViewComponent } from "./components/contracts/contract-view/contract-view.component";
 import { ClientViewComponent } from "./components/clients/client-view/client-view.component";
+import { UserEditComponent } from "./components/users/user-edit/user-edit.component";
 
 
 const routes: Routes = [
@@ -37,6 +38,8 @@ const routes: Routes = [
             { path: 'clients/:id', component: ClientViewComponent },
             { path: 'clients/:id/edit', component: ClientEditComponent },
             { path: 'users', component: UsersListComponent },
+            { path: 'users/new', component: UserEditComponent },
+            { path: 'users/:id/edit', component: UserEditComponent },
         ] },
 ];
 

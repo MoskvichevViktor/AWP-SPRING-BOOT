@@ -31,5 +31,8 @@ export const ApiEndpoints = {
     },
     users: {
         list: '/users',
+        get: (id: number) => `/users/${id}`,
+        create: '/users',
+        update: '/users',
     },
 }

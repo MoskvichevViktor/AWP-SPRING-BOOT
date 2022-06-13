@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import { UserService } from "../../../services/user.service";
 import { Sort } from "@angular/material/sort";
 import { compare } from "../../../shared/sort-compare";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-users-list',
@@ -15,11 +16,13 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   tableTitle = 'Список пользователей';
   dataSource = new MatTableDataSource<User>([]);
-  displayedColumns = ['id', 'name', 'email', 'role', 'created', 'updated'];
+  displayedColumns = ['menu', 'id', 'name', 'email', 'role', 'created', 'updated'];
 
   $usersSub = new Subscription();
 
   constructor(
+      private router: Router,
+      private route: ActivatedRoute,
       public userService: UserService
   ) { }
 
@@ -65,5 +68,14 @@ export class UsersListComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  onAddUserClick() {
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
+  onEditUserClick(id: number) {
+    this.router.navigate([id, 'edit'], {relativeTo: this.route});
+  }
+
 
 }

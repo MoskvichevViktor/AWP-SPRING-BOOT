@@ -17,6 +17,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatSliderModule } from "@angular/material/slider";
 import { MatChipsModule } from "@angular/material/chips";
+import { MatSelectModule } from "@angular/material/select";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { MatChipsModule } from "@angular/material/chips";
         MatDialogModule,
         MatGridListModule,
         MatSliderModule,
-        MatChipsModule
+        MatChipsModule,
+        MatSelectModule
     ],
     exports: [
         MatSidenavModule,
@@ -59,7 +61,8 @@ import { MatChipsModule } from "@angular/material/chips";
         MatDialogModule,
         MatGridListModule,
         MatSliderModule,
-        MatChipsModule
+        MatChipsModule,
+        MatSelectModule
     ]
 })
 export class MaterialModule {

@@ -29,6 +29,7 @@ import { ContractCreateComponent } from './components/contracts/contract-create/
 import { ContractViewComponent } from './components/contracts/contract-view/contract-view.component';
 import { ClientViewComponent } from './components/clients/client-view/client-view.component';
 import { CalculationListComponent } from './components/calculation/calculation-list/calculation-list.component';
+import { UserEditComponent } from './components/users/user-edit/user-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,8 @@ import { CalculationListComponent } from './components/calculation/calculation-l
     ContractCreateComponent,
     ContractViewComponent,
     ClientViewComponent,
-    CalculationListComponent
+    CalculationListComponent,
+    UserEditComponent
   ],
   imports: [
     AppRoutingModule,

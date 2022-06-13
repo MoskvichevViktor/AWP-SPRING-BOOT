@@ -128,6 +128,14 @@ export interface User {
     updatedAt: string
 }
 
+export interface UserDto {
+    id?: number,
+    userName: string,
+    email: string,
+    password: string,
+    role: UserRole
+}
+
 export enum ContractStatus {
     WAITING_SIGNING = "WAITING_SIGNING",
     ACTIVE = "ACTIVE",

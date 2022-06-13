@@ -1,6 +1,7 @@
 package application.services;
 
 import application.constants.UserRole;
+import application.dto.UserDto;
 import application.dto.UserRegistrationDto;
 import application.exception.AwpException;
 import application.models.User;
@@ -49,8 +50,8 @@ public class UserService implements UserDetailsService {
     @SneakyThrows
     @Transactional
     public ResponseEntity<?> delete(Long id) {
-        User user = getById(id).orElseThrow(() ->
-                new AwpException("user with id:" + id + " tot found"));
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new AwpException("user with id:" + id + " not found"));
         if (user == null || user.getUsername().equals("admin")) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -79,8 +80,8 @@ public class UserService implements UserDetailsService {
         return userRepository.existsAllByUsernameEquals(username);
     }
 
-    public Optional<User> getById(Long id) {
-        return userRepository.findById(id);
+    public UserDto getById(Long id) {
+        return userRepository.findById(id).map(UserDto::new).orElse(null);
     }
 
     public ResponseEntity<?> createNewUser(UserRegistrationDto userDto) {
