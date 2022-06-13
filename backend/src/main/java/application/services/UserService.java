@@ -3,6 +3,7 @@ package application.services;
 import application.constants.UserRole;
 import application.dto.UserDto;
 import application.dto.UserRegistrationDto;
+import application.dto.UserUpdateDto;
 import application.exception.AwpException;
 import application.models.User;
 import application.repositories.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<User> getAll() {
         return userRepository.findAll();
@@ -98,5 +101,11 @@ public class UserService implements UserDetailsService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    public ResponseEntity<?> update(UserUpdateDto userDto) {
+        User user = userDto.valueOf(userDto);
+        user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userRepository.save(user);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 }
 

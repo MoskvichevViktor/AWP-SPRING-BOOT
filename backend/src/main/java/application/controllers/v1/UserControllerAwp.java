@@ -3,6 +3,7 @@ package application.controllers.v1;
 import application.controllers.exception_handler.AbstractAwpExceptionHandlerController;
 import application.dto.UserDto;
 import application.dto.UserRegistrationDto;
+import application.dto.UserUpdateDto;
 import application.exception.AwpException;
 import application.models.User;
 import application.services.AuthService;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/api/v1/users")
 @RestController
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class UserControllerAwp extends AbstractAwpExceptionHandlerController {
 
@@ -33,9 +34,9 @@ public class UserControllerAwp extends AbstractAwpExceptionHandlerController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @PatchMapping("")
-    public ResponseEntity<?> update(@RequestBody User user) {
-        return userService.save(user);
+    @PutMapping()
+    public ResponseEntity<?> update(@RequestBody UserUpdateDto user) {
+        return userService.update(user);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
