@@ -16,6 +16,7 @@ import { ClientEditComponent } from "./components/clients/client-edit/client-edi
 import { ContractViewComponent } from "./components/contracts/contract-view/contract-view.component";
 import { ClientViewComponent } from "./components/clients/client-view/client-view.component";
 import { UserEditComponent } from "./components/users/user-edit/user-edit.component";
+import { RoleGuard } from "./guards/role.guard";
 
 
 const routes: Routes = [
@@ -37,9 +38,9 @@ const routes: Routes = [
             { path: 'clients/new', component: ClientEditComponent },
             { path: 'clients/:id', component: ClientViewComponent },
             { path: 'clients/:id/edit', component: ClientEditComponent },
-            { path: 'users', component: UsersListComponent },
-            { path: 'users/new', component: UserEditComponent },
-            { path: 'users/:id/edit', component: UserEditComponent },
+            { path: 'users', component: UsersListComponent, canActivate: [RoleGuard] },
+            { path: 'users/new', component: UserEditComponent, canActivate: [RoleGuard] },
+            { path: 'users/:id/edit', component: UserEditComponent, canActivate: [RoleGuard] },
         ] },
 ];
 
