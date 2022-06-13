@@ -2,7 +2,6 @@ package application.services;
 
 import application.constants.UserRole;
 import application.dto.UserDto;
-import application.dto.UserRegistrationDto;
 import application.dto.UserUpdateDto;
 import application.exception.AwpException;
 import application.models.User;
@@ -20,7 +19,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -87,21 +89,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id).map(UserDto::new).orElse(null);
     }
 
-    public ResponseEntity<?> createNewUser(UserRegistrationDto userDto) {
-        Date now = new Date();
-        User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        //TODO определиться с ролью по умолчанию
-        user.setRole(UserRole.ROLE_MANAGER);
-        user.setEmail(userDto.getEmail());
-        user.setCreatedAt(now);
-        user.setUpdatedAt(now);
-        save(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    public ResponseEntity<?> update(UserUpdateDto userDto) {
+    public ResponseEntity<?> save(UserUpdateDto userDto) {
         User user = userDto.valueOf(userDto);
         user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         userRepository.save(user);

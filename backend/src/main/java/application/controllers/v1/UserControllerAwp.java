@@ -2,11 +2,9 @@ package application.controllers.v1;
 
 import application.controllers.exception_handler.AbstractAwpExceptionHandlerController;
 import application.dto.UserDto;
-import application.dto.UserRegistrationDto;
 import application.dto.UserUpdateDto;
 import application.exception.AwpException;
 import application.models.User;
-import application.services.AuthService;
 import application.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -24,7 +22,6 @@ import java.util.stream.Collectors;
 public class UserControllerAwp extends AbstractAwpExceptionHandlerController {
 
     private final UserService userService;
-    private final AuthService authService;
 
     @GetMapping("")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -36,7 +33,7 @@ public class UserControllerAwp extends AbstractAwpExceptionHandlerController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PutMapping()
     public ResponseEntity<?> update(@RequestBody UserUpdateDto user) {
-        return userService.update(user);
+        return userService.save(user);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -46,13 +43,13 @@ public class UserControllerAwp extends AbstractAwpExceptionHandlerController {
     }
 
     @SneakyThrows
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("")
-    public ResponseEntity<?> createNewUser(@RequestBody UserRegistrationDto userDto) {
-        if (userService.isExistsUser(userDto.getUsername())) {
+    public ResponseEntity<?> save(@RequestBody UserUpdateDto userDto) {
+        if (userService.isExistsUser(userDto.getUserName())) {
             throw new AwpException("This username is occupied");
         }
-        userDto.setPassword(authService.encrypt(userDto.getPassword()));
-        return userService.createNewUser(userDto);
+        return userService.save(userDto);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
