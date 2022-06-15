@@ -40,7 +40,7 @@ public class GenerateContractService {
         createDocFromTemplate(creditResponseDto);
         replaceTextFromTemplate(creditResponseDto);
         backTemplate();
-        //File file = new File("C:\\Users\\belde\\Documents\\GB\\Команда\\6\\backend\\src\\main\\resources\\blankContract\\createFileFromTemplate.docx");
+        //File file = new File("./backend/src/main/resources/blankContract/createFileFromTemplate.docx");
         //Desktop desktop = Desktop.getDesktop();
         //desktop.open(file);
         Process builder = Runtime.getRuntime().exec("cmd /c start C:\\Users\\belde\\Documents\\GB\\Команда\\6\\backend\\src\\main\\resources\\blankContract\\createFileFromTemplate.docx");
@@ -49,15 +49,15 @@ public class GenerateContractService {
 
 
     private  void backTemplate() throws IOException, InvalidFormatException {
-        XWPFDocument doc2 = new XWPFDocument(OPCPackage.open("C:\\Users\\belde\\Documents\\GB\\Команда\\6\\backend\\src\\main\\resources\\blankContract\\templateTest.docx"));
-        doc2.write(new FileOutputStream("C:\\Users\\belde\\Documents\\GB\\Команда\\6\\backend\\src\\main\\resources\\blankContract\\template.docx"));
+        XWPFDocument doc2 = new XWPFDocument(OPCPackage.open("./backend/src/main/resources/blankContract/templateTest.docx"));
+        doc2.write(new FileOutputStream("./backend/src/main/resources/blankContract/blankContract\\template.docx"));
         doc2.close();
     }
 
 
     private  void createDocFromTemplate(CreditResponseDto dto) throws InvalidFormatException, IOException{
 
-        XWPFDocument doc = new XWPFDocument(OPCPackage.open("C:\\Users\\belde\\Documents\\GB\\Команда\\6\\backend\\src\\main\\resources\\blankContract\\template.docx"));
+        XWPFDocument doc = new XWPFDocument(OPCPackage.open("./backend/src/main/resources/blankContract/template.docx"));
         //добавление графика платежей
         BigDecimal sum = dto.getSum();
         float percent = dto.getPercent();
@@ -78,13 +78,13 @@ public class GenerateContractService {
             tableRow.getCell(3).setText(Objects.toString(calculation.getOutputDataArrays(new InputData(sum, percent, period)).get(i).getPartPercent()));
             tableRow.getCell(4).setText(Objects.toString(calculation.getOutputDataArrays(new InputData(sum, percent, period)).get(i).getPartSum()));
         }
-        doc.write(new FileOutputStream("C:\\Users\\belde\\Documents\\GB\\Команда\\6\\backend\\src\\main\\resources\\blankContract\\createFileFromTemplate.docx"));
+        doc.write(new FileOutputStream("./backend/src/main/resources/blankContract/createFileFromTemplate.docx"));
         doc.close();
     }
 
     private  void replaceTextFromTemplate(CreditResponseDto dto) throws InvalidFormatException, IOException{
         //Open doc templatet file
-        XWPFDocument doc = new XWPFDocument(OPCPackage.open("C:\\Users\\belde\\Documents\\GB\\Команда\\6\\backend\\src\\main\\resources\\blankContract\\template.docx"));
+        XWPFDocument doc = new XWPFDocument(OPCPackage.open("./backend/src/main/resources/blankContract/template.docx"));
         //замена параметров
         for (XWPFParagraph p : doc.getParagraphs()) {
             List<XWPFRun> runs = p.getRuns();
@@ -131,7 +131,7 @@ public class GenerateContractService {
             }
         }
 
-        doc.write(new FileOutputStream("C:\\Users\\belde\\Documents\\GB\\Команда\\6\\backend\\src\\main\\resources\\blankContract\\createFileFromTemplate.docx"));
+        doc.write(new FileOutputStream("./backend/src/main/resources/blankContract/createFileFromTemplate.docx"));
         doc.close();
     }
 }
