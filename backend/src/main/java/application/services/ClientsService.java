@@ -24,17 +24,6 @@ public class ClientsService {
         return clientRepository.findAll();
     }
 
-//    public ResponseEntity<?> delete(Long id) {
-//        Client client = clientRepository.findById(id).orElseThrow(() ->
-//                new ResourceNotFoundException("Client with id:" + id + " not found.")
-//        );
-//        if (client == null) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        clientRepository.delete(client);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
     public Optional<Client> getById(Long id) {
         return clientRepository.findById(id);
     }

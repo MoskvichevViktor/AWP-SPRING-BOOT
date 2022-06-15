@@ -1,0 +1,56 @@
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar>
+            <a routerLink="/main/responses">
+                <mat-icon
+                    matTooltip="Вернуться к списку ответов"
+                    matTooltipPosition="right"
+                    color="primary">
+                    subdirectory_arrow_left
+                </mat-icon>
+            </a>
+        </div>
+    </mat-card-header>
+    <mat-card-title>{{getResponseInfo(response)}}</mat-card-title>
+    <mat-card-subtitle>
+        <h2>{{title | uppercase }}</h2>
+    </mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <div class="card-container">
+            <div class="card_list">
+                <mat-list>
+                    <mat-list-item>
+                        <h4 matLine>Заявитель: </h4>
+                        <p matLine>{{response?.clientName}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>{{response?.status === 'CONFIRMED' ? 'Одобрена сумма:' : 'Запрашиваемая сумма:'}}</h4>
+                        <p matLine class="sum-rub">{{response?.sum}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>Срок кредита: </h4>
+                        <p matLine class="period-month">{{response?.period}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>Процентная ставка: </h4>
+                        <p matLine class="percent">{{response?.percent}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>Заявка создана: </h4>
+                        <p matLine>{{response?.createdAt}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4 matLine>Текущий статус: </h4>
+                        <p matLine>{{response ? creditResponseService.renderResponseStatus(response.status) : ''}}</p>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div class="card_calculation" *ngIf="response && response.status !== 'REJECTION'">
+                <h4>График платежей:</h4>
+                <app-calculation-list [$calcDtoSubj]="$calcDtoSubj"></app-calculation-list>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+</mat-card>

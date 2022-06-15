@@ -1,0 +1,42 @@
+<mat-card>
+    <mat-card-subtitle>
+        <h2>{{title | uppercase }}</h2>
+    </mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <div class="edit-form-group">
+            <form [formGroup]="editForm" [style.fontSize.px]="16">
+                <p>
+                    <mat-form-field appearance="legacy" color="primary">
+                        <mat-label>Ф.И.О заемщика</mat-label>
+                        <input matInput placeholder="Иванов И.И." formControlName="clientName">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Сумма кредита, руб.</mat-label>
+                        <input matInput placeholder="10000" formControlName="sum" type="number">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Срок кредита, мес.</mat-label>
+                        <input matInput placeholder="12" formControlName="period" type="number">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Процентная ставка, %.</mat-label>
+                        <input matInput placeholder="4" formControlName="percent" type="number">
+                    </mat-form-field>
+                </p>
+            </form>
+        </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+        <button mat-stroked-button color="primary" (click)="onSaveClick()">Сохранить</button>
+        <button mat-stroked-button color="accent"  (click)="onCancelClick()">Отменить</button>
+    </mat-card-actions>
+    <mat-card-footer></mat-card-footer>
+</mat-card>

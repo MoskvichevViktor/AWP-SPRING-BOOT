@@ -12,7 +12,12 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatListModule } from "@angular/material/list";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import {MatMenuModule} from "@angular/material/menu";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatSliderModule } from "@angular/material/slider";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatSelectModule } from "@angular/material/select";
 
 
 @NgModule({
@@ -31,7 +36,12 @@ import {MatMenuModule} from "@angular/material/menu";
         MatButtonToggleModule,
         MatListModule,
         MatTooltipModule,
-        MatMenuModule
+        MatMenuModule,
+        MatDialogModule,
+        MatGridListModule,
+        MatSliderModule,
+        MatChipsModule,
+        MatSelectModule
     ],
     exports: [
         MatSidenavModule,
@@ -47,7 +57,12 @@ import {MatMenuModule} from "@angular/material/menu";
         MatButtonToggleModule,
         MatListModule,
         MatTooltipModule,
-        MatMenuModule
+        MatMenuModule,
+        MatDialogModule,
+        MatGridListModule,
+        MatSliderModule,
+        MatChipsModule,
+        MatSelectModule
     ]
 })
 export class MaterialModule {

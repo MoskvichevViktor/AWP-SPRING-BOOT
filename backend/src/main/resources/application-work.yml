@@ -15,7 +15,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/awp
     driver-class-name: org.postgresql.Driver
     user: postgres
-    password: postgres
+    password: 712459
     connect-retries: 60
     validate-on-migrate: true
     enabled: true

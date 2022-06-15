@@ -14,7 +14,17 @@ body {
   text-align: left;
 }
 
-.mat-row :hover {
+.table_icon {
+  font-size: 1.5em;
+  position: relative;
+  top: 4px;
+}
+
+.table_icon_holder {
+  display: inline-block;
+}
+
+.table_icon_holder :hover {
   cursor: pointer;
 }
 
@@ -30,7 +40,7 @@ mat-card-title {
   color: $primaryDarkColor;
 }
 
-mat-list-item h4 {
+h4 {
   color: $primaryDarkColor;
 }
 
@@ -50,6 +60,8 @@ mat-list-item p {
 
 
 .sum-rub:after { content:"\20BD"; }
+
+.percent:after { content:"\0025"; }
 
 .period-month:after { content: ' мес.'; }
 

@@ -1,11 +1,13 @@
 package application.services;
 
 import application.constants.UserRole;
-import application.dto.UserRegistrationDto;
-import application.exception.ResourceNotFoundException;
+import application.dto.UserDto;
+import application.dto.UserUpdateDto;
+import application.exception.AwpException;
 import application.models.User;
 import application.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,10 +15,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +30,7 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<User> getAll() {
         return userRepository.findAll();
@@ -45,10 +52,11 @@ public class UserService implements UserDetailsService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @SneakyThrows
     @Transactional
     public ResponseEntity<?> delete(Long id) {
-        User user = getUserById(id).orElseThrow(() ->
-                new ResourceNotFoundException("user with id:" + id + " tot found"));
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new AwpException("user with id:" + id + " not found"));
         if (user == null || user.getUsername().equals("admin")) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -77,23 +85,15 @@ public class UserService implements UserDetailsService {
         return userRepository.existsAllByUsernameEquals(username);
     }
 
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public UserDto getById(Long id) {
+        return userRepository.findById(id).map(UserDto::new).orElse(null);
     }
 
-    public ResponseEntity<?> createNewUser(UserRegistrationDto userDto) {
-        Date now = new Date();
-        User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        //TODO определиться с ролью по умолчанию
-        user.setRole(UserRole.ROLE_MANAGER);
-        user.setEmail(userDto.getEmail());
-        user.setCreatedAt(now);
-        user.setUpdatedAt(now);
-        save(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<?> save(UserUpdateDto userDto) {
+        User user = userDto.valueOf(userDto);
+        user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userRepository.save(user);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-
 }
 

@@ -1,0 +1,63 @@
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar>
+            <a routerLink="/main/users">
+                <mat-icon
+                        matTooltip="Вернуться к списку пользователей"
+                        matTooltipPosition="right"
+                        color="warn">
+                    close
+                </mat-icon>
+            </a>
+        </div>
+    </mat-card-header>
+    <mat-card-subtitle>
+        <h2>{{title | uppercase }}</h2>
+    </mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <div class="edit-form-group">
+            <form [formGroup]="editForm" [style.fontSize.px]="16">
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Логин пользователя</mat-label>
+                        <input matInput placeholder="Manager" formControlName="userName" type="text">
+                        <mat-error *ngIf="formErrors['userName']">{{formErrors['userName']}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Адрес электронной почты</mat-label>
+                        <input matInput placeholder="address@company.com" formControlName="email" type="text">
+                        <mat-error *ngIf="formErrors['email']">{{formErrors['email']}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Роль пользователя</mat-label>
+                        <mat-select formControlName="role">
+                            <mat-option *ngFor="let role of UserRole | keyvalue" [value]="role.key">
+                                {{userService.renderUserRole(role.value)}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formErrors['role']">{{formErrors['role']}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" color="primary">
+                        <mat-label>Пароль</mat-label>
+                        <input matInput placeholder="secret" formControlName="password" type="password">
+                        <mat-error *ngIf="formErrors['password']">{{formErrors['password']}}</mat-error>
+                    </mat-form-field>
+                </p>
+            </form>
+        </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+        <button mat-stroked-button color="primary" (click)="onSaveClick()">Сохранить</button>
+        <button mat-stroked-button color="accent"  (click)="onDiscardClick()">Отменить изменения</button>
+    </mat-card-actions>
+    <mat-card-footer></mat-card-footer>
+</mat-card>
+

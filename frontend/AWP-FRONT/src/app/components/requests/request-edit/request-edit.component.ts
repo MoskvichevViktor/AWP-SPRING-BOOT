@@ -3,11 +3,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 import { CreditRequestService } from "../../../services/credit-request.service";
 import {Client, CreditRequest, CreditRequestDto, FormErrors} from "../../../shared/models.interfaces";
 import { Subscription } from "rxjs";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {ClientService} from "../../../services/client.service";
 
 @Component({
-  selector: 'app-reques-edit',
+  selector: 'app-request-edit',
   templateUrl: './request-edit.component.html',
   styleUrls: ['./request-edit.component.scss']
 })
@@ -20,7 +20,7 @@ export class RequestEditComponent implements OnInit {
   };
   editMode = false;
   editForm = this.fb.group({
-    clientName: [{value: 'Client', disabled: true}, Validators.required],
+    clientName: [{value: 'Client', disabled: true}],
     sum: [0, [Validators.required, Validators.min(1)]],
     period: [0, [Validators.required, Validators.min(1)]],
   });
@@ -62,6 +62,7 @@ export class RequestEditComponent implements OnInit {
   private prefillFormForEdit(request: CreditRequest) {
     this.requestDto.id = request.id;
     this.requestDto.clientId = request.clientId;
+    this.requestDto.status = request.status;
     this.editForm.patchValue({
       clientName: request.clientName,
       sum: request.sum,
@@ -97,7 +98,7 @@ export class RequestEditComponent implements OnInit {
     this.formErrors = {};
   }
 
-  checkAndShowFormErrors() {
+  private checkAndShowFormErrors() {
     for (const controlName in this.editForm.controls) {
       const formControl = this.editForm.controls[controlName];
       if (formControl.errors) {
@@ -106,7 +107,7 @@ export class RequestEditComponent implements OnInit {
     }
   }
 
-  saveOrUpdate(dto: CreditRequestDto) {
+  private saveOrUpdate(dto: CreditRequestDto) {
     if (this.editMode) {
       this.creditRequestService.update(dto);
     } else {

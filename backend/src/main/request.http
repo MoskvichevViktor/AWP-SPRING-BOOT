@@ -1,3 +1,19 @@
+PUT http://localhost:8080/api/v1/contracts/status/1/ACTIVE
+
+###
+GET http://localhost:8080/api/v1/contracts/status/WAITING_SIGNING
+
+###
+
+GET http://localhost:8080/api/v1/users/1
+
+###
+
+
+GET http://localhost:8080/api/v1/contracts/client_id/1
+
+###
+
 POST http://localhost:8080/api/v1/credit_requests/
 Content-Type: application/json
 
@@ -6,14 +22,13 @@ Content-Type: application/json
   "sum": "50000",
   "period": "24"
 }
-
 ###
 
-GET http://localhost:8080/api/v1/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZXMiOlsiUk9MRV9NQU5BR0VSIl0sImV4cCI6MTY1Mzk5OTE3OCwiaWF0IjoxNjUzOTk1NTc4fQ.w7B-bZvk-g0xm74B1I2a74wa7tr9kuIBP_1KWdZp9fg
+GET http://localhost:8080/api/v1/users/55
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjU0MTY5MzM2LCJpYXQiOjE2NTQxNjU3MzZ9.kGOqcbKX7uUnjXxPQs6NdBSSqntAyP80jnpj6a79Nm0
 
 ###
-GET http://localhost:8080/api/v1/credit_requests
+GET http://localhost:8080/api/v1/credit_requests/
 
 ###
 GET http://localhost:8080/api/v1/credit_responses
@@ -26,7 +41,7 @@ GET http://localhost:8080/api/v1/credit_responses/all
 
 ###
 
-GET http://localhost:8080/api/v1/contracts
+GET http://localhost:8080/api/v1/contracts/
 
 ###
 
@@ -53,6 +68,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPT
 
 GET http://localhost:8080/api/v1/users
 #Authorization: Bearer {{auth_token}}
+###
+
+
+#The This username is occupied":**********
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
 ###
 
 

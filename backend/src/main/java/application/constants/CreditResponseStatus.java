@@ -1,14 +1,14 @@
 package application.constants;
 
-public enum ResponseStatus {
+public enum CreditResponseStatus {
     WAITING("waiting"),
     CONFIRMED("confirmed"),
-    REJECTION("rejection");
-
+    REJECTION("rejection"),
+    PROCESSED("processed");
 
     private final String statusName;
 
-    ResponseStatus(String statusName) {
+    CreditResponseStatus(String statusName) {
         this.statusName = statusName;
     }
 

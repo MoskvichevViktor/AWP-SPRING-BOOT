@@ -1,15 +1,17 @@
 package application.services;
 
+import application.constants.CreditResponseStatus;
 import application.constants.RequestStatus;
 import application.dto.CreditRequestDto;
 import application.dto.CreditRequestInputDto;
-import application.exception.ResourceNotFoundException;
+import application.exception.AwpException;
 import application.models.Client;
 import application.models.CreditRequest;
+import application.models.CreditResponse;
 import application.repositories.ClientRepository;
 import application.repositories.CreditRequestRepository;
-import application.repositories.CreditResponseRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +24,11 @@ import java.util.stream.Collectors;
 public class RequestService {
     private final CreditRequestRepository requestRepository;
     private final ClientRepository clientRepository;
-    private final CreditResponseRepository responseRepository;
 
-
-    public List<CreditRequestDto> findAllRequestDto(RequestStatus status) {
+    public List<CreditRequestDto> findAllRequestDto(RequestStatus status, Long clientId) {
         return requestRepository.findAll().stream()
                 .filter(creditRequest -> status == null || creditRequest.getStatus().equals(status))
+                .filter(creditRequest -> clientId == null || creditRequest.getClient().getId().equals(clientId))
                 .map(CreditRequestDto::valueOf)
                 .collect(Collectors.toUnmodifiableList());
     }
@@ -48,31 +49,34 @@ public class RequestService {
         }
     }
 
+    @SneakyThrows
     public void update(CreditRequestDto requestDto) {
-
-        CreditRequest request = requestRepository.getById(requestDto.getId());
-        if (request != null) {
-            RequestStatus status = request.getStatus();
-            request.setSum(requestDto.getSum());
-            request.setPeriod(requestDto.getPeriod());
-            request.setStatus(status);
-            if (status != RequestStatus.WAITING) {
-                throw new IllegalArgumentException("Редактировать запрос со статусом: " + status + " запрещено");
-            }
-            //   request.setCreditResponse(responseRepository.findById(requestDto.getResponseId()).orElse(null));
-            if (requestDto.getResponseId() != null) {
-                if (responseRepository.existsById(requestDto.getResponseId())) {
-                    request.setCreditResponse(responseRepository.getById(requestDto.getResponseId()));
-                } else {
-                    throw new ResourceNotFoundException("Incorrect credit response id: " + requestDto.getResponseId() + " Not exists!");
-                }
-            } else {
-                request.setCreditResponse(null);
-            }
-            requestRepository.save(request);
-        } else {
-            throw new NoSuchElementException();
+        CreditRequest request = requestRepository.findById(requestDto.getId()).orElseThrow(() ->
+                new NoSuchElementException(String.format("Incorrect credit request ID: %d", requestDto.getId())));
+        RequestStatus status = request.getStatus();
+        if (status != RequestStatus.WAITING) {
+            throw new AwpException("Request editing with status: " + status + " is forbidden");
         }
+        request.setSum(requestDto.getSum());
+        request.setPeriod(requestDto.getPeriod());
+        request.setStatus(requestDto.getStatus());
+        requestRepository.save(request);
+    }
+
+    public void updateStatusWithResponse(CreditRequest request, CreditResponse response){
+        request.setCreditResponse(response);
+        switch (response.getStatus()){
+            case CONFIRMED:
+                    request.setStatus(RequestStatus.CONFIRMED);
+                    break;
+            case REJECTION:
+                request.setStatus(RequestStatus.REJECTION);
+                break;
+            default:
+                request.setStatus(request.getStatus());
+                break;
+        }
+        requestRepository.save(request);
     }
 
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -14,9 +15,11 @@ import javax.persistence.*;
 public class User extends AbstractEntity {
 
     @Column(name = "username")
+    @Size(min = 3, max = 30)
     private String username;
 
     @Column(name = "password")
+    @Size(min = 3, max = 200)
     private String password;
 
     @Column(name = "email")

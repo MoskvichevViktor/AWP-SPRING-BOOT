@@ -1,0 +1,40 @@
+@import "../../../../styles.scss";
+
+table {
+  width: 100%;
+  .mat-header-row {
+    background-color: $secLightColor;
+    font-weight: bold;
+    th.mat-header-cell {
+      border-bottom: 0;
+    }
+  }
+  th.mat-header-cell {
+    border-bottom: 0;
+  }
+  th.menu-column {
+    width: 2%;
+  }
+  th.id-column {
+    width: 5%;
+  }
+  th.date-column {
+    width: 20%;
+  }
+  th.name-column {
+    width: 28%;
+  }
+  th.sum-column {
+    width: 20%;
+  }
+  th.period-column {
+    width: 5%;
+  }
+  th.status-column {
+    width: 20%;
+  }
+}
+
+.status-filter {
+  margin-left: 64px;
+}

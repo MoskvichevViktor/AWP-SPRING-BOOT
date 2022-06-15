@@ -1,0 +1,67 @@
+@import "../../../../settings";
+
+.calc_block {
+  margin-right: 1%;
+}
+
+.calc-form-field {
+  width: 70%;
+  position: absolute;
+  left: 25%;
+  font-size: 1.5em;
+  color: $primaryColor;
+}
+
+.sum-field {
+  top: 30%;
+}
+
+.percent-field {
+  bottom: 25%
+}
+
+.calc-button {
+  position: absolute;
+  bottom: 7%;
+  left: 25%;
+  width: 70%;
+}
+
+mat-slider {
+  height: 80%;
+  position: absolute;
+  left: 7%;
+  bottom: 5%;
+}
+
+mat-chip {
+  padding: 8px 32px;
+}
+
+.slider-label {
+  font-weight: bold;
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  color: $primaryDarkColor;
+  font-size: 1.5em;
+}
+
+#calc_footer {
+  background: $secColor;
+}
+
+#calc_controls {
+}
+
+#calc_content {
+  overflow-y: auto;
+}
+
+.calc_content__container {
+  width: 100%;
+  position: absolute;
+}
+
+
+

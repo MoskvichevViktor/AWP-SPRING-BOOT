@@ -4,6 +4,7 @@ import { map } from "rxjs";
 import { RemoteService } from "./remote.service";
 import { environment } from "../../environments/environment";
 import { formatDateTime } from "../shared/format-date-time";
+import {CommonFilterService} from "./common-filter.service";
 
 
 @Injectable({
@@ -14,16 +15,24 @@ export class CreditRequestService {
     private loadRequestsUrl = environment.api.url + environment.api.endpoints.creditRequests.list;
 
     constructor(
-        private remoteService: RemoteService
+        private remoteService: RemoteService,
+        private filterService: CommonFilterService
     ) {
     }
 
-    public loadAll(status: string) {
+    public loadAll(status?: string) {
         let url = this.loadRequestsUrl;
-        if (status !== '') {
-            url = `${url}?status=${status}`;
+        let param;
+        if (this.filterService.clientFilter) {
+            param = this.filterService.clientFilter;
         }
-        return this.remoteService.fetchAll<CreditRequest>(url)
+        if (status) {
+            this.filterService.clearClientFilter();
+        }
+        if (status && status !== '') {
+            param = {name: 'status', value: status};
+        }
+        return this.remoteService.fetchAll<CreditRequest>(url, param)
             .pipe(
                 map(requests => {
                     return requests.map(request => {
@@ -53,10 +62,8 @@ export class CreditRequestService {
     }
 
     public update(dto: CreditRequestDto) {
-        if (dto.id) {
-            const url = environment.api.url + environment.api.endpoints.creditRequests.update;
-            this.remoteService.update<CreditRequestDto>(url, dto).subscribe();
-        }
+        const url = environment.api.url + environment.api.endpoints.creditRequests.update;
+        this.remoteService.update<CreditRequestDto>(url, dto).subscribe();
     }
 
     public renderRequestStatus(status: RequestStatus) {

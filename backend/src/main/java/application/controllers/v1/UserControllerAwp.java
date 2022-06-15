@@ -1,13 +1,13 @@
 package application.controllers.v1;
 
+import application.controllers.exception_handler.AbstractAwpExceptionHandlerController;
 import application.dto.UserDto;
-import application.dto.UserRegistrationDto;
-import application.exception.AwpError;
+import application.dto.UserUpdateDto;
+import application.exception.AwpException;
 import application.models.User;
-import application.services.AuthService;
 import application.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +17,11 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/api/v1/users")
 @RestController
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
-public class UserController {
+public class UserControllerAwp extends AbstractAwpExceptionHandlerController {
 
     private final UserService userService;
-    private final AuthService authService;
 
     @GetMapping("")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -32,8 +31,8 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @PatchMapping("")
-    public ResponseEntity<?> update(@RequestBody User user) {
+    @PutMapping()
+    public ResponseEntity<?> update(@RequestBody UserUpdateDto user) {
         return userService.save(user);
     }
 
@@ -43,13 +42,19 @@ public class UserController {
         return userService.delete(id);
     }
 
+    @SneakyThrows
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("")
-    public ResponseEntity<?> createNewUser(@RequestBody UserRegistrationDto userDto) {
-        if (userService.isExistsUser(userDto.getUsername())) {
-            return new ResponseEntity<>(new AwpError("This username is occupied"), HttpStatus.CONFLICT);
+    public ResponseEntity<?> save(@RequestBody UserUpdateDto userDto) {
+        if (userService.isExistsUser(userDto.getUserName())) {
+            throw new AwpException("This username is occupied");
         }
-        userDto.setPassword(authService.encrypt(userDto.getPassword()));
-        return userService.createNewUser(userDto);
+        return userService.save(userDto);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/{id}")
+    public UserDto getById(@PathVariable Long id) {
+        return userService.getById(id);
+    }
 }

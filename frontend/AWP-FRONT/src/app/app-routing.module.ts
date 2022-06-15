@@ -1,14 +1,22 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import {LoginComponent} from "./components/auth/login/login.component";
-import {MainPageComponent} from "./components/main/main-page/main-page.component";
-import {RequestsListComponent} from "./components/requests/requests-list/requests-list.component";
-import {MainPageStartComponent} from "./components/main/main-page-start/main-page-start.component";
+import { RouterModule, Routes } from "@angular/router";
+import { LoginComponent } from "./components/auth/login/login.component";
+import { MainPageComponent } from "./components/main/main-page/main-page.component";
+import { RequestsListComponent } from "./components/requests/requests-list/requests-list.component";
+import { MainPageStartComponent } from "./components/main/main-page-start/main-page-start.component";
 import { ClientsListComponent } from "./components/clients/clients-list/clients-list.component";
 import { UsersListComponent } from "./components/users/users-list/users-list.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { RequestViewComponent } from "./components/requests/request-view/request-view.component";
 import { RequestEditComponent } from "./components/requests/request-edit/request-edit.component";
+import { ResponsesListComponent } from "./components/responses/responses-list/responses-list.component";
+import { ContractsListComponent } from "./components/contracts/contracts-list/contracts-list.component";
+import { ResponseViewComponent } from "./components/responses/response-view/response-view.component";
+import { ClientEditComponent } from "./components/clients/client-edit/client-edit.component";
+import { ContractViewComponent } from "./components/contracts/contract-view/contract-view.component";
+import { ClientViewComponent } from "./components/clients/client-view/client-view.component";
+import { UserEditComponent } from "./components/users/user-edit/user-edit.component";
+import { RoleGuard } from "./guards/role.guard";
 
 
 const routes: Routes = [
@@ -22,8 +30,17 @@ const routes: Routes = [
             { path: 'requests/new', component: RequestEditComponent },
             { path: 'requests/:id', component: RequestViewComponent },
             { path: 'requests/:id/edit', component: RequestEditComponent },
+            { path: 'responses', component: ResponsesListComponent },
+            { path: 'responses/:id', component: ResponseViewComponent },
+            { path: 'contracts', component: ContractsListComponent },
+            { path: 'contracts/:id', component: ContractViewComponent },
             { path: 'clients', component: ClientsListComponent },
-            { path: 'users', component: UsersListComponent },
+            { path: 'clients/new', component: ClientEditComponent },
+            { path: 'clients/:id', component: ClientViewComponent },
+            { path: 'clients/:id/edit', component: ClientEditComponent },
+            { path: 'users', component: UsersListComponent, canActivate: [RoleGuard] },
+            { path: 'users/new', component: UserEditComponent, canActivate: [RoleGuard] },
+            { path: 'users/:id/edit', component: UserEditComponent, canActivate: [RoleGuard] },
         ] },
 ];
 
